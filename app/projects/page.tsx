@@ -14,13 +14,22 @@ import { Card, CardContent } from "@/components/ui/card";
 
 type Template = "all" | "application" | "technology" | "research";
 
-const MOCK_PROJECTS = [
+type MockProject = {
+  slug: string;
+  title: string;
+  description: string;
+  template: "application" | "technology" | "research";
+  image: string;
+  technologies: string[];
+};
+
+const MOCK_PROJECTS: MockProject[] = [
   {
     slug: "hadconnect-plus",
     title: "HADconnect+",
     description:
       "Solution complète de gestion pour les établissements d'Hospitalisation À Domicile",
-    template: "application" as const,
+    template: "application",
     image: "/images/projects/hadconnect-hero.jpg",
     technologies: ["Next.js", "TypeScript", "PostgreSQL", "Prisma"],
   },
@@ -29,7 +38,7 @@ const MOCK_PROJECTS = [
     title: "Medical AI Enrichment System",
     description:
       "Système backend intelligent pour enrichir automatiquement les annonces médicales grâce à l'IA",
-    template: "technology" as const,
+    template: "technology",
     image: "/images/projects/ai-enrichment.jpg",
     technologies: ["Python", "FastAPI", "OpenAI GPT-4", "PostgreSQL"],
   },

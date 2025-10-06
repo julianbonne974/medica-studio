@@ -4,10 +4,10 @@ import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ProjectCard } from "@/components/project-card";
 import { ProjectFilters } from "@/components/project-filters";
-import { Project } from "@/lib/projects";
+import type { LegacyProject } from "@/lib/projects";
 
 interface ProjectsSectionProps {
-  projects: Project[];
+  projects: LegacyProject[];
 }
 
 export function ProjectsSection({ projects }: ProjectsSectionProps) {

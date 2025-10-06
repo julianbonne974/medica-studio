@@ -3,6 +3,10 @@ import path from "path";
 import matter from "gray-matter";
 import type { Project } from "@/types/project";
 
+// Re-export Project type for convenience
+export type { Project } from "@/types/project";
+export type { ApplicationProject, TechnologyProject, ResearchProject } from "@/types/project";
+
 const contentDirectory = path.join(process.cwd(), "content/projects");
 
 /**

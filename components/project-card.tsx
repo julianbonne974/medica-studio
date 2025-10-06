@@ -4,11 +4,11 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Project } from "@/lib/projects";
+import type { LegacyProject } from "@/lib/projects";
 import { analytics } from "@/lib/analytics";
 
 interface ProjectCardProps {
-  project: Project;
+  project: LegacyProject;
   index: number;
   isFeatured?: boolean;
 }
