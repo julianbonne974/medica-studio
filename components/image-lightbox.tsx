@@ -26,7 +26,7 @@ export function ImageLightbox({ images, projectTitle }: ImageLightboxProps) {
     }
   };
 
-  const handleKeyDown = (e: KeyboardEvent) => {
+  const handleKeyDown = (e: React.KeyboardEvent | KeyboardEvent) => {
     if (e.key === "Escape") setSelectedImage(null);
     if (e.key === "ArrowLeft") handlePrevious();
     if (e.key === "ArrowRight") handleNext();
