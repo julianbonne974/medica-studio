@@ -16,4 +16,8 @@ technologies:
   - PostgreSQL
   - Prisma
   - Tailwind CSS
+results:
+  users: "500+"
+  satisfaction: "95%"
+  connections: "2500+"
 ---

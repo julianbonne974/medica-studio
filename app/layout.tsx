@@ -1,6 +1,12 @@
 import type { Metadata } from "next";
 import { Space_Grotesk } from "next/font/google";
 import { Navigation } from "@/components/navigation";
+import { Footer } from "@/components/footer";
+import { CustomCursor } from "@/components/custom-cursor";
+import { PlausibleAnalytics } from "@/components/plausible-analytics";
+import { ThemeProvider } from "@/components/theme-provider";
+import { ClientLayout } from "@/components/client-layout";
+import { EasterEgg } from "@/components/easter-egg";
 import Script from "next/script";
 import "./globals.css";
 
@@ -10,8 +16,52 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: "Medica Studio",
+  title: {
+    default: "Medica Studio - Solutions numériques pour la santé",
+    template: "%s | Medica Studio",
+  },
   description: "Solutions numériques innovantes pour le secteur de la santé",
+  metadataBase: new URL("https://medicastudio.com"),
+  icons: {
+    icon: [
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/favicon.ico", sizes: "any" },
+    ],
+    apple: "/apple-touch-icon.png",
+  },
+  openGraph: {
+    type: "website",
+    locale: "fr_FR",
+    url: "https://medicastudio.com",
+    siteName: "Medica Studio",
+    title: "Medica Studio - Solutions numériques pour la santé",
+    description: "Solutions numériques innovantes pour le secteur de la santé",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Medica Studio",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Medica Studio - Solutions numériques pour la santé",
+    description: "Solutions numériques innovantes pour le secteur de la santé",
+    images: ["/og-image.png"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
 };
 
 export default function RootLayout({
@@ -20,27 +70,36 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="fr">
-      <head>
-        <Script
+    <html lang="fr" suppressHydrationWarning>
+      <head suppressHydrationWarning>
+        {/* Netlify Identity - Uncomment when deploying to Netlify */}
+        {/* <Script
           src="https://identity.netlify.com/v1/netlify-identity-widget.js"
           strategy="beforeInteractive"
-        />
+          suppressHydrationWarning
+        /> */}
       </head>
       <body
         className={`${spaceGrotesk.variable} font-sans antialiased`}
+        suppressHydrationWarning
       >
-        <Navigation />
-        <main>{children}</main>
-        <footer className="border-t border-zinc-200 bg-white">
-          <div className="mx-auto max-w-7xl px-8 py-8">
-            <p className="text-center text-sm text-zinc-500">
-              © 2025 Medica Studio
-            </p>
-          </div>
-        </footer>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="light"
+          enableSystem={false}
+        >
+          <ClientLayout>
+            <PlausibleAnalytics />
+            <CustomCursor />
+            <EasterEgg />
+            <Navigation />
+            <main>{children}</main>
+            <Footer />
+          </ClientLayout>
+        </ThemeProvider>
 
-        <Script id="netlify-identity-redirect" strategy="afterInteractive">
+        {/* Netlify Identity redirect - Uncomment when deploying to Netlify */}
+        {/* <Script id="netlify-identity-redirect" strategy="afterInteractive">
           {`
             if (window.netlifyIdentity) {
               window.netlifyIdentity.on("init", user => {
@@ -52,7 +111,7 @@ export default function RootLayout({
               });
             }
           `}
-        </Script>
+        </Script> */}
       </body>
     </html>
   );

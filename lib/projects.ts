@@ -13,6 +13,9 @@ export interface Project {
   technologies: string[];
   image?: string;
   gallery?: string[];
+  results?: {
+    [key: string]: string;
+  };
 }
 
 const projectsDirectory = path.join(process.cwd(), "content/projects");
@@ -43,6 +46,7 @@ export function getProjects(): Project[] {
         technologies: data.technologies || [],
         image: data.image || undefined,
         gallery: data.gallery || undefined,
+        results: data.results || undefined,
       } as Project;
     });
 

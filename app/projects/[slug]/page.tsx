@@ -1,10 +1,15 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
+import { ArrowLeft } from "lucide-react";
 import { getProjects, getProjectBySlug } from "@/lib/projects";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import { AnimatedCounter } from "@/components/animated-counter";
+import { TechBadge } from "@/components/tech-badge";
+import { ImageLightbox } from "@/components/image-lightbox";
+import { ProjectViewTracker } from "@/components/project-view-tracker";
 
 interface ProjectPageProps {
   params: Promise<{
@@ -19,6 +24,43 @@ export async function generateStaticParams() {
   }));
 }
 
+export async function generateMetadata({ params }: ProjectPageProps) {
+  const { slug } = await params;
+  const project = getProjectBySlug(slug);
+
+  if (!project) {
+    return {
+      title: "Projet non trouvé",
+    };
+  }
+
+  return {
+    title: project.title,
+    description: project.description,
+    openGraph: {
+      title: `${project.title} - Medica Studio`,
+      description: project.description,
+      url: `https://medicastudio.com/projects/${project.slug}`,
+      images: project.image
+        ? [
+            {
+              url: project.image,
+              width: 1200,
+              height: 630,
+              alt: project.title,
+            },
+          ]
+        : undefined,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: project.title,
+      description: project.description,
+      images: project.image ? [project.image] : undefined,
+    },
+  };
+}
+
 export default async function ProjectPage({ params }: ProjectPageProps) {
   const { slug } = await params;
   const project = getProjectBySlug(slug);
@@ -29,37 +71,69 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Header */}
-      <header className="border-b border-zinc-200">
-        <div className="mx-auto max-w-4xl px-8 py-12">
-          <Link href="/">
-            <Button variant="ghost" className="mb-8 -ml-4 text-zinc-600 hover:bg-transparent hover:text-zinc-900">
-              ← Retour
-            </Button>
-          </Link>
-          <div className="space-y-4">
-            <Badge variant="secondary" className="border-zinc-200 bg-zinc-50 font-normal">
-              {project.category}
-            </Badge>
-            <h1 className="text-5xl font-medium tracking-tight">{project.title}</h1>
-            <p className="text-xl text-zinc-600">{project.description}</p>
-          </div>
-        </div>
-      </header>
+      <ProjectViewTracker projectTitle={project.title} projectSlug={project.slug} />
 
-      {/* Hero Image */}
-      {project.image && (
-        <div className="mx-auto max-w-6xl px-8 py-16">
-          <div className="relative aspect-video w-full overflow-hidden border border-zinc-200 bg-zinc-50">
-            <Image
-              src={project.image}
-              alt={project.title}
-              fill
-              className="object-cover"
-              priority
-            />
+      {/* Hero Section */}
+      {project.image ? (
+        <div className="relative h-[70vh] min-h-[600px] w-full overflow-hidden">
+          {/* Background Image */}
+          <Image
+            src={project.image}
+            alt={project.title}
+            fill
+            className="object-cover"
+            priority
+          />
+
+          {/* Overlay */}
+          <div className="absolute inset-0 bg-zinc-900/50" />
+
+          {/* Back Button */}
+          <div className="absolute left-8 top-8 z-10">
+            <Link href="/">
+              <Button
+                variant="outline"
+                className="border-white/20 bg-white/10 text-white backdrop-blur-sm transition-all hover:bg-white/20 hover:text-white"
+              >
+                <ArrowLeft className="mr-2 h-4 w-4" />
+                Retour
+              </Button>
+            </Link>
+          </div>
+
+          {/* Content */}
+          <div className="absolute inset-0 flex items-end">
+            <div className="mx-auto w-full max-w-7xl px-8 pb-16">
+              <div className="space-y-6">
+                <Badge className="border-white/20 bg-white/10 text-white backdrop-blur-sm">
+                  {project.category}
+                </Badge>
+                <h1 className="text-6xl font-bold tracking-tight text-white md:text-7xl">
+                  {project.title}
+                </h1>
+                <p className="max-w-2xl text-xl text-white/90">{project.description}</p>
+              </div>
+            </div>
           </div>
         </div>
+      ) : (
+        <header className="border-b border-zinc-200">
+          <div className="mx-auto max-w-4xl px-8 py-12">
+            <Link href="/">
+              <Button variant="ghost" className="mb-8 -ml-4 text-zinc-600 hover:bg-transparent hover:text-zinc-900">
+                <ArrowLeft className="mr-2 h-4 w-4" />
+                Retour
+              </Button>
+            </Link>
+            <div className="space-y-4">
+              <Badge variant="secondary" className="border-zinc-200 bg-zinc-50 font-normal">
+                {project.category}
+              </Badge>
+              <h1 className="text-5xl font-medium tracking-tight">{project.title}</h1>
+              <p className="text-xl text-zinc-600">{project.description}</p>
+            </div>
+          </div>
+        </header>
       )}
 
       {/* Main Content */}
@@ -69,6 +143,25 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           <h2 className="mb-6 text-2xl font-medium">À propos</h2>
           <p className="text-lg leading-relaxed text-zinc-600">{project.fullDescription}</p>
         </section>
+
+        {/* Impact Section */}
+        {project.results && Object.keys(project.results).length > 0 && (
+          <>
+            <Separator className="my-16 bg-zinc-200" />
+            <section className="mb-16">
+              <h2 className="mb-12 text-center text-2xl font-medium">Impact</h2>
+              <div className="grid gap-12 md:grid-cols-3">
+                {Object.entries(project.results).map(([key, value]) => (
+                  <AnimatedCounter
+                    key={key}
+                    value={value}
+                    label={key.charAt(0).toUpperCase() + key.slice(1).replace(/([A-Z])/g, ' $1')}
+                  />
+                ))}
+              </div>
+            </section>
+          </>
+        )}
 
         <Separator className="my-16 bg-zinc-200" />
 
@@ -89,16 +182,10 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
         {/* Technologies */}
         <section>
-          <h2 className="mb-6 text-2xl font-medium">Technologies</h2>
-          <div className="flex flex-wrap gap-3">
+          <h2 className="mb-8 text-2xl font-medium">Technologies</h2>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {project.technologies.map((tech, index) => (
-              <Badge
-                key={index}
-                variant="outline"
-                className="border-zinc-200 bg-zinc-50 px-4 py-2 font-normal text-zinc-700"
-              >
-                {tech}
-              </Badge>
+              <TechBadge key={index} tech={tech} />
             ))}
           </div>
         </section>
@@ -109,21 +196,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             <Separator className="my-16 bg-zinc-200" />
             <section>
               <h2 className="mb-8 text-2xl font-medium">Galerie</h2>
-              <div className="grid gap-8 md:grid-cols-2">
-                {project.gallery.map((image, index) => (
-                  <div
-                    key={index}
-                    className="relative aspect-video w-full overflow-hidden border border-zinc-200 bg-zinc-50"
-                  >
-                    <Image
-                      src={image}
-                      alt={`${project.title} - Image ${index + 1}`}
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                ))}
-              </div>
+              <ImageLightbox images={project.gallery} projectTitle={project.title} />
             </section>
           </>
         )}
