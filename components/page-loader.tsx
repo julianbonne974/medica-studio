@@ -19,13 +19,6 @@ export function PageLoader({ isLoading }: PageLoaderProps) {
         delayChildren: 0.2,
       },
     },
-    exit: {
-      opacity: 0,
-      transition: {
-        duration: 0.5,
-        ease: "easeInOut",
-      },
-    },
   };
 
   const child = {
@@ -38,7 +31,7 @@ export function PageLoader({ isLoading }: PageLoaderProps) {
       y: 0,
       transition: {
         duration: 0.4,
-        ease: "easeOut",
+        ease: [0.4, 0.0, 0.2, 1],
       },
     },
   };
@@ -50,14 +43,13 @@ export function PageLoader({ isLoading }: PageLoaderProps) {
           key="loader"
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.5, ease: "easeInOut" }}
+          transition={{ duration: 0.5, ease: [0.4, 0.0, 0.2, 1] }}
           className="fixed inset-0 z-50 flex items-center justify-center bg-zinc-50 dark:bg-zinc-950"
         >
           <motion.div
             variants={container}
             initial="hidden"
             animate="visible"
-            exit="exit"
             className="flex overflow-hidden"
           >
             {letters.map((letter, index) => (
