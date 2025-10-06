@@ -2,32 +2,182 @@ backend:
   name: git-gateway
   branch: main
 
-media_folder: public/images/projects
-public_folder: /images/projects
+media_folder: "public/images/projects"
+public_folder: "/images/projects"
 
 collections:
-  - name: "projects"
-    label: "Projets"
-    folder: "content/projects"
+  # Collection APPLICATIONS
+  - name: "applications"
+    label: "Applications & SaaS"
+    folder: "content/projects/applications"
     create: true
     slug: "{{slug}}"
     fields:
+      - { label: "Template", name: "template", widget: "hidden", default: "application" }
       - { label: "Titre", name: "title", widget: "string" }
-      - { label: "Description courte", name: "description", widget: "string" }
-      - { label: "Catégorie", name: "category", widget: "string" }
       - { label: "Slug", name: "slug", widget: "string" }
-      - { label: "Image principale", name: "image", widget: "image", required: false }
-      - { label: "Description complète", name: "fullDescription", widget: "text" }
+      - { label: "Description courte", name: "description", widget: "text" }
+      - { label: "Description longue", name: "longDescription", widget: "markdown" }
+      - { label: "Image principale", name: "image", widget: "image" }
+      - { label: "Ordre d'affichage", name: "order", widget: "number", default: 0 }
+      - { label: "Statut", name: "status", widget: "select", options: ["draft", "published"], default: "published" }
+
+      # Métadonnées projet
+      - label: "Métadonnées"
+        name: "metadata"
+        widget: "object"
+        fields:
+          - { label: "Année", name: "year", widget: "string" }
+          - { label: "Équipe", name: "team", widget: "string" }
+          - { label: "Client", name: "client", widget: "string", required: false }
+          - { label: "Durée", name: "duration", widget: "string", required: false }
+
+      # Technologies
+      - { label: "Technologies", name: "technologies", widget: "list", allow_add: true }
+
+      # Features
       - label: "Fonctionnalités"
         name: "features"
         widget: "list"
-        field: { label: "Fonctionnalité", name: "feature", widget: "string" }
-      - label: "Technologies"
-        name: "technologies"
-        widget: "list"
-        field: { label: "Technologie", name: "technology", widget: "string" }
-      - label: "Galerie d'images"
-        name: "gallery"
+        fields:
+          - { label: "Titre", name: "title", widget: "string" }
+          - { label: "Description", name: "description", widget: "text", required: false }
+
+      # Impact metrics
+      - label: "Impact"
+        name: "impact"
+        widget: "object"
+        required: false
+        fields:
+          - { label: "Utilisateurs actifs", name: "users", widget: "string", required: false }
+          - { label: "Réduction temps", name: "reduction", widget: "string", required: false }
+          - { label: "Satisfaction", name: "satisfaction", widget: "string", required: false }
+          - label: "Métriques personnalisées"
+            name: "custom"
+            widget: "list"
+            required: false
+            fields:
+              - { label: "Label", name: "label", widget: "string" }
+              - { label: "Valeur", name: "value", widget: "string" }
+
+      # Timeline
+      - label: "Timeline"
+        name: "timeline"
         widget: "list"
         required: false
-        field: { label: "Image", name: "image", widget: "image" }
+        fields:
+          - { label: "Date", name: "date", widget: "string" }
+          - { label: "Titre", name: "title", widget: "string" }
+          - { label: "Description", name: "description", widget: "text" }
+
+      # Galerie
+      - { label: "Galerie d'images", name: "gallery", widget: "list", required: false, field: { label: "Image", name: "image", widget: "image" } }
+
+      # Liens
+      - label: "Liens"
+        name: "links"
+        widget: "object"
+        required: false
+        fields:
+          - { label: "Demo", name: "demo", widget: "string", required: false }
+          - { label: "GitHub", name: "github", widget: "string", required: false }
+          - { label: "Site web", name: "website", widget: "string", required: false }
+
+  # Collection TECHNOLOGIES
+  - name: "technologies"
+    label: "Technologies & Backend"
+    folder: "content/projects/technologies"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Template", name: "template", widget: "hidden", default: "technology" }
+      - { label: "Titre", name: "title", widget: "string" }
+      - { label: "Slug", name: "slug", widget: "string" }
+      - { label: "Type", name: "techType", widget: "select", options: ["Backend", "API", "AI/ML", "Infrastructure", "Library", "Tool"], default: "Backend" }
+      - { label: "Description courte", name: "description", widget: "text" }
+      - { label: "Description technique", name: "technicalDescription", widget: "markdown" }
+      - { label: "Image principale", name: "image", widget: "image" }
+      - { label: "Ordre d'affichage", name: "order", widget: "number", default: 0 }
+      - { label: "Statut", name: "status", widget: "select", options: ["draft", "published"], default: "published" }
+
+      # Métadonnées
+      - label: "Métadonnées"
+        name: "metadata"
+        widget: "object"
+        fields:
+          - { label: "Année", name: "year", widget: "string" }
+          - { label: "Version", name: "version", widget: "string", required: false }
+
+      # Stack technique
+      - { label: "Stack technique", name: "stack", widget: "list", allow_add: true }
+
+      # Caractéristiques techniques
+      - label: "Caractéristiques"
+        name: "characteristics"
+        widget: "list"
+        fields:
+          - { label: "Titre", name: "title", widget: "string" }
+          - { label: "Description", name: "description", widget: "text" }
+          - { label: "Icône", name: "icon", widget: "select", options: ["Zap", "Shield", "Database", "Globe", "Cpu", "Lock", "BarChart"], default: "Zap" }
+
+      # Performance metrics
+      - label: "Performance"
+        name: "performance"
+        widget: "object"
+        required: false
+        fields:
+          - { label: "Latence", name: "latency", widget: "string", required: false }
+          - { label: "Throughput", name: "throughput", widget: "string", required: false }
+          - { label: "Uptime", name: "uptime", widget: "string", required: false }
+          - label: "Métriques personnalisées"
+            name: "custom"
+            widget: "list"
+            required: false
+            fields:
+              - { label: "Label", name: "label", widget: "string" }
+              - { label: "Valeur", name: "value", widget: "string" }
+
+      # Architecture diagram
+      - { label: "Diagramme d'architecture", name: "architecture", widget: "image", required: false }
+
+      # Code examples
+      - label: "Exemples de code"
+        name: "codeExamples"
+        widget: "list"
+        required: false
+        fields:
+          - { label: "Titre", name: "title", widget: "string" }
+          - { label: "Langage", name: "language", widget: "string" }
+          - { label: "Code", name: "code", widget: "text" }
+
+      # Liens
+      - label: "Liens"
+        name: "links"
+        widget: "object"
+        required: false
+        fields:
+          - { label: "Documentation", name: "docs", widget: "string", required: false }
+          - { label: "GitHub", name: "github", widget: "string", required: false }
+          - { label: "API Reference", name: "api", widget: "string", required: false }
+
+  # Collection RESEARCH (optionnel)
+  - name: "research"
+    label: "Research & Concepts"
+    folder: "content/projects/research"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Template", name: "template", widget: "hidden", default: "research" }
+      - { label: "Titre", name: "title", widget: "string" }
+      - { label: "Slug", name: "slug", widget: "string" }
+      - { label: "Description courte", name: "description", widget: "text" }
+      - { label: "Contenu détaillé", name: "content", widget: "markdown" }
+      - { label: "Image principale", name: "image", widget: "image" }
+      - { label: "Statut", name: "status", widget: "select", options: ["draft", "published"], default: "published" }
+      - { label: "Tags", name: "tags", widget: "list", allow_add: true }
+      - label: "Métadonnées"
+        name: "metadata"
+        widget: "object"
+        fields:
+          - { label: "Année", name: "year", widget: "string" }
+          - { label: "Phase", name: "phase", widget: "select", options: ["Concept", "POC", "Prototype", "Beta"], default: "Concept" }

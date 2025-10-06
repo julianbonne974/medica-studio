@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Space_Grotesk } from "next/font/google";
+import Script from "next/script";
 import { Navigation } from "@/components/navigation";
 import { Footer } from "@/components/footer";
 import { CustomCursor } from "@/components/custom-cursor";
@@ -70,12 +71,11 @@ export default function RootLayout({
   return (
     <html lang="fr" suppressHydrationWarning>
       <head suppressHydrationWarning>
-        {/* Netlify Identity - Uncomment when deploying to Netlify */}
-        {/* <Script
+        <Script
           src="https://identity.netlify.com/v1/netlify-identity-widget.js"
           strategy="beforeInteractive"
           suppressHydrationWarning
-        /> */}
+        />
       </head>
       <body
         className={`${spaceGrotesk.variable} font-sans antialiased`}
@@ -95,8 +95,7 @@ export default function RootLayout({
           </ClientLayout>
         </ThemeProvider>
 
-        {/* Netlify Identity redirect - Uncomment when deploying to Netlify */}
-        {/* <Script id="netlify-identity-redirect" strategy="afterInteractive">
+        <Script id="netlify-identity-redirect" strategy="afterInteractive">
           {`
             if (window.netlifyIdentity) {
               window.netlifyIdentity.on("init", user => {
@@ -108,7 +107,7 @@ export default function RootLayout({
               });
             }
           `}
-        </Script> */}
+        </Script>
       </body>
     </html>
   );

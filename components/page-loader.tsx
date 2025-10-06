@@ -7,8 +7,10 @@ interface PageLoaderProps {
 }
 
 export function PageLoader({ isLoading }: PageLoaderProps) {
-  const text = "Medica Studio";
-  const letters = text.split("");
+  const textParts = [
+    { text: "Medica Stud", color: "text-zinc-900 dark:text-zinc-100" },
+    { text: "io", color: "text-[#059669]" },
+  ];
 
   return (
     <AnimatePresence mode="wait">
@@ -26,17 +28,23 @@ export function PageLoader({ isLoading }: PageLoaderProps) {
             transition={{ staggerChildren: 0.08, delayChildren: 0.2 }}
             className="flex overflow-hidden"
           >
-            {letters.map((letter, index) => (
-              <motion.span
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: index * 0.08 }}
-                className="text-5xl font-bold tracking-tight text-zinc-900 md:text-6xl dark:text-zinc-100"
-              >
-                {letter === " " ? "\u00A0" : letter}
-              </motion.span>
-            ))}
+            {textParts.map((part, partIndex) => {
+              const letters = part.text.split("");
+              return letters.map((letter, letterIndex) => {
+                const globalIndex = partIndex === 0 ? letterIndex : textParts[0].text.length + letterIndex;
+                return (
+                  <motion.span
+                    key={globalIndex}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.4, delay: globalIndex * 0.08 }}
+                    className={`text-5xl font-bold tracking-tight md:text-6xl ${part.color}`}
+                  >
+                    {letter === " " ? "\u00A0" : letter}
+                  </motion.span>
+                );
+              });
+            })}
           </motion.div>
         </motion.div>
       )}

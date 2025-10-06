@@ -1,12 +1,28 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { EcgLogo } from "@/components/ecg-logo";
 
 export function Navigation() {
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <header className="border-b border-zinc-200 bg-white transition-colors dark:border-zinc-800 dark:bg-zinc-950">
+    <header
+      className={`sticky top-0 z-50 backdrop-blur-md bg-white/80 transition-all duration-300 dark:bg-zinc-950/80 ${
+        isScrolled ? "border-b border-zinc-200 dark:border-zinc-800" : "border-b border-zinc-200/0 dark:border-zinc-800/0"
+      }`}
+    >
       <div className="mx-auto max-w-7xl px-8 py-8">
         <nav className="flex items-center justify-between">
           {/* Logo */}

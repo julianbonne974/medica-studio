@@ -1,8 +1,149 @@
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
+import type { Project } from "@/types/project";
 
-export interface Project {
+const contentDirectory = path.join(process.cwd(), "content/projects");
+
+/**
+ * Lit récursivement tous les fichiers .md dans un dossier
+ */
+function readMarkdownFiles(dir: string): Array<{ filePath: string; slug: string }> {
+  const files: Array<{ filePath: string; slug: string }> = [];
+
+  try {
+    if (!fs.existsSync(dir)) {
+      return files;
+    }
+
+    const entries = fs.readdirSync(dir, { withFileTypes: true });
+
+    for (const entry of entries) {
+      const fullPath = path.join(dir, entry.name);
+
+      if (entry.isDirectory()) {
+        // Récursion dans les sous-dossiers
+        files.push(...readMarkdownFiles(fullPath));
+      } else if (entry.isFile() && entry.name.endsWith(".md")) {
+        const slug = entry.name.replace(/\.md$/, "");
+        files.push({ filePath: fullPath, slug });
+      }
+    }
+  } catch (error) {
+    console.error(`Erreur lors de la lecture du dossier ${dir}:`, error);
+  }
+
+  return files;
+}
+
+/**
+ * Récupère tous les projets de tous les templates
+ */
+export function getAllProjects(): Project[] {
+  try {
+    const markdownFiles = readMarkdownFiles(contentDirectory);
+    const projects: Project[] = [];
+
+    for (const { filePath, slug } of markdownFiles) {
+      try {
+        const fileContents = fs.readFileSync(filePath, "utf8");
+        const { data, content } = matter(fileContents);
+
+        // Validation du template
+        if (!data.template || !["application", "technology", "research"].includes(data.template)) {
+          console.warn(`Template invalide ou manquant pour ${slug}, ignoré`);
+          continue;
+        }
+
+        const project = {
+          slug: data.slug || slug,
+          content,
+          ...data,
+        } as Project;
+
+        projects.push(project);
+      } catch (error) {
+        console.error(`Erreur lors du parsing de ${filePath}:`, error);
+      }
+    }
+
+    return projects;
+  } catch (error) {
+    console.error("Erreur lors de la récupération des projets:", error);
+    return [];
+  }
+}
+
+/**
+ * Récupère un projet spécifique par son slug
+ */
+export function getProjectBySlug(slug: string): Project | null {
+  try {
+    const allProjects = getAllProjects();
+    const project = allProjects.find((p) => p.slug === slug);
+    return project || null;
+  } catch (error) {
+    console.error(`Erreur lors de la récupération du projet ${slug}:`, error);
+    return null;
+  }
+}
+
+/**
+ * Filtre les projets par template
+ */
+export function getProjectsByTemplate(
+  template: "application" | "technology" | "research"
+): Project[] {
+  try {
+    const allProjects = getAllProjects();
+    return allProjects.filter((p) => p.template === template);
+  } catch (error) {
+    console.error(`Erreur lors du filtrage par template ${template}:`, error);
+    return [];
+  }
+}
+
+/**
+ * Récupère les projets triés par order (ascendant) puis par titre
+ */
+export function getSortedProjects(): Project[] {
+  try {
+    const allProjects = getAllProjects();
+    return allProjects
+      .filter((p) => p.status === "published") // Uniquement les projets publiés
+      .sort((a, b) => {
+        // Tri par ordre d'affichage
+        if (a.order !== b.order) {
+          return a.order - b.order;
+        }
+        // Si même ordre, tri alphabétique par titre
+        return a.title.localeCompare(b.title);
+      });
+  } catch (error) {
+    console.error("Erreur lors du tri des projets:", error);
+    return [];
+  }
+}
+
+/**
+ * Récupère les projets triés filtrés par template
+ */
+export function getSortedProjectsByTemplate(
+  template: "application" | "technology" | "research"
+): Project[] {
+  try {
+    const allProjects = getSortedProjects();
+    return allProjects.filter((p) => p.template === template);
+  } catch (error) {
+    console.error(`Erreur lors du tri par template ${template}:`, error);
+    return [];
+  }
+}
+
+// === Backward compatibility ===
+// Ces fonctions maintiennent la compatibilité avec l'ancien système
+
+export interface LegacyProject {
   id: string;
   title: string;
   description: string;
@@ -18,45 +159,37 @@ export interface Project {
   };
 }
 
-const projectsDirectory = path.join(process.cwd(), "content/projects");
+export function getProjects(): LegacyProject[] {
+  const allProjects = getAllProjects();
 
-export function getProjects(): Project[] {
-  // Check if directory exists, if not return empty array
-  if (!fs.existsSync(projectsDirectory)) {
-    return [];
-  }
-
-  const fileNames = fs.readdirSync(projectsDirectory);
-  const projects = fileNames
-    .filter((fileName) => fileName.endsWith(".md"))
-    .map((fileName) => {
-      const slug = fileName.replace(/\.md$/, "");
-      const fullPath = path.join(projectsDirectory, fileName);
-      const fileContents = fs.readFileSync(fullPath, "utf8");
-      const { data } = matter(fileContents);
-
-      return {
-        id: slug,
-        title: data.title || "",
-        description: data.description || "",
-        category: data.category || "",
-        slug: data.slug || slug,
-        fullDescription: data.fullDescription || "",
-        features: data.features || [],
-        technologies: data.technologies || [],
-        image: data.image || undefined,
-        gallery: data.gallery || undefined,
-        results: data.results || undefined,
-      } as Project;
-    });
-
-  return projects;
+  return allProjects.map((project) => ({
+    id: project.slug,
+    title: project.title,
+    description: project.description,
+    category: project.template,
+    slug: project.slug,
+    fullDescription:
+      "longDescription" in project
+        ? project.longDescription
+        : "technicalDescription" in project
+        ? project.technicalDescription
+        : "content" in project
+        ? project.content
+        : "",
+    features:
+      "features" in project && Array.isArray(project.features)
+        ? project.features.map((f) => (typeof f === "string" ? f : f.title))
+        : [],
+    technologies:
+      "technologies" in project
+        ? project.technologies
+        : "stack" in project
+        ? project.stack
+        : [],
+    image: project.image,
+    gallery: "gallery" in project ? project.gallery : undefined,
+    results: undefined,
+  }));
 }
 
-export function getProjectBySlug(slug: string): Project | undefined {
-  const projects = getProjects();
-  return projects.find((project) => project.slug === slug);
-}
-
-// Keep the old export for backward compatibility during migration
-export const projects: Project[] = [];
+export const projects: LegacyProject[] = [];
