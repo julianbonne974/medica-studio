@@ -82,10 +82,10 @@ export default function NotFound() {
             className="space-y-4"
           >
             <h2 className="text-3xl font-medium tracking-tight md:text-4xl dark:text-zinc-100">
-              Cette page n'existe pas
+              Cette page n&apos;existe pas
             </h2>
             <p className="mx-auto max-w-md text-lg text-zinc-600 dark:text-zinc-400">
-              La page que vous recherchez a peut-être été déplacée ou n'existe plus.
+              La page que vous recherchez a peut-être été déplacée ou n&apos;existe plus.
             </p>
           </motion.div>
 
@@ -102,7 +102,7 @@ export default function NotFound() {
                 className="group rounded-none border-2 border-zinc-900 bg-zinc-900 px-8 py-6 text-base font-medium text-white shadow-none transition-all hover:bg-zinc-800 dark:border-zinc-100 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-200"
               >
                 <ArrowLeft className="mr-2 h-5 w-5 transition-transform group-hover:-translate-x-1" />
-                Retour à l'accueil
+                Retour à l&apos;accueil
               </Button>
             </Link>
           </motion.div>

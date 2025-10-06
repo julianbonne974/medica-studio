@@ -19,7 +19,7 @@ export default function ContactPage() {
     fetch("/", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: new URLSearchParams(new FormData(form) as any).toString(),
+      body: new URLSearchParams(new FormData(form) as unknown as Record<string, string>).toString(),
     })
       .then(() => {
         analytics.contactFormSubmit();
@@ -59,7 +59,7 @@ export default function ContactPage() {
                 {/* Honeypot field */}
                 <p className="hidden">
                   <label>
-                    Don't fill this out if you're human: <input name="bot-field" />
+                    Don&apos;t fill this out if you&apos;re human: <input name="bot-field" />
                   </label>
                 </p>
 

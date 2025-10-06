@@ -79,7 +79,7 @@ export function Footer() {
                   href="/projects/the-doctors-club"
                   className="text-sm text-zinc-600 transition-colors hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
                 >
-                  The Doctor's Club
+                  The Doctor&apos;s Club
                 </Link>
               </li>
               <li>
@@ -167,7 +167,7 @@ export function Footer() {
                   "Abonné ✓"
                 ) : (
                   <>
-                    S'abonner
+                    S&apos;abonner
                     <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                   </>
                 )}

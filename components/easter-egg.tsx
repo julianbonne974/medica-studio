@@ -7,29 +7,25 @@ import confetti from "canvas-confetti";
 
 export function EasterEgg() {
   const [isVisible, setIsVisible] = useState(false);
-  const [keySequence, setKeySequence] = useState<string[]>([]);
   const targetSequence = ["m", "e", "d", "i", "c", "a"];
 
   useEffect(() => {
+    let keySequence: string[] = [];
+
     const handleKeyPress = (e: KeyboardEvent) => {
       const key = e.key.toLowerCase();
+      keySequence = [...keySequence, key].slice(-targetSequence.length);
 
-      setKeySequence((prev) => {
-        const newSequence = [...prev, key].slice(-targetSequence.length);
-
-        // Check if the sequence matches
-        if (newSequence.join("") === targetSequence.join("")) {
-          triggerEasterEgg();
-          return [];
-        }
-
-        return newSequence;
-      });
+      // Check if the sequence matches
+      if (keySequence.join("") === targetSequence.join("")) {
+        triggerEasterEgg();
+        keySequence = [];
+      }
     };
 
     window.addEventListener("keypress", handleKeyPress);
     return () => window.removeEventListener("keypress", handleKeyPress);
-  }, []);
+  }, [targetSequence]);
 
   const triggerEasterEgg = () => {
     setIsVisible(true);
@@ -127,7 +123,7 @@ export function EasterEgg() {
               transition={{ delay: 0.6 }}
               className="mb-6 text-lg text-zinc-600 dark:text-zinc-400"
             >
-              Contactez-nous avec le code{" "}
+              Contactez-nous avec le code{&quot; &quot;}
               <span className="rounded-none bg-zinc-900 px-3 py-1 font-mono font-bold text-zinc-50 dark:bg-zinc-100 dark:text-zinc-900">
                 INSIDER
               </span>{" "}

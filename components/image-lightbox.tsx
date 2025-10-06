@@ -64,7 +64,7 @@ export function ImageLightbox({ images, projectTitle }: ImageLightboxProps) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setSelectedImage(null)}
-            onKeyDown={(e: any) => handleKeyDown(e)}
+            onKeyDown={(e: React.KeyboardEvent) => handleKeyDown(e)}
           >
             {/* Close Button */}
             <Button
