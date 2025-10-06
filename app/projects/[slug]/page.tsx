@@ -89,7 +89,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
   return (
     <div className="min-h-screen bg-white transition-colors dark:bg-zinc-950">
-      <ProjectViewTracker slug={slug} title={project.title} />
+      <ProjectViewTracker projectSlug={slug} projectTitle={project.title} />
 
       {/* Back button */}
       <div className="sticky top-20 z-40 border-b border-zinc-200 bg-white/80 backdrop-blur-md dark:border-zinc-800 dark:bg-zinc-950/80">
