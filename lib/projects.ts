@@ -144,6 +144,19 @@ export function getSortedProjectsByTemplate(
   }
 }
 
+/**
+ * Compte le nombre total de projets publiés (applications + technologies)
+ */
+export function getProjectsCount(): number {
+  try {
+    const allProjects = getSortedProjects();
+    return allProjects.length;
+  } catch (error) {
+    console.error("Erreur lors du comptage des projets:", error);
+    return 0;
+  }
+}
+
 // === Backward compatibility ===
 // Ces fonctions maintiennent la compatibilité avec l'ancien système
 

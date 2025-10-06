@@ -42,7 +42,7 @@ export function Footer() {
                 <Github className="h-5 w-5" />
               </a>
               <a
-                href="https://linkedin.com"
+                href="https://fr.linkedin.com/in/julian-bonne-bb4a75172"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-zinc-600 transition-colors hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
@@ -51,7 +51,7 @@ export function Footer() {
                 <Linkedin className="h-5 w-5" />
               </a>
               <a
-                href="mailto:contact@medicastudio.com"
+                href="mailto:julianbonne@optimasantesolutions.com"
                 className="text-zinc-600 transition-colors hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
                 aria-label="Email"
               >
@@ -133,10 +133,10 @@ export function Footer() {
               </li>
               <li>
                 <a
-                  href="mailto:contact@medicastudio.com"
+                  href="mailto:julianbonne@optimasantesolutions.com"
                   className="text-sm text-zinc-600 transition-colors hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
                 >
-                  contact@medicastudio.com
+                  julianbonne@optimasantesolutions.com
                 </a>
               </li>
             </ul>

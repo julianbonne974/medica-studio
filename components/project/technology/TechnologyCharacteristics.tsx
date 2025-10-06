@@ -25,7 +25,7 @@ export function TechnologyCharacteristics({
 
   return (
     <section className="bg-zinc-50 py-16 dark:bg-zinc-900">
-      <div className="mx-auto max-w-7xl px-8">
+      <div className="mx-auto max-w-7xl px-4 sm:px-8">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -35,7 +35,7 @@ export function TechnologyCharacteristics({
           Caractéristiques
         </motion.h2>
 
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {characteristics.map((char, index) => {
             const Icon = iconMap[char.icon as keyof typeof iconMap] || Zap;
 
@@ -52,7 +52,9 @@ export function TechnologyCharacteristics({
                 <h3 className="mb-2 text-lg font-medium text-zinc-900 dark:text-zinc-100">
                   {char.title}
                 </h3>
-                <p className="text-sm text-zinc-600 dark:text-zinc-400">{char.description}</p>
+                <p className="text-sm text-zinc-600 dark:text-zinc-400">
+                  {char.description}
+                </p>
               </motion.div>
             );
           })}

@@ -3,7 +3,6 @@ import { Space_Grotesk } from "next/font/google";
 import Script from "next/script";
 import { Navigation } from "@/components/navigation";
 import { Footer } from "@/components/footer";
-import { CustomCursor } from "@/components/custom-cursor";
 import { PlausibleAnalytics } from "@/components/plausible-analytics";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ClientLayout } from "@/components/client-layout";
@@ -70,13 +69,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr" suppressHydrationWarning>
-      <head suppressHydrationWarning>
-        <Script
-          src="https://identity.netlify.com/v1/netlify-identity-widget.js"
-          strategy="beforeInteractive"
-          suppressHydrationWarning
-        />
-      </head>
+      <head suppressHydrationWarning />
       <body
         className={`${spaceGrotesk.variable} font-sans antialiased`}
         suppressHydrationWarning
@@ -88,14 +81,18 @@ export default function RootLayout({
         >
           <ClientLayout>
             <PlausibleAnalytics />
-            <CustomCursor />
             <Navigation />
             <main>{children}</main>
             <Footer />
           </ClientLayout>
         </ThemeProvider>
 
-        <Script id="netlify-identity-redirect" strategy="afterInteractive">
+        <Script
+          src="https://identity.netlify.com/v1/netlify-identity-widget.js"
+          strategy="lazyOnload"
+        />
+
+        <Script id="netlify-identity-redirect" strategy="lazyOnload">
           {`
             if (window.netlifyIdentity) {
               window.netlifyIdentity.on("init", user => {
@@ -105,6 +102,13 @@ export default function RootLayout({
                   });
                 }
               });
+
+              // Hide the widget on public pages
+              if (!window.location.pathname.startsWith('/admin')) {
+                const style = document.createElement('style');
+                style.innerHTML = '.netlify-identity-widget { display: none !important; }';
+                document.head.appendChild(style);
+              }
             }
           `}
         </Script>

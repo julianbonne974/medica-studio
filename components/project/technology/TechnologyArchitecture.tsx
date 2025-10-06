@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import type { TechnologyProject } from "@/types/project";
+import { TechnologyArchitectureDiagram } from "./TechnologyArchitectureDiagram";
 
 interface TechnologyArchitectureProps {
   architecture: TechnologyProject["architecture"];
@@ -15,9 +16,15 @@ export function TechnologyArchitecture({
 }: TechnologyArchitectureProps) {
   if (!architecture) return null;
 
+  // If architecture is "custom", render the custom diagram component
+  if (architecture === "custom") {
+    return <TechnologyArchitectureDiagram />;
+  }
+
+  // Otherwise render the image as before
   return (
     <section className="py-16">
-      <div className="mx-auto max-w-7xl px-8">
+      <div className="mx-auto max-w-7xl px-4 sm:px-8">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

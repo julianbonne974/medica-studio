@@ -2,61 +2,84 @@
 template: application
 title: "HADconnect+"
 slug: "hadconnect-plus"
-description: "Solution complète de gestion pour les établissements d'Hospitalisation À Domicile"
-longDescription: |
-  HADconnect+ révolutionne la gestion des établissements HAD en centralisant tous les aspects opérationnels dans une interface intuitive. Le système automatise la facturation, coordonne les soins et offre une vue d'ensemble en temps réel de l'activité.
-image: "/images/projects/hadconnect-hero.jpg"
+description: "Solution SaaS de facturation automatisée pour les infirmiers libéraux (IDEL) travaillant avec les structures d'Hospitalisation À Domicile (HAD)"
+longDescription: "HADconnect+ révolutionne la facturation entre infirmiers libéraux et structures HAD en France. Actuellement, les IDEL facturent manuellement les HAD sans Carte Vitale, avec des règles spécifiques (Article 11B) et des délais de 15-30 jours. Notre solution automatise l'ensemble du processus via une app mobile FlutterFlow pour les soins quotidiens et un dashboard Next.js pour la gestion administrative, le tout synchronisé sur Firebase en temps réel."
+image: "/images/projects/hadconnect/hadconnect-hero.jpg"
+mobileImage: "/images/projects/hadconnect/mobile-tournee.jpg"
 order: 1
 status: published
 
 metadata:
-  year: "2023"
-  team: "4 personnes"
-  client: "Établissements HAD"
-  duration: "8 mois"
+  year: "2024-2025"
+  team: "2 personnes"
+  client: "IDEL & Structures HAD"
+  duration: "En développement - Phase 2/6 complétée"
+  role: "Lead Developer & Product Designer"
 
 technologies:
-  - Next.js
+  - Next.js 14
   - TypeScript
-  - PostgreSQL
-  - Prisma
-  - TailwindCSS
-  - tRPC
+  - Firebase Firestore
+  - Firebase Auth
+  - FlutterFlow
+  - Tailwind CSS
+  - shadcn/ui
+  - Stripe
+  - Cloud Functions
+  - Vercel
+  - iOS
+  - Android
+  - PWA
+  - Hébergement de Santé
 
 features:
-  - title: "Gestion des dossiers patients HAD"
-    description: "Interface complète pour la gestion des patients"
-  - title: "Planification des soins à domicile"
-    description: "Calendrier intelligent pour organiser les interventions"
-  - title: "Facturation automatisée"
-    description: "Génération automatique des factures"
-  - title: "Suivi des interventions"
-    description: "Dashboard temps réel"
-  - title: "Reporting et statistiques"
-    description: "Analytics détaillés"
-  - title: "Interface pour professionnels de santé"
-    description: "UX optimisée pour le terrain"
+  - title: "Application mobile IDEL"
+    description: "Interface FlutterFlow avec écran tournée, saisie rapide des actes, calcul automatique et signature électronique des interventions"
+  - title: "Dashboard web HAD"
+    description: "Interface Next.js 14 avec métriques temps réel, validation des factures en un clic, gestion des partenaires IDEL et exports comptables CSV/XML"
+  - title: "Calcul automatique Article 11B"
+    description: "Application stricte des règles HAD : tarif plein sans dégressivité (AMI4+AMI2+AMI1 = 28€+14€+7€ = 49€ vs 35€ en libéral classique)"
+  - title: "Parser NGAP intelligent"
+    description: "Script JavaScript d'extraction automatique de 37 actes depuis le PDF officiel NGAP avec catégorisation et calcul des tarifs"
+  - title: "Architecture Firebase unifiée"
+    description: "Base Firestore partagée entre mobile et web avec 5 collections (users, hads, patients, interventions, facturations) et sync temps réel"
+  - title: "Authentification multi-rôles"
+    description: "Firebase Auth avec custom claims pour rôles différenciés (IDEL / HAD admin) et security rules granulaires"
+  - title: "Génération de bordereaux PDF"
+    description: "Cloud Functions pour génération automatique des bordereaux mensuels avec détail des interventions et calculs conformes"
+  - title: "Intégration Stripe"
+    description: "Système d'abonnement IDEL avec webhooks, gestion automatique des paiements et facturation récurrente"
 
 impact:
-  users: "1,200+"
-  reduction: "45%"
-  satisfaction: "94%"
+  users: "En développement - Programme pilote prévu"
+  reduction: "Réduction estimée de 80% du temps de facturation"
+  satisfaction: "Phase de tests à venir"
 
 timeline:
-  - date: "T1 2023"
-    title: "Recherche & Discovery"
-    description: "Entretiens utilisateurs et analyse des besoins"
-  - date: "T2 2023"
-    title: "MVP Development"
-    description: "Développement des fonctionnalités core"
-  - date: "T3 2023"
-    title: "Beta Testing"
-    description: "Tests avec 3 établissements pilotes"
-  - date: "T4 2023"
-    title: "Launch"
-    description: "Déploiement en production"
+  - date: "Oct 2024"
+    title: "Phase 1 - Setup initial"
+    description: "Configuration Firebase, développement parser NGAP, extraction de 37 actes de soins (31 AMI + 3 AIS + 3 BSI)"
+  - date: "Oct-Nov 2024"
+    title: "Phase 2 - Dashboard HAD ✅"
+    description: "Développement complet Next.js : authentification, métriques temps réel, gestion factures, sidebar violette, shadcn/ui"
+  - date: "Nov 2024"
+    title: "Phase 3 - Configuration Firebase"
+    description: "Activation Firestore, initialisation collections, création scripts (test, init, create-admin), upload NGAP"
+  - date: "Déc 2024"
+    title: "Phase 4 - App mobile FlutterFlow"
+    description: "Écran tournée avec patients du jour, saisie rapide actes, calcul temps réel, signature, facturation mensuelle"
+  - date: "Jan 2025"
+    title: "Phase 5 - Cloud Functions"
+    description: "Génération PDF automatique, agrégation mensuelle, notifications push, webhooks Stripe, workflows complets"
+  - date: "Fév 2025"
+    title: "Phase 6 - Production"
+    description: "Déploiement Vercel, security rules, indexes Firestore, tests E2E, lancement avec 5 IDEL pilotes"
+
+gallery:
+  - "/images/projects/hadconnect/dashboard-overview.jpg"
+  - "/images/projects/hadconnect/mobile-tournee.jpg"
 
 links:
-  demo: "https://demo.hadconnect.fr"
-  github: null
+  demo: "https://hadconnect-demo.vercel.app"
+  github: "https://github.com/julianbonne974/hadconnect"
 ---

@@ -1,8 +1,10 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import { ExternalLink, Github, Globe, FileText } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { PrivateLinkModal } from "@/components/private-link-modal";
 
 interface ProjectLinksProps {
   links?: {
@@ -16,21 +18,27 @@ interface ProjectLinksProps {
 }
 
 export function ProjectLinks({ links, className = "" }: ProjectLinksProps) {
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalType, setModalType] = useState<"github" | "documentation" | "demo">("github");
+
   if (!links || Object.values(links).every((link) => !link)) {
     return null;
   }
+
+  const handlePrivateLink = (type: "github" | "documentation" | "demo") => {
+    setModalType(type);
+    setModalOpen(true);
+  };
 
   return (
     <div className={`flex flex-wrap gap-3 ${className}`}>
       {links.demo && (
         <Button
-          asChild
+          onClick={() => handlePrivateLink("demo")}
           className="rounded-none border-2 border-[#059669] bg-[#059669] text-white hover:bg-[#047857]"
         >
-          <Link href={links.demo} target="_blank" rel="noopener noreferrer">
-            <ExternalLink className="mr-2 h-4 w-4" />
-            Voir la démo
-          </Link>
+          <ExternalLink className="mr-2 h-4 w-4" />
+          Voir la démo
         </Button>
       )}
 
@@ -49,27 +57,23 @@ export function ProjectLinks({ links, className = "" }: ProjectLinksProps) {
 
       {links.github && (
         <Button
-          asChild
+          onClick={() => handlePrivateLink("github")}
           variant="outline"
           className="rounded-none border-2 border-zinc-900 dark:border-zinc-100"
         >
-          <Link href={links.github} target="_blank" rel="noopener noreferrer">
-            <Github className="mr-2 h-4 w-4" />
-            GitHub
-          </Link>
+          <Github className="mr-2 h-4 w-4" />
+          GitHub
         </Button>
       )}
 
       {links.docs && (
         <Button
-          asChild
+          onClick={() => handlePrivateLink("documentation")}
           variant="outline"
           className="rounded-none border-2 border-zinc-900 dark:border-zinc-100"
         >
-          <Link href={links.docs} target="_blank" rel="noopener noreferrer">
-            <FileText className="mr-2 h-4 w-4" />
-            Documentation
-          </Link>
+          <FileText className="mr-2 h-4 w-4" />
+          Documentation
         </Button>
       )}
 
@@ -85,6 +89,12 @@ export function ProjectLinks({ links, className = "" }: ProjectLinksProps) {
           </Link>
         </Button>
       )}
+
+      <PrivateLinkModal
+        isOpen={modalOpen}
+        onClose={() => setModalOpen(false)}
+        linkType={modalType}
+      />
     </div>
   );
 }

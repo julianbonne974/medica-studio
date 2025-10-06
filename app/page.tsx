@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import { Hero } from "@/components/hero";
 import { ProjectsSection } from "@/components/projects-section";
-import { getProjects } from "@/lib/projects";
+import { getProjects, getProjectsCount } from "@/lib/projects";
 
 export const metadata: Metadata = {
   title: "Accueil - Solutions numériques pour la santé",
@@ -15,10 +15,11 @@ export const metadata: Metadata = {
 
 export default function Home() {
   const projects = getProjects();
+  const totalProjects = getProjectsCount();
 
   return (
     <div>
-      <Hero />
+      <Hero totalProjects={totalProjects} />
       <ProjectsSection projects={projects} />
     </div>
   );

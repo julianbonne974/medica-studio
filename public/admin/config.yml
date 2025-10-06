@@ -18,7 +18,8 @@ collections:
       - { label: "Slug", name: "slug", widget: "string" }
       - { label: "Description courte", name: "description", widget: "text" }
       - { label: "Description longue", name: "longDescription", widget: "markdown" }
-      - { label: "Image principale", name: "image", widget: "image" }
+      - { label: "Image principale (Desktop)", name: "image", widget: "image" }
+      - { label: "Image mobile (optionnelle)", name: "mobileImage", widget: "image", required: false, hint: "Si renseignée, un toggle Desktop/Mobile sera affiché" }
       - { label: "Ordre d'affichage", name: "order", widget: "number", default: 0 }
       - { label: "Statut", name: "status", widget: "select", options: ["draft", "published"], default: "published" }
 
@@ -96,7 +97,8 @@ collections:
       - { label: "Type", name: "techType", widget: "select", options: ["Backend", "API", "AI/ML", "Infrastructure", "Library", "Tool"], default: "Backend" }
       - { label: "Description courte", name: "description", widget: "text" }
       - { label: "Description technique", name: "technicalDescription", widget: "markdown" }
-      - { label: "Image principale", name: "image", widget: "image" }
+      - { label: "Image principale (Desktop)", name: "image", widget: "image" }
+      - { label: "Image mobile (optionnelle)", name: "mobileImage", widget: "image", required: false, hint: "Si renseignée, un toggle Desktop/Mobile sera affiché" }
       - { label: "Ordre d'affichage", name: "order", widget: "number", default: 0 }
       - { label: "Statut", name: "status", widget: "select", options: ["draft", "published"], default: "published" }
 

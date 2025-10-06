@@ -4,38 +4,29 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowDown } from "lucide-react";
 
-export function Hero() {
+interface HeroProps {
+  totalProjects: number;
+}
+
+export function Hero({ totalProjects }: HeroProps) {
   const [projectsCount, setProjectsCount] = useState(0);
-  const [innovationPercent, setInnovationPercent] = useState(0);
 
   useEffect(() => {
-    // Animate projects count from 0 to 4
+    // Animate projects count from 0 to totalProjects
     const projectsInterval = setInterval(() => {
       setProjectsCount((prev) => {
-        if (prev >= 4) {
+        if (prev >= totalProjects) {
           clearInterval(projectsInterval);
-          return 4;
+          return totalProjects;
         }
         return prev + 1;
       });
     }, 150);
 
-    // Animate innovation percent from 0 to 100
-    const innovationInterval = setInterval(() => {
-      setInnovationPercent((prev) => {
-        if (prev >= 100) {
-          clearInterval(innovationInterval);
-          return 100;
-        }
-        return prev + 5;
-      });
-    }, 30);
-
     return () => {
       clearInterval(projectsInterval);
-      clearInterval(innovationInterval);
     };
-  }, []);
+  }, [totalProjects]);
 
   const scrollToProjects = () => {
     const projectsSection = document.getElementById("projects");
@@ -58,36 +49,36 @@ export function Hero() {
         }}
       />
 
-      <div className="relative mx-auto max-w-7xl px-8">
-        <div className="space-y-16">
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-8">
+        <div className="space-y-8 sm:space-y-16">
           {/* Title */}
-          <div className="space-y-6">
-            <h1 className="animate-fade-in text-6xl font-bold tracking-tight md:text-7xl dark:text-zinc-100">
-              Solutions tech qui transforment la santé
+          <div className="space-y-4 sm:space-y-6">
+            <h1 className="animate-fade-in text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight leading-tight dark:text-zinc-100">
+              Ingénierie logicielle dans le secteur médical
             </h1>
-            <p className="max-w-2xl animate-fade-in-delay-1 text-xl text-zinc-600 dark:text-zinc-400">
-              Simplifier le quotidien des professionnels de santé
+            <p className="max-w-2xl animate-fade-in-delay-1 text-lg sm:text-xl text-zinc-600 dark:text-zinc-400">
+              Développement d'applications et systèmes dédiés aux professionnels de santé
             </p>
           </div>
 
           {/* Stats */}
-          <div className="flex flex-row flex-wrap items-start gap-16 animate-fade-in-delay-2">
-              <div className="group border-l-4 border-emerald-600 pl-6 transition-all hover:border-l-8">
+          <div className="flex flex-row flex-wrap items-start gap-8 sm:gap-12 lg:gap-16 animate-fade-in-delay-2">
+              <div className="group border-l-4 border-emerald-600 pl-4 sm:pl-6 transition-all hover:border-l-8">
                 <div className="space-y-1">
-                  <div className="text-5xl font-bold text-emerald-600">{projectsCount}</div>
-                  <div className="text-sm uppercase tracking-wider text-zinc-500 dark:text-zinc-400">Projets</div>
+                  <div className="text-4xl sm:text-5xl font-bold text-emerald-600">{projectsCount}</div>
+                  <div className="text-xs sm:text-sm uppercase tracking-wider text-zinc-500 dark:text-zinc-400">Projets</div>
                 </div>
               </div>
-              <div className="group border-l-4 border-emerald-600 pl-6 transition-all hover:border-l-8">
+              <div className="group border-l-4 border-emerald-600 pl-4 sm:pl-6 transition-all hover:border-l-8">
                 <div className="space-y-1">
-                  <div className="text-5xl font-bold text-emerald-600 animate-pulse">∞</div>
-                  <div className="text-sm uppercase tracking-wider text-zinc-500 dark:text-zinc-400">Technologies de pointe</div>
+                  <div className="text-4xl sm:text-5xl font-bold text-emerald-600">5+</div>
+                  <div className="text-xs sm:text-sm uppercase tracking-wider text-zinc-500 dark:text-zinc-400 max-w-[120px] sm:max-w-none">Années d'expertise</div>
                 </div>
               </div>
-              <div className="group border-l-4 border-emerald-600 pl-6 transition-all hover:border-l-8">
+              <div className="group border-l-4 border-emerald-600 pl-4 sm:pl-6 transition-all hover:border-l-8">
                 <div className="space-y-1">
-                  <div className="text-5xl font-bold text-emerald-600">{innovationPercent}%</div>
-                  <div className="text-sm uppercase tracking-wider text-zinc-500 dark:text-zinc-400">Innovation santé</div>
+                  <div className="text-4xl sm:text-5xl font-bold text-emerald-600">3</div>
+                  <div className="text-xs sm:text-sm uppercase tracking-wider text-zinc-500 dark:text-zinc-400">Secteurs médicaux</div>
                 </div>
               </div>
             </div>

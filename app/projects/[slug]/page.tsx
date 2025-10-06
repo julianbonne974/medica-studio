@@ -19,6 +19,7 @@ import { TechnologyPerformance } from "@/components/project/technology/Technolog
 import { TechnologyCharacteristics } from "@/components/project/technology/TechnologyCharacteristics";
 import { TechnologyArchitecture } from "@/components/project/technology/TechnologyArchitecture";
 import { TechnologyCodeExamples } from "@/components/project/technology/TechnologyCodeExamples";
+import { TechnologyTimeline } from "@/components/project/technology/TechnologyTimeline";
 
 // Shared components
 import { ProjectMetadata } from "@/components/project/shared/ProjectMetadata";
@@ -93,7 +94,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
       {/* Back button */}
       <div className="sticky top-20 z-40 border-b border-zinc-200 bg-white/80 backdrop-blur-md dark:border-zinc-800 dark:bg-zinc-950/80">
-        <div className="mx-auto max-w-7xl px-8 py-4">
+        <div className="mx-auto max-w-7xl px-4 sm:px-8 py-4">
           <Button
             asChild
             variant="ghost"
@@ -112,7 +113,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         <>
           <ApplicationHero project={project} />
 
-          <div className="mx-auto max-w-7xl space-y-16 px-8 py-16">
+          <div className="mx-auto max-w-7xl space-y-16 px-4 sm:px-8 py-16">
             {/* Long Description */}
             {project.longDescription && (
               <section>
@@ -148,34 +149,38 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         <>
           <TechnologyHero project={project} />
 
-          <div className="mx-auto max-w-7xl space-y-16 px-8 py-16">
-            {/* Technical Description */}
-            {project.technicalDescription && (
-              <section>
+          {/* Technical Description */}
+          {project.technicalDescription && (
+            <section className="py-16">
+              <div className="mx-auto max-w-7xl px-4 sm:px-8">
                 <div className="prose prose-zinc max-w-none dark:prose-invert">
                   <div
                     dangerouslySetInnerHTML={{ __html: project.technicalDescription }}
                     className="text-lg leading-relaxed text-zinc-600 dark:text-zinc-400"
                   />
                 </div>
-              </section>
-            )}
-
-            {/* Metadata & Links in sidebar layout */}
-            <div className="grid gap-8 lg:grid-cols-3">
-              <div className="lg:col-span-2 space-y-16">
-                <TechnologyCharacteristics characteristics={project.characteristics} />
-                {project.performance && <TechnologyPerformance performance={project.performance} />}
-                {project.architecture && <TechnologyArchitecture architecture={project.architecture} />}
-                {project.codeExamples && <TechnologyCodeExamples codeExamples={project.codeExamples} />}
               </div>
+            </section>
+          )}
 
-              <div className="space-y-6">
+          {/* Technology Components */}
+          <TechnologyCharacteristics characteristics={project.characteristics} />
+          {project.performance && <TechnologyPerformance performance={project.performance} />}
+          {project.architecture && <TechnologyArchitecture architecture={project.architecture} />}
+          {project.codeExamples && <TechnologyCodeExamples codeExamples={project.codeExamples} />}
+          {project.timeline && <TechnologyTimeline timeline={project.timeline} />}
+
+          {/* Metadata & Links */}
+          <section className="py-16 bg-zinc-50 dark:bg-zinc-900">
+            <div className="mx-auto max-w-7xl px-4 sm:px-8">
+              <div className="grid gap-8 md:grid-cols-2">
                 <ProjectMetadata metadata={project.metadata} />
                 {project.links && <ProjectLinks links={project.links} />}
               </div>
             </div>
+          </section>
 
+          <div className="mx-auto max-w-7xl px-4 sm:px-8 py-16">
             <ProjectCTA />
           </div>
         </>
@@ -185,7 +190,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         <>
           {/* Research template - Simple layout */}
           <section className="bg-zinc-50 py-20 dark:bg-zinc-900">
-            <div className="mx-auto max-w-4xl px-8">
+            <div className="mx-auto max-w-4xl px-4 sm:px-8">
               <div className="mb-4 inline-block">
                 <span className="rounded-none bg-[#059669] px-3 py-1 text-xs font-medium uppercase tracking-wide text-white">
                   {project.metadata.phase}
@@ -198,7 +203,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             </div>
           </section>
 
-          <div className="mx-auto max-w-4xl space-y-16 px-8 py-16">
+          <div className="mx-auto max-w-4xl space-y-16 px-4 sm:px-8 py-16">
             {/* Content */}
             <div
               className="prose prose-zinc max-w-none dark:prose-invert"
@@ -231,7 +236,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
       {/* Navigation */}
       <div className="border-t border-zinc-200 bg-zinc-50 py-12 dark:border-zinc-800 dark:bg-zinc-900">
-        <div className="mx-auto max-w-7xl px-8">
+        <div className="mx-auto max-w-7xl px-4 sm:px-8">
           <ProjectNavigation
             prevProject={
               prevProject

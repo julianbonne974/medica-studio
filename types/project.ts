@@ -4,6 +4,7 @@ interface ProjectBase {
   title: string;
   description: string;
   image: string;
+  mobileImage?: string; // Image optionnelle pour mobile/app
   order: number;
   status: "draft" | "published";
   metadata: {
@@ -68,6 +69,12 @@ export interface TechnologyProject extends ProjectBase {
     title: string;
     language: string;
     code: string;
+  }>;
+  timeline?: Array<{
+    date: string;
+    milestone: string;
+    description: string;
+    status?: "completed" | "in-progress" | "upcoming";
   }>;
   links?: {
     docs?: string;

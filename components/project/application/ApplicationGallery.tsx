@@ -18,7 +18,7 @@ export function ApplicationGallery({ gallery, title }: ApplicationGalleryProps) 
 
   return (
     <section className="bg-zinc-50 py-16 dark:bg-zinc-900">
-      <div className="mx-auto max-w-7xl px-8">
+      <div className="mx-auto max-w-7xl px-4 sm:px-8">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
