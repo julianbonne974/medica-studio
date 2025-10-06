@@ -85,7 +85,7 @@ export function CustomCursor() {
           }}
           transition={{
             duration: 0.2,
-            ease: "easeOut",
+            ease: [0.0, 0, 0.2, 1],
           }}
         />
       </motion.div>
@@ -105,7 +105,7 @@ export function CustomCursor() {
           }}
           transition={{
             duration: 0.2,
-            ease: "easeOut",
+            ease: [0.0, 0, 0.2, 1],
           }}
         />
       </motion.div>

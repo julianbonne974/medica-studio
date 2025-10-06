@@ -39,7 +39,7 @@ export function AnimatedCounter({ value, label }: AnimatedCounterProps) {
       className="text-center"
       initial={{ opacity: 0, y: 20 }}
       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
+      transition={{ duration: 0.6, ease: [0.0, 0, 0.2, 1] }}
     >
       <div className="mb-3 text-5xl font-bold md:text-6xl">0</div>
       <div className="text-sm text-zinc-500">{label}</div>

@@ -13,21 +13,6 @@ interface ProjectCardProps {
   isFeatured?: boolean;
 }
 
-const cardVariants = {
-  hidden: {
-    opacity: 0,
-    y: 50,
-  },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.6,
-      ease: "easeOut",
-    },
-  },
-};
-
 export function ProjectCard({ project, index, isFeatured = false }: ProjectCardProps) {
   const handleClick = () => {
     analytics.projectClick(project.title, project.slug);
@@ -35,11 +20,10 @@ export function ProjectCard({ project, index, isFeatured = false }: ProjectCardP
 
   return (
     <motion.div
-      variants={cardVariants}
-      initial="hidden"
-      whileInView="visible"
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-100px" }}
-      transition={{ delay: index * 0.1 }}
+      transition={{ duration: 0.6, delay: index * 0.1 }}
       className="group h-full"
     >
       <Link href={`/projects/${project.slug}`} onClick={handleClick} className="block h-full">

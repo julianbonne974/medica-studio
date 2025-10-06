@@ -56,7 +56,7 @@ export default function NotFound() {
               transition={{
                 duration: 3,
                 repeat: Infinity,
-                ease: "easeInOut",
+                ease: [0.4, 0.0, 0.2, 1],
               }}
               className="absolute right-1/4 top-1/3"
             >

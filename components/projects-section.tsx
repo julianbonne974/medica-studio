@@ -59,7 +59,7 @@ export function ProjectsSection({ projects }: ProjectsSectionProps) {
               transition={{
                 duration: 0.5,
                 delay: index * 0.1,
-                ease: "easeOut",
+                ease: [0.0, 0, 0.2, 1],
               }}
               className={
                 index === 0
