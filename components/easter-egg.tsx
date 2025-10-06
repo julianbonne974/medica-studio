@@ -123,7 +123,7 @@ export function EasterEgg() {
               transition={{ delay: 0.6 }}
               className="mb-6 text-lg text-zinc-600 dark:text-zinc-400"
             >
-              Contactez-nous avec le code{&quot; &quot;}
+              Contactez-nous avec le code{" "}
               <span className="rounded-none bg-zinc-900 px-3 py-1 font-mono font-bold text-zinc-50 dark:bg-zinc-100 dark:text-zinc-900">
                 INSIDER
               </span>{" "}
