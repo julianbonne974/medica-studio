@@ -6,7 +6,6 @@ import { CustomCursor } from "@/components/custom-cursor";
 import { PlausibleAnalytics } from "@/components/plausible-analytics";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ClientLayout } from "@/components/client-layout";
-import { EasterEgg } from "@/components/easter-egg";
 import "./globals.css";
 
 const spaceGrotesk = Space_Grotesk({
@@ -90,7 +89,6 @@ export default function RootLayout({
           <ClientLayout>
             <PlausibleAnalytics />
             <CustomCursor />
-            <EasterEgg />
             <Navigation />
             <main>{children}</main>
             <Footer />
