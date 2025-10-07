@@ -5,7 +5,7 @@ slug: "thedoctorclub"
 description: "Application mobile et web de conciergerie premium exclusivement dédiée aux médecins, offrant des services personnalisés 24/7 basés sur l'expertise Clac.io (350k+ utilisateurs)"
 longDescription: "The Doctor's Club révolutionne la conciergerie médicale en proposant une plateforme premium chatbot-first où les médecins accèdent à tous les services via une conversation naturelle avec Marie, leur concierge IA. L'application couvre 8 catégories de services : Voyage & Transport (vols, jets privés, lounges), Restauration (tables VIP, restaurants étoilés), Événements & Culture (concerts, opéras, congrès médicaux), Services à Domicile (ménage, babysitting, bricolage), Personal Shopping, Assistance Administrative, Services Médicaux Spécifiques (recherche remplaçants, publications, networking) et Bien-être & Récupération. Architecture Flutter multiplateforme (iOS, Android, Web) avec Firebase backend, système de plans par abonnement (Essential 299€, Premium 599€, Platinum 1299€), et intégration Stripe pour paiements."
 mobileImage: "/images/projects/thedoctorclub/mobile-home.jpg"
-order: 3
+order: 1
 status: published
 
 metadata:

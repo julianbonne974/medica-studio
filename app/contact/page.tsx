@@ -12,24 +12,40 @@ import { analytics } from "@/lib/analytics";
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = e.currentTarget;
     const formData = new FormData(form);
 
-    fetch("/", {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: new URLSearchParams(formData as any).toString(),
-    })
-      .then(() => {
+    try {
+      const response = await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams(formData as any).toString(),
+      });
+
+      if (!response.ok) throw new Error('Erreur lors de la soumission');
+
+      analytics.contactFormSubmit();
+      setSubmitted(true);
+    } catch (error) {
+      console.error("Error:", error);
+      // Fallback: essayer avec l'endpoint direct de Netlify
+      try {
+        await fetch("/.netlify/functions/submission-created", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            form_name: "contact",
+            ...Object.fromEntries(formData)
+          }),
+        });
         analytics.contactFormSubmit();
         setSubmitted(true);
-      })
-      .catch((error) => {
-        console.error("Error:", error);
+      } catch (fallbackError) {
         alert("Une erreur s'est produite. Veuillez réessayer.");
-      });
+      }
+    }
   };
 
   return (
