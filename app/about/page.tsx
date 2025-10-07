@@ -21,7 +21,7 @@ import {
 export default function AboutPage() {
   const stats = [
     { label: "Projets réalisés", value: "20+", icon: Award },
-    { label: "Années d'expérience", value: "4", icon: Zap },
+    { label: "Années d'expérience", value: "5+", icon: Zap },
     { label: "Technologies maîtrisées", value: "25+", icon: Code2 },
     { label: "Domaines d'expertise", value: "3", icon: Target },
   ];

@@ -5,7 +5,7 @@ slug: "ngap-nomenclature-parser"
 techType: "Backend"
 description: "Système d'extraction automatique et de structuration de la nomenclature NGAP (Nomenclature Générale des Actes Professionnels) depuis PDF officiel vers base de données exploitable"
 technicalDescription: "Parser Node.js robuste qui extrait automatiquement les actes paramédicaux (infirmiers, kinésithérapeutes, podologues, orthophonistes, orthoptistes, pédicures-podologues, diététiciens, psychomotriciens, ergothérapeutes) depuis le PDF NGAP officiel et génère une base de données structurée avec coefficients, tarifs, majorations, indemnités et règles de cumul. Utilise pdf-parse pour extraction de texte, regex avancées pour parsing des tableaux NGAP complexes (gestion césures, multi-lignes, références croisées), catégorisation automatique par heuristiques, calcul des tarifs (coefficient × valeur de base), et upload batch vers Firebase Firestore. Le système gère 37+ actes AMI/AIS/BSI, détecte les majorations (MAU, MCI, MIE, MN, MD, MF), indemnités (IFD, IFI, IK), et règles métier (Article 11B cumuls). Architecture extensible à toutes les professions paramédicales avec adaptation des regex par spécialité."
-order: 5
+order: 7
 status: published
 
 metadata:

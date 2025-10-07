@@ -5,7 +5,7 @@ slug: "medical-scraper-pipeline"
 techType: "Backend"
 description: "Système d'extraction automatique d'annonces médicales depuis APIs partenaires avec normalisation des données, détection de doublons et indexation Algolia"
 technicalDescription: "Pipeline ETL (Extract-Transform-Load) automatisé qui interroge quotidiennement les APIs partenaires pour récupérer 100+ annonces médicales, normalise les données (adresses, géolocalisation, photos, contrats), détecte et supprime les doublons via système de références uniques, crée/met à jour automatiquement les fiches cliniques partenaires dans Firestore, et synchronise l'indexation Algolia pour recherche instantanée. Architecture Cloud Functions avec scheduler PubSub (exécution toutes les 24h), gestion des timeouts, retry logic sur erreurs API, et logging structuré pour monitoring. Traite également la géolocalisation avec parsing d'adresses complexes (ville, code postal, longitude/latitude) et génération automatique de codes INSEE."
-order: 4
+order: 6
 status: published
 
 metadata:

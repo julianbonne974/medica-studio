@@ -77,8 +77,8 @@ export function Hero({ totalProjects }: HeroProps) {
               </div>
               <div className="group border-l-4 border-emerald-600 pl-4 sm:pl-6 transition-all hover:border-l-8">
                 <div className="space-y-1">
-                  <div className="text-4xl sm:text-5xl font-bold text-emerald-600">3</div>
-                  <div className="text-xs sm:text-sm uppercase tracking-wider text-zinc-500 dark:text-zinc-400">Secteurs médicaux</div>
+                  <div className="text-4xl sm:text-5xl font-bold text-emerald-600">Full-stack</div>
+                  <div className="text-xs sm:text-sm uppercase tracking-wider text-zinc-500 dark:text-zinc-400">Solutions complètes</div>
                 </div>
               </div>
             </div>

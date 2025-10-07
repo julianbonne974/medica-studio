@@ -5,7 +5,7 @@ slug: "crm-pipeline-medical"
 techType: "Backend"
 description: "Système CRM complet pour cliniques avec tunnel de recrutement en 9 étapes (Match → Intégration), gestion candidats enrichie, analytics conversion et workflows automatisés"
 technicalDescription: "Architecture CRM complexe dédiée au recrutement médical avec pipeline Kanban de 9 étapes trackées individuellement. Solution hybride combinant sous-collection prospects (annonces/{id}/prospects) pour matching automatique et collection candidates (cliniques/{id}/candidates) pour CRM actif. Chaque candidat possède un profil enrichi avec RPPS validé, documents (CV, diplômes, références), historique interactions détaillé (messages, appels, notes), scoring IA 0-100, tags personnalisés et métriques temporelles (first_contact_date, last_activity_date, next_follow_up_date). Système d'automatisation avec workflows conditionnels, templates emails, rappels automatiques et analytics conversion par étape."
-order: 3
+order: 5
 status: published
 
 metadata:

@@ -5,7 +5,7 @@ slug: "matching-engine"
 techType: "Backend"
 description: "Algorithme de matching intelligent temps réel entre médecins et annonces médicales basé sur 15+ critères (spécialité, localisation, disponibilités, expérience, contrats)"
 technicalDescription: "Moteur de recommandation sophistiqué qui analyse automatiquement chaque nouvelle annonce médicale et identifie les candidats les plus pertinents parmi une base de 200+ médecins. Le système calcule un score de matching 0-100 en croisant les données de profil (RPPS, spécialité, sous-spécialités, expérience, disponibilités) avec les critères de l'annonce (contrat, urgence, localisation, rémunération). Architecture event-driven avec Cloud Functions déclenchées sur création/modification d'annonce, batch processing nocturne pour ré-calcul global, et indexation Algolia pour recherche instantanée avec filtres combinés."
-order: 2
+order: 3
 status: published
 
 metadata:

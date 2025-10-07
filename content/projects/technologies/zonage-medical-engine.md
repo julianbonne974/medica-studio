@@ -5,7 +5,7 @@ slug: "zonage-medical-engine"
 techType: "Backend"
 description: "Moteur d'analyse territoriale automatique qui enrichit les annonces médicales avec les aides financières (CAIM, CAISP, ZFRR) basées sur les zonages ARS français"
 technicalDescription: "Système backend complexe qui croise automatiquement 34 630 communes françaises avec les zonages médicaux officiels (ZIP, ZAC, ZAR) et calcule en temps réel les aides territoriales disponibles pour chaque spécialité médicale. Le moteur analyse le code INSEE de chaque annonce, interroge une base de données de zonage enrichie, applique les règles d'éligibilité complexes (médecins généralistes vs spécialistes, exclusions par spécialité) et génère un score d'attractivité territoriale avec détail des aides pouvant atteindre 50 000€ pour l'installation."
-order: 1
+order: 2
 status: published
 
 metadata:
