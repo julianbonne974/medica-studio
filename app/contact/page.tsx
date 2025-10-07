@@ -4,7 +4,7 @@ import { Separator } from "@/components/ui/separator";
 export default function ContactPage() {
   return (
     <div className="min-h-screen bg-white transition-colors dark:bg-zinc-950">
-      {/* Formulaire caché pour Netlify - IMPORTANT pour la détection */}
+      {/* Formulaire HTML statique pour Netlify Forms */}
       <form
         name="contact"
         data-netlify="true"
