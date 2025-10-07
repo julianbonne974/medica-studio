@@ -14,7 +14,7 @@ export default function PrivacyPage() {
 
       <div className="prose prose-zinc dark:prose-invert max-w-none">
         <p className="text-lg text-zinc-600 dark:text-zinc-400">
-          Dernière mise à jour : {new Date().toLocaleDateString("fr-FR")}
+          Dernière mise à jour : 7 octobre 2025
         </p>
 
         <h2 className="mt-8 text-2xl font-bold dark:text-zinc-100">Collecte des données</h2>
