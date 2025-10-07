@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import { Hero } from "@/components/hero";
 import { ProjectsSection } from "@/components/projects-section";
-import { getProjects, getProjectsCount } from "@/lib/projects";
+import { getSortedProjects, getProjectsCount } from "@/lib/projects";
 
 export const metadata: Metadata = {
   title: "Accueil - Solutions numériques pour la santé",
@@ -14,7 +14,26 @@ export const metadata: Metadata = {
 };
 
 export default function Home() {
-  const projects = getProjects();
+  const sortedProjects = getSortedProjects();
+  // Convert to legacy format for compatibility with ProjectsSection
+  const projects = sortedProjects.map((project) => ({
+    id: project.slug,
+    title: project.title,
+    description: project.description,
+    category: project.template,
+    slug: project.slug,
+    fullDescription:
+      "longDescription" in project
+        ? project.longDescription
+        : "technicalDescription" in project
+        ? project.technicalDescription
+        : "",
+    features: [],
+    technologies: "technologies" in project ? project.technologies : [],
+    image: project.image,
+    gallery: "gallery" in project ? project.gallery : undefined,
+    results: undefined,
+  }));
   const totalProjects = getProjectsCount();
 
   return (
