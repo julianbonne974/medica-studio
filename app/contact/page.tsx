@@ -18,7 +18,8 @@ export default function ContactPage() {
     const formData = new FormData(form);
 
     try {
-      const response = await fetch("/", {
+      // Next.js Runtime v5 requires submission to static HTML file
+      const response = await fetch("/__forms.html", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: new URLSearchParams(formData as any).toString(),
@@ -30,38 +31,12 @@ export default function ContactPage() {
       setSubmitted(true);
     } catch (error) {
       console.error("Error:", error);
-      // Fallback: essayer avec l'endpoint direct de Netlify
-      try {
-        await fetch("/.netlify/functions/submission-created", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            form_name: "contact",
-            ...Object.fromEntries(formData)
-          }),
-        });
-        analytics.contactFormSubmit();
-        setSubmitted(true);
-      } catch (fallbackError) {
-        alert("Une erreur s'est produite. Veuillez réessayer.");
-      }
+      alert("Une erreur s'est produite. Veuillez réessayer.");
     }
   };
 
   return (
     <div className="min-h-screen bg-white transition-colors dark:bg-zinc-950">
-      {/* Formulaire HTML caché pour Netlify Forms detection */}
-      <form
-        name="contact"
-        data-netlify="true"
-        data-netlify-honeypot="bot-field"
-        hidden
-      >
-        <input type="text" name="name" />
-        <input type="email" name="email" />
-        <textarea name="message"></textarea>
-      </form>
-
       <main className="mx-auto max-w-2xl px-8 py-32">
         <div className="space-y-16">
           {/* Title */}
