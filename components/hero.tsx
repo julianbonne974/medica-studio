@@ -54,7 +54,7 @@ export function Hero({ totalProjects }: HeroProps) {
           {/* Title */}
           <div className="space-y-4 sm:space-y-6">
             <h1 className="animate-fade-in text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight leading-tight dark:text-zinc-100">
-              Ingénierie logicielle dans le secteur médical
+              Ingénierie numérique dans le secteur de la santé
             </h1>
             <p className="max-w-2xl animate-fade-in-delay-1 text-lg sm:text-xl text-zinc-600 dark:text-zinc-400">
               Développement d'applications et systèmes dédiés aux professionnels de santé
