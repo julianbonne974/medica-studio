@@ -4,12 +4,3 @@
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
-
-[[redirects]]
-  from = "/contact"
-  to = "/.netlify/functions/__nf_ssr"
-  status = 200
-  force = true
-
-[functions]
-  included_files = ["**"]
