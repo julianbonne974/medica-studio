@@ -6,7 +6,6 @@ techType: "AI/ML"
 description: "Système backend intelligent pour enrichir automatiquement les annonces médicales grâce à l'IA"
 technicalDescription: |
   Architecture backend scalable utilisant des modèles d'IA pour analyser et enrichir les annonces médicales. Le système extrait automatiquement des informations clés, catégorise les annonces et suggère des améliorations.
-image: "/images/projects/ai-enrichment.jpg"
 order: 2
 status: published
 
