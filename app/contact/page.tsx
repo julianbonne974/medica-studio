@@ -50,19 +50,6 @@ export default function ContactPage() {
 
   return (
     <div className="min-h-screen bg-white transition-colors dark:bg-zinc-950">
-      {/* Formulaire HTML statique pour Netlify Forms */}
-      <form
-        name="contact"
-        data-netlify="true"
-        data-netlify-honeypot="bot-field"
-        hidden
-      >
-        <input type="text" name="name" />
-        <input type="email" name="email" />
-        <textarea name="message"></textarea>
-        <input type="hidden" name="bot-field" />
-      </form>
-
       <main className="mx-auto max-w-2xl px-8 py-32">
         <div className="space-y-16">
           {/* Title */}
@@ -83,15 +70,6 @@ export default function ContactPage() {
                 className="space-y-8"
                 onSubmit={handleSubmit}
               >
-                <input type="hidden" name="form-name" value="contact" />
-
-                {/* Honeypot field */}
-                <p className="hidden">
-                  <label>
-                    Don&apos;t fill this out if you&apos;re human: <input name="bot-field" />
-                  </label>
-                </p>
-
                 <div className="space-y-2">
                   <label htmlFor="name" className="text-sm font-medium text-zinc-700 dark:text-zinc-300">
                     Nom
