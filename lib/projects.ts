@@ -108,7 +108,7 @@ export function getProjectsByTemplate(
 }
 
 /**
- * Récupère les projets triés par order (ascendant) puis par titre
+ * Récupère les projets triés par template (application avant technology), puis par order (ascendant), puis par titre
  */
 export function getSortedProjects(): Project[] {
   try {
@@ -116,11 +116,23 @@ export function getSortedProjects(): Project[] {
     return allProjects
       .filter((p) => p.status === "published") // Uniquement les projets publiés
       .sort((a, b) => {
-        // Tri par ordre d'affichage
+        // 1. Tri par template : applications d'abord, puis technologies
+        const templateOrder: Record<string, number> = {
+          application: 1,
+          technology: 2,
+          research: 3,
+        };
+        const templateDiff = (templateOrder[a.template] || 999) - (templateOrder[b.template] || 999);
+        if (templateDiff !== 0) {
+          return templateDiff;
+        }
+
+        // 2. Tri par ordre d'affichage
         if (a.order !== b.order) {
           return a.order - b.order;
         }
-        // Si même ordre, tri alphabétique par titre
+
+        // 3. Si même ordre, tri alphabétique par titre
         return a.title.localeCompare(b.title);
       });
   } catch (error) {
