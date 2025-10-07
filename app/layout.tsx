@@ -3,7 +3,7 @@ import { Space_Grotesk } from "next/font/google";
 import Script from "next/script";
 import { Navigation } from "@/components/navigation";
 import { Footer } from "@/components/footer";
-import { GoogleAnalytics } from "@/components/google-analytics";
+import { CookieConsent } from "@/components/cookie-consent";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ClientLayout } from "@/components/client-layout";
 import "./globals.css";
@@ -80,7 +80,7 @@ export default function RootLayout({
           enableSystem={false}
         >
           <ClientLayout>
-            <GoogleAnalytics />
+            <CookieConsent />
             <Navigation />
             <main>{children}</main>
             <Footer />
