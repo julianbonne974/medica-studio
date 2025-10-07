@@ -4,3 +4,7 @@
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
+
+# Environment variables for production
+[build.environment]
+  NEXT_PUBLIC_PLAUSIBLE_DOMAIN = "medicastudio.fr"
