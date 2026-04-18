@@ -183,6 +183,7 @@ export interface LegacyProject {
   technologies: string[];
   image?: string;
   gallery?: string[];
+  confidential?: boolean;
   results?: {
     [key: string]: string;
   };
@@ -217,6 +218,7 @@ export function getProjects(): LegacyProject[] {
         : [],
     image: project.image,
     gallery: "gallery" in project ? project.gallery : undefined,
+    confidential: project.confidential,
     results: undefined,
   }));
 }

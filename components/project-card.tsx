@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { Lock } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import type { LegacyProject } from "@/lib/projects";
@@ -43,11 +44,19 @@ export function ProjectCard({ project, index, isFeatured = false }: ProjectCardP
           <CardHeader className={`relative space-y-2 ${isFeatured ? "p-6 md:p-8" : "p-4"}`}>
             <div className="flex items-start justify-between gap-3">
               <div className="space-y-1">
-                {isFeatured && (
-                  <Badge className="border-0 bg-emerald-600 px-2 py-0.5 text-xs font-medium text-white">
-                    FEATURED
-                  </Badge>
-                )}
+                <div className="flex flex-wrap items-center gap-1.5">
+                  {isFeatured && (
+                    <Badge className="border-0 bg-emerald-600 px-2 py-0.5 text-xs font-medium text-white">
+                      FEATURED
+                    </Badge>
+                  )}
+                  {project.confidential && (
+                    <Badge className="border-0 bg-zinc-800 px-2 py-0.5 text-[10px] font-medium uppercase tracking-wide text-zinc-100 dark:bg-zinc-700">
+                      <Lock className="mr-1 h-3 w-3" />
+                      Interne
+                    </Badge>
+                  )}
+                </div>
                 <CardTitle className={`font-semibold transition-transform duration-300 group-hover:-translate-y-1 dark:text-zinc-100 ${
                   isFeatured ? "text-2xl md:text-3xl" : "text-xl"
                 }`}>

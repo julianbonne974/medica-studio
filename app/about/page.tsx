@@ -1,6 +1,5 @@
 "use client";
 
-import { Metadata } from "next";
 import { motion } from "framer-motion";
 import {
   Code2,
@@ -15,14 +14,15 @@ import {
   CheckCircle2,
   Zap,
   Target,
-  Award
+  Award,
+  Lock,
 } from "lucide-react";
 
 export default function AboutPage() {
   const stats = [
-    { label: "Projets réalisés", value: "20+", icon: Award },
-    { label: "Années d'expérience", value: "5+", icon: Zap },
-    { label: "Technologies maîtrisées", value: "25+", icon: Code2 },
+    { label: "Solutions développées", value: "6", icon: Award },
+    { label: "En production", value: "4", icon: Zap },
+    { label: "Technologies utilisées", value: "40+", icon: Code2 },
     { label: "Domaines d'expertise", value: "3", icon: Target },
   ];
 
@@ -35,7 +35,7 @@ export default function AboutPage() {
     {
       icon: Shield,
       title: "Confidentialité & Sécurité",
-      description: "Protection rigoureuse des données de santé conformément aux normes RGPD et respect du secret médical."
+      description: "Protection rigoureuse des données de santé conformément aux normes RGPD, HDS et respect du secret médical."
     },
     {
       icon: Heart,
@@ -50,11 +50,29 @@ export default function AboutPage() {
   ];
 
   const technologies = [
-    "Flutter", "FlutterFlow", "Firebase", "Node.js", "TypeScript", "React", "Next.js",
-    "Tailwind CSS", "Firebase Auth", "Firebase Firestore", "Firebase Cloud Functions",
-    "Algolia Search", "Stripe", "Google Maps API", "Push Notifications", "OCR",
-    "Biometric Auth", "iOS", "Android", "PWA", "pdf-parse", "Regex", "Framer Motion",
-    "GitHub Actions", "Netlify"
+    // Frontend & UI
+    "Next.js 16", "React 19", "TypeScript", "Tailwind CSS", "shadcn/ui", "Radix UI", "Base UI",
+    "Framer Motion", "Lenis", "Flutter", "FlutterFlow", "Dart",
+    // State / Forms
+    "React Hook Form", "Zod", "Zustand", "React Query",
+    // Backend / API
+    "Node.js", "tRPC", "NextAuth", "Firebase Cloud Functions",
+    // Data
+    "PostgreSQL", "Prisma", "Firebase Firestore", "Firebase Storage", "Algolia",
+    // Services tiers
+    "Stripe", "flutter_stripe", "Resend", "SendGrid", "Nodemailer", "imapflow",
+    // IA
+    "Scaleway AI", "Mistral", "Llama",
+    // Spécialisé santé / fiscal
+    "HDS", "publicodes", "modele-social", "React PDF",
+    // Cartographie & visu
+    "Leaflet", "Recharts", "Tiptap", "@dnd-kit",
+    // Infra
+    "Vercel", "Scalingo", "Netlify", "Scaleway S3", "Docker",
+    // Observabilité
+    "Sentry", "Axiom", "Better Stack", "PostHog",
+    // DevOps / tests
+    "Vitest", "Playwright", "MSW",
   ];
 
   const process = [
@@ -82,33 +100,33 @@ export default function AboutPage() {
 
   const expertise = [
     {
-      title: "Healthtech & Santé Numérique",
+      title: "Healthtech & Architecture HDS",
       items: [
-        "Applications mobiles médicales (iOS/Android/PWA)",
-        "Plateformes de télémédecine et coordination de soins",
-        "Systèmes de gestion HAD (Hospitalisation À Domicile)",
-        "Outils de matching et recrutement médical",
-        "Parsers de nomenclature (NGAP, CCAM)"
+        "Applications SaaS santé multi-surfaces (B2C / B2B / portails dédiés)",
+        "Hébergement HDS (PostgreSQL Scalingo, Firebase) et conformité Art. L.1111-8",
+        "Audit trail mutable-proof via tRPC auditedProcedure",
+        "Chiffrement des documents médicaux, bytea PostgreSQL",
+        "Web + mobile Flutter unifié via Firebase",
       ]
     },
     {
-      title: "Backend & Infrastructure",
+      title: "Cybersécurité & Conformité santé",
       items: [
-        "Architecture Firebase (Auth, Firestore, Functions, Storage)",
-        "APIs Node.js et Cloud Functions serverless",
-        "Intégrations tierces (Stripe, Algolia, Google Maps)",
-        "Parsing PDF et traitement de documents",
-        "Webhooks et automatisations"
+        "Scanners OSINT passifs (empreinte web externe, DMARC/SPF/DKIM, CVE)",
+        "Rapports conformité HAS 2025, CaRE, HDS 2.0 pour ESMS",
+        "Plans d'action générés par IA (Scaleway, Mistral, Llama)",
+        "Sécurité applicative : CSP, rate-limit, RBAC Firestore, NextAuth v5",
+        "Observabilité triplée : Sentry, Axiom, Better Stack",
       ]
     },
     {
-      title: "Frontend & UX",
+      title: "CRM médicaux & Automatisation",
       items: [
-        "Applications Flutter natives et FlutterFlow",
-        "Interfaces React/Next.js avec Tailwind CSS",
-        "Design systems cohérents et accessibles",
-        "Animations Framer Motion",
-        "Progressive Web Apps (PWA)"
+        "Pipelines Kanban avancés (19 statuts, transitions validées, auto-notes)",
+        "Recherche Algolia multi-index avec facettes et typo-tolérance",
+        "Calculateurs publicodes (URSSAF, CARMF, IR) avec export PDF",
+        "Séquences email drip cron-driven via Resend",
+        "Paiement Stripe natif mobile via flutter_stripe",
       ]
     }
   ];
@@ -264,7 +282,7 @@ export default function AboutPage() {
                   Stack Technique Favorite
                 </h3>
                 <div className="flex flex-wrap gap-2">
-                  {["FlutterFlow", "Firebase", "Node.js", "TypeScript", "Next.js"].map((tech) => (
+                  {["Next.js 16", "TypeScript", "tRPC", "PostgreSQL", "Firebase", "Tailwind CSS", "Flutter"].map((tech) => (
                     <span
                       key={tech}
                       className="rounded-none border border-zinc-200 bg-white px-3 py-1 text-sm font-medium text-zinc-700 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-300"
@@ -282,19 +300,19 @@ export default function AboutPage() {
                 <ul className="space-y-2 text-zinc-600 dark:text-zinc-400">
                   <li className="flex items-start gap-2">
                     <CheckCircle2 className="mt-1 h-4 w-4 flex-shrink-0 text-[#059669]" />
-                    <span>Applications mobiles santé (Flutter/FlutterFlow)</span>
+                    <span>Architecture HDS (PostgreSQL Scalingo, Firebase)</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <Lock className="mt-1 h-4 w-4 flex-shrink-0 text-[#059669]" />
+                    <span>Audit trail et conformité secret médical</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <CheckCircle2 className="mt-1 h-4 w-4 flex-shrink-0 text-[#059669]" />
-                    <span>Architectures Firebase scalables</span>
+                    <span>Cybersécurité médico-sociale (HAS, CaRE, HDS 2.0)</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <CheckCircle2 className="mt-1 h-4 w-4 flex-shrink-0 text-[#059669]" />
-                    <span>Optimisation juridique et tech pour médecins</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <CheckCircle2 className="mt-1 h-4 w-4 flex-shrink-0 text-[#059669]" />
-                    <span>Intégrations IA (Gemini, chatbots médicaux)</span>
+                    <span>Moteurs de règles publicodes (URSSAF, CARMF, IR)</span>
                   </li>
                 </ul>
               </div>
@@ -478,7 +496,7 @@ export default function AboutPage() {
               Technologies Maîtrisées
             </h2>
             <p className="mx-auto max-w-2xl text-lg text-zinc-600 dark:text-zinc-400">
-              25+ technologies et frameworks pour créer des solutions performantes
+              {technologies.length}+ technologies et frameworks pour créer des solutions performantes, sécurisées et conformes aux exigences du secteur santé.
             </p>
           </motion.div>
 

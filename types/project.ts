@@ -7,6 +7,7 @@ interface ProjectBase {
   mobileImage?: string; // Image optionnelle pour mobile/app
   order: number;
   status: "draft" | "published";
+  confidential?: boolean; // Projet interne / non public
   metadata: {
     year: string;
     [key: string]: any;

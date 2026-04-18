@@ -1,135 +1,52 @@
 ---
 template: application
-title: The Doctor's Club
-slug: thedoctorclub
-description: Application mobile et web de conciergerie premium exclusivement
-  dédiée aux médecins, offrant des services personnalisés 24/7 basés sur
-  l'expertise Clac.io (350k+ utilisateurs)
-longDescription: "The Doctor's Club révolutionne la conciergerie médicale en
-  proposant une plateforme premium chatbot-first où les médecins accèdent à tous
-  les services via une conversation naturelle avec Marie, leur concierge IA.
-  L'application couvre 8 catégories de services : Voyage & Transport (vols, jets
-  privés, lounges), Restauration (tables VIP, restaurants étoilés), Événements &
-  Culture (concerts, opéras, congrès médicaux), Services à Domicile (ménage,
-  babysitting, bricolage), Personal Shopping, Assistance Administrative,
-  Services Médicaux Spécifiques (recherche remplaçants, publications,
-  networking) et Bien-être & Récupération. Architecture Flutter multiplateforme
-  (iOS, Android, Web) avec Firebase backend, système de plans par abonnement, et
-  intégration Stripe pour paiements."
-mobileImage: /images/projects/thedoctorclub/mobile-home.jpg
-order: 1
+title: "The Doctor's Club"
+slug: "thedoctorclub"
+description: "Plateforme SaaS (web Next.js + app mobile Flutter) de conciergerie médicale premium : onboarding, profil vérifié, abonnement Stripe (Standard 20€ / Professional+MerciDocteur 79,90€), essai gratuit 7 jours, paiement natif iOS et Android."
+longDescription: "The Doctor's Club combine un front web Next.js 16 (thedoctorsclub.fr) et une application mobile Flutter / FlutterFlow distribuée via TestFlight et Play Store. Le cœur du produit est un système d'abonnement multi-niveaux branché sur Stripe, avec intégration native de flutter_stripe côté mobile (Apple Pay, Google Pay, 3D Secure). Les webhooks Stripe alimentent Firestore en temps réel via des Firebase Cloud Functions Node.js, ce qui garantit la cohérence des droits d'accès et de l'historique de paiement. Le projet s'appuie sur l'API Clac.io pour les données légales et réglementaires médicales."
+image: "/images/projects/thedoctorclub/hero.svg"
+mobileImage: "/images/projects/thedoctorclub/mobile-home.jpg"
+order: 2
 status: published
+
 metadata:
-  year: 2024-2026
-  team: Solo developer
-  client: Médecins & Professionnels de santé
-  duration: En développement - Lancement prévu Janvier 2026
-  role: Full-Stack Developer & UI/UX Designer
+  year: "2025-2026"
+  client: "The Doctor's Club"
+  role: "Full-Stack Developer & Product Lead"
+  duration: "En beta — lancement public prévu 2026"
+
 technologies:
+  - Next.js 16
+  - React 19
+  - TypeScript 5
   - Flutter
   - FlutterFlow
-  - Firebase Firestore
+  - Dart
   - Firebase Auth
+  - Firebase Firestore
   - Firebase Cloud Functions
-  - Firebase Storage
   - Stripe
-  - Push Notifications
-  - OCR (License verification)
-  - Biometric Auth
-  - iOS
-  - Android
-  - PWA
+  - flutter_stripe
+  - Apple Pay
+  - Google Pay
+  - Tailwind CSS
+  - Vercel
+
 features:
-  - title: Interface Chatbot-First
-    description: Concierge IA conversationnelle pour toutes les demandes. Chat en
-      temps réel avec reconnaissance automatique du type de service, suggestions
-      contextuelles, upload de fichiers inline, quick replies et voice input.
-      Élimine les formulaires complexes.
-  - title: 8 catégories de services premium
-    description: Voyage & Transport (vols, jets privés, lounges VIP), Restauration
-      (tables étoilées, traiteurs), Événements (concerts, congrès médicaux),
-      Services à Domicile, Personal Shopping luxe, Assistance Administrative,
-      Services Médicaux Spécifiques, Bien-être & Récupération 24/7
-  - title: Système d'abonnement multi-niveaux
-    description: "2 plans : Free et payant"
-  - title: Vérification médicale intégrée
-    description: "Upload de license médicale avec OCR, vérification sous 24-48h,
-      badge 'Verified' sur profil. Champs spécialisés : spécialité médicale,
-      hôpital/clinique, années de pratique, titre (Dr., Prof.), région
-      d'exercice"
-  - title: Architecture Flutter multiplateforme
-    description: "App mobile native (iOS/Android) + Web PWA responsive. FlutterFlow
-      pour prototypage rapide, design system 'Émeraude Médical' (vert forêt
-      #065F46, émeraude #10B981), typography Poppins + Roboto, dark mode
-      complet"
-  - title: Onboarding personnalisé 7 étapes
-    description: Welcome → Info personnelles → Info médicales → Upload license →
-      Vérification → Préférences services → Choix plan → Paiement Stripe.
-      Biometric setup (Face ID/Touch ID), notifications configurables, email
-      verification OTP
-  - title: Gestion de profil avancée
-    description: Informations personnelles et médicales complètes, upload photo de
-      profil, credentials vérifiés, préférences par catégorie (airlines,
-      cuisines, brands), quiet hours pour notifications, historique de login
-  - title: Système de référencement
-    description: Code de parrainage unique, partage via QR code/message/email/social
-      media, tracking des referrals, récompenses earned, dashboard dédié avec
-      statistiques et liste des médecins parrainés
-impact:
-  users: Phase développement - Lancement prévu Janvier 2026
-  reduction: Simplification vie professionnelle des médecins
-  satisfaction: "Basé sur expertise Clac.io : 98% satisfaction clients"
-  custom:
-    - label: Catégories de services
-      value: 8 catégories complètes
-    - label: Disponibilité
-      value: 24/7/365
-timeline:
-  - date: Sept 2024
-    title: Phase 1 - Conception & Design System ✅
-    description: Définition UI/UX architecture complète (50+ screens), création
-      design system 'Émeraude Médical', wireframes FlutterFlow, catalogue des 8
-      catégories de services, mapping avec expertise Clac.io
-  - date: Oct 2024
-    title: Phase 2 - MVP Core Features ✅
-    description: Développement authentication flow (login, signup, biometric),
-      onboarding 7 étapes avec vérification médicale, dashboard avec chatbot
-      Marie, création des 8 catégories de services, intégration Firebase (Auth,
-      Firestore, Functions, Storage)
-  - date: Nov-Déc 2024
-    title: Phase 3 - Chat & Requests 🚧
-    description: Interface chat temps réel avec Marie, système de quick replies et
-      suggestions contextuelles, upload de fichiers inline, historique des
-      conversations, gestion des demandes (tracking, statuts, rating),
-      notifications push
-  - date: Jan-Fév 2025
-    title: Phase 4 - Subscription & Payments
-    description: Intégration Stripe complète, système d'abonnement 3 niveaux
-      (Essential/Premium/Platinum), gestion cartes de paiement, billing history
-      avec invoices PDF, upgrade/downgrade flows, trial period
-  - date: Mars-Juin 2025
-    title: Phase 5 - Enhancement & Polish
-    description: Système de référencement avec QR codes, help center avec FAQ et
-      vidéos, security settings avancés, notification preferences granulaires,
-      animations et micro-interactions, error states et offline mode
-  - date: Juil-Sept 2025
-    title: Phase 6 - Beta Testing
-    description: Tests utilisateurs avec 30 médecins pilotes, optimisation
-      performances Flutter, corrections bugs, ajustements UX/UI basés sur
-      feedback, préparation soumissions App Store et Play Store
-  - date: Oct-Déc 2025
-    title: Phase 7 - Déploiement & Préparation Launch
-    description: Soumission et validation App Store (iOS) et Play Store (Android),
-      lancement PWA web, formation équipe support Clac.io, création matériel
-      marketing, onboarding premiers clients premium
-  - date: Janvier 2026
-    title: Phase 8 - Lancement Commercial 🚀
-    description: Lancement officiel multiplateforme (iOS, Android, Web), campagne
-      marketing ciblée médecins, partenariats avec ordres professionnels, suivi
-      KPIs et feedback utilisateurs, itérations rapides post-launch
-gallery:
-  - /images/projects/thedoctorclub/mobile-home.jpg
+  - title: "Web Next.js + app mobile Flutter"
+    description: "Web thedoctorsclub.fr en Next.js 16 pour la landing et le dashboard. App mobile Flutter / FlutterFlow déployée sur iOS (TestFlight) et Android, partageant la même base Firebase."
+  - title: "Paiement mobile natif Stripe"
+    description: "Custom actions Flutter autour de flutter_stripe 11.5 : Apple Pay, Google Pay, 3D Secure. Payment Sheet native intégrée dans l'onboarding mobile pour un parcours sans redirection."
+  - title: "Abonnements multi-niveaux"
+    description: "Standard 20€/mois et Professional+MerciDocteur 79,90€/mois, essai gratuit 7 jours, gestion upgrade/downgrade via Stripe Customer Portal."
+  - title: "Synchronisation webhooks temps réel"
+    description: "Firebase Cloud Functions qui consomment les webhooks Stripe (subscription.created, invoice.paid, customer.subscription.updated) et mettent à jour les collections Firestore users, subscription_events et payments."
+  - title: "Intégration Clac.io"
+    description: "API Clac.io branchée côté back pour enrichir les données légales et réglementaires liées aux médecins."
+
 links:
-  demo: https://thedoctorclub.app
-  github: https://github.com/julianbonne974/thedoctorclub
+  demo: "https://thedoctorsclub.fr"
+
+gallery:
+  - "/images/projects/thedoctorclub/mobile-home.jpg"
 ---

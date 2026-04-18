@@ -1,7 +1,23 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Zap, Shield, Database, Globe, Cpu, Lock, BarChart } from "lucide-react";
+import {
+  Zap,
+  Shield,
+  Database,
+  Globe,
+  Cpu,
+  Lock,
+  BarChart,
+  Scale,
+  FileText,
+  RefreshCw,
+  Code,
+  Activity,
+  Network,
+  Layers,
+  GitBranch,
+} from "lucide-react";
 import type { TechnologyProject } from "@/types/project";
 
 const iconMap = {
@@ -12,6 +28,14 @@ const iconMap = {
   Cpu,
   Lock,
   BarChart,
+  Scale,
+  FileText,
+  RefreshCw,
+  Code,
+  Activity,
+  Network,
+  Layers,
+  GitBranch,
 };
 
 interface TechnologyCharacteristicsProps {

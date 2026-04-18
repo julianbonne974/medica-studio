@@ -4,11 +4,14 @@ import { ProjectsSection } from "@/components/projects-section";
 import { getSortedProjects, getProjectsCount } from "@/lib/projects";
 
 export const metadata: Metadata = {
-  title: "Accueil - Solutions numériques pour la santé",
-  description: "Découvrez nos solutions numériques innovantes pour le secteur de la santé : plateformes de télémédecine, outils de gestion pour professionnels de santé, et applications médicales sur mesure.",
+  title: "Studio de développement santé — HDS, CRM médicaux, cybersécurité ESMS",
+  description:
+    "Medica Studio conçoit et opère des applications SaaS santé, des CRM médicaux, des plateformes de cybersécurité ESMS et des outils fiscaux pour professionnels de santé. Architectures HDS conformes RGPD, HAS 2025, CaRE et HDS 2.0.",
+  alternates: { canonical: "https://medicastudio.com" },
   openGraph: {
-    title: "Medica Studio - Solutions numériques pour la santé",
-    description: "Découvrez nos solutions numériques innovantes pour le secteur de la santé",
+    title: "Medica Studio — Studio de développement santé, HDS et conformité",
+    description:
+      "Applications SaaS santé, CRM médicaux, cybersécurité ESMS et outils fiscaux. Next.js, tRPC, PostgreSQL HDS, Firebase, Flutter, publicodes.",
     url: "https://medicastudio.com",
   },
 };

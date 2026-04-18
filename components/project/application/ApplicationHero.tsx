@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Monitor, Smartphone } from "lucide-react";
+import { Monitor, Smartphone, Lock } from "lucide-react";
 import type { ApplicationProject } from "@/types/project";
 import { TechStack } from "../shared/TechStack";
 
@@ -37,10 +37,16 @@ export function ApplicationHero({ project }: ApplicationHeroProps) {
             transition={{ duration: 0.6 }}
             className="flex flex-col justify-center"
           >
-            <div className="mb-4 inline-block">
+            <div className="mb-4 flex flex-wrap items-center gap-2">
               <span className="rounded-none bg-[#059669] px-3 py-1 text-xs font-medium uppercase tracking-wide text-white">
                 Application
               </span>
+              {project.confidential && (
+                <span className="inline-flex items-center gap-1 rounded-none bg-zinc-900 px-3 py-1 text-xs font-medium uppercase tracking-wide text-zinc-100 dark:bg-zinc-700">
+                  <Lock className="h-3 w-3" />
+                  Projet interne · Confidentiel
+                </span>
+              )}
             </div>
 
             <h1 className="mb-6 text-4xl font-bold tracking-tight text-zinc-900 md:text-5xl lg:text-6xl dark:text-zinc-100">
