@@ -368,6 +368,10 @@ export interface TextFlippingBoardProps {
   className?: string;
   /** Total animation duration in seconds. Defaults to ~1.2s. */
   duration?: number;
+  /** Nombre de lignes de la grille (défaut 6). Réduire sur mobile allège le DOM. */
+  boardRows?: number;
+  /** Nombre de colonnes de la grille (défaut 22). Réduire sur mobile allège le DOM. */
+  boardCols?: number;
 }
 
 export function TextFlippingBoard({
@@ -375,6 +379,8 @@ export function TextFlippingBoard({
   text,
   className,
   duration = BASE_TOTAL_S,
+  boardRows = BOARD_ROWS,
+  boardCols = BOARD_COLS,
 }: TextFlippingBoardProps) {
   const scale = duration / BASE_TOTAL_S;
   const colDelay = BASE_COL_DELAY * scale;
@@ -383,36 +389,36 @@ export function TextFlippingBoard({
   const flipDur = Math.min(0.6, Math.max(0.15, BASE_FLIP_S * scale));
 
   const board = useMemo(() => {
-    const grid: ParsedCell[][] = Array.from({ length: BOARD_ROWS }, () =>
-      Array.from({ length: BOARD_COLS }, () => ({
+    const grid: ParsedCell[][] = Array.from({ length: boardRows }, () =>
+      Array.from({ length: boardCols }, () => ({
         type: "char" as const,
         value: " ",
       })),
     );
 
     if (text) {
-      const lines = wrapText(text, BOARD_COLS).slice(0, BOARD_ROWS);
-      const startRow = Math.max(0, Math.floor((BOARD_ROWS - lines.length) / 2));
+      const lines = wrapText(text, boardCols).slice(0, boardRows);
+      const startRow = Math.max(0, Math.floor((boardRows - lines.length) / 2));
       lines.forEach((line, i) => {
         const row = startRow + i;
-        if (row >= BOARD_ROWS) return;
+        if (row >= boardRows) return;
         const parsed = parseRow(line);
         const startCol = Math.max(
           0,
-          Math.floor((BOARD_COLS - parsed.length) / 2),
+          Math.floor((boardCols - parsed.length) / 2),
         );
         parsed.forEach((cell, c) => {
-          if (startCol + c < BOARD_COLS) {
+          if (startCol + c < boardCols) {
             grid[row][startCol + c] = cell;
           }
         });
       });
     } else if (rows) {
       rows.forEach((row, r) => {
-        if (r >= BOARD_ROWS) return;
+        if (r >= boardRows) return;
         const parsed = parseRow(row);
         parsed.forEach((cell, c) => {
-          if (c < BOARD_COLS) {
+          if (c < boardCols) {
             grid[r][c] = cell;
           }
         });
@@ -420,7 +426,7 @@ export function TextFlippingBoard({
     }
 
     return grid;
-  }, [rows, text]);
+  }, [rows, text, boardRows, boardCols]);
 
   return (
     <div
@@ -431,7 +437,7 @@ export function TextFlippingBoard({
     >
       <div
         className="grid gap-px md:gap-[3px]"
-        style={{ gridTemplateColumns: `repeat(${BOARD_COLS}, 1fr)` }}
+        style={{ gridTemplateColumns: `repeat(${boardCols}, 1fr)` }}
       >
         {board.map((row, r) =>
           row.map((cell, c) =>

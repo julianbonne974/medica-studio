@@ -5,7 +5,6 @@ import { Navigation } from "@/components/navigation";
 import { Footer } from "@/components/footer";
 import { CookieConsent } from "@/components/cookie-consent";
 import { ThemeProvider } from "@/components/theme-provider";
-import { ClientLayout } from "@/components/client-layout";
 import "./globals.css";
 
 const spaceGrotesk = Space_Grotesk({
@@ -173,12 +172,10 @@ export default function RootLayout({
           defaultTheme="light"
           enableSystem={false}
         >
-          <ClientLayout>
-            <CookieConsent />
-            <Navigation />
-            <main>{children}</main>
-            <Footer />
-          </ClientLayout>
+          <CookieConsent />
+          <Navigation />
+          <main>{children}</main>
+          <Footer />
         </ThemeProvider>
 
         <Script
