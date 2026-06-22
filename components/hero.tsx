@@ -21,6 +21,21 @@ export function Hero({ totalProjects }: HeroProps) {
   const [projectsCount, setProjectsCount] = useState(0);
   const [msgIdx, setMsgIdx] = useState(0);
   const sectionRef = useRef<HTMLElement>(null);
+  const [isMobile, setIsMobile] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    // Le board est rendu uniquement côté client (après hydratation) : le HTML initial
+    // reste léger (aucune des ~130 cellules à hydrater) et le board se monte une seule
+    // fois directement à la bonne taille — réduite sur mobile pour alléger le DOM et
+    // le compositing. setIsMobile + setMounted sont batchés -> pas de double rendu.
+    const mq = window.matchMedia("(max-width: 767px)");
+    setIsMobile(mq.matches);
+    setMounted(true);
+    const onChange = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
+  }, []);
 
   useEffect(() => {
     // Animation counter 0 → totalProjects
@@ -130,8 +145,17 @@ export function Hero({ totalProjects }: HeroProps) {
             <h1 className="sr-only">
               Ingénierie numérique dans le secteur de la santé
             </h1>
-            <div className="animate-fade-in" aria-hidden="true">
-              <TextFlippingBoard text={BOARD_MESSAGES[msgIdx]} />
+            <div
+              className="flex min-h-[260px] items-center justify-center animate-fade-in sm:min-h-[430px]"
+              aria-hidden="true"
+            >
+              {mounted && (
+                <TextFlippingBoard
+                  text={BOARD_MESSAGES[msgIdx]}
+                  boardRows={isMobile ? 5 : 6}
+                  boardCols={isMobile ? 14 : 22}
+                />
+              )}
             </div>
             <p className="mx-auto max-w-2xl animate-fade-in-delay-1 text-center text-lg sm:text-xl text-zinc-600 dark:text-zinc-400">
               Développement d&apos;applications et systèmes dédiés aux
