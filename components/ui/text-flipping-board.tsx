@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef, useState, useMemo } from "react";
-import { motion } from "motion/react";
+import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 const FLAP_CHARS = " ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$()-+&=;:'\"%,./?°";
@@ -94,8 +94,8 @@ const FlapCell = React.memo(function FlapCell({
 
     const scrambleCount =
       normalized === " "
-        ? 8 + Math.floor(Math.random() * 8)
-        : 25 + Math.floor(Math.random() * 15);
+        ? 5 + Math.floor(Math.random() * 5)
+        : 12 + Math.floor(Math.random() * 8);
 
     const runStep = (i: number) => {
       const isLast = i === scrambleCount;
