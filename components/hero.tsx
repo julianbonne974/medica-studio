@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowDown } from "lucide-react";
 import { TextFlippingBoard } from "@/components/ui/text-flipping-board";
@@ -20,6 +20,7 @@ const BOARD_MESSAGES: string[] = [
 export function Hero({ totalProjects }: HeroProps) {
   const [projectsCount, setProjectsCount] = useState(0);
   const [msgIdx, setMsgIdx] = useState(0);
+  const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     // Animation counter 0 → totalProjects
@@ -46,10 +47,56 @@ export function Hero({ totalProjects }: HeroProps) {
     ) {
       return;
     }
-    const id = setInterval(() => {
-      setMsgIdx((i) => (i + 1) % BOARD_MESSAGES.length);
-    }, 6000);
-    return () => clearInterval(id);
+    const section = sectionRef.current;
+    if (!section) return;
+
+    // La rotation (et donc l'animation des 132 cellules) ne tourne QUE lorsque le
+    // board est visible à l'écran ET l'onglet actif : aucun coût CPU en arrière-plan
+    // ou quand l'utilisateur a scrollé plus bas.
+    let intervalId: ReturnType<typeof setInterval> | null = null;
+    let onScreen = true;
+
+    const start = () => {
+      if (
+        intervalId === null &&
+        onScreen &&
+        document.visibilityState === "visible"
+      ) {
+        intervalId = setInterval(() => {
+          setMsgIdx((i) => (i + 1) % BOARD_MESSAGES.length);
+        }, 8000);
+      }
+    };
+    const stop = () => {
+      if (intervalId !== null) {
+        clearInterval(intervalId);
+        intervalId = null;
+      }
+    };
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        onScreen = entry.isIntersecting;
+        if (onScreen) start();
+        else stop();
+      },
+      { threshold: 0.15 },
+    );
+    observer.observe(section);
+
+    const onVisibility = () => {
+      if (document.visibilityState === "visible") start();
+      else stop();
+    };
+    document.addEventListener("visibilitychange", onVisibility);
+
+    start();
+
+    return () => {
+      stop();
+      observer.disconnect();
+      document.removeEventListener("visibilitychange", onVisibility);
+    };
   }, []);
 
   const scrollToProjects = () => {
@@ -60,7 +107,10 @@ export function Hero({ totalProjects }: HeroProps) {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden">
+    <section
+      ref={sectionRef}
+      className="relative min-h-screen flex items-center overflow-hidden"
+    >
       {/* Medical grid background */}
       <div
         className="absolute inset-0 opacity-20 dark:opacity-10"
