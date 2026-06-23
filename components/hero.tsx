@@ -146,13 +146,13 @@ export function Hero({ totalProjects }: HeroProps) {
               Ingénierie numérique dans le secteur de la santé
             </h1>
             <div
-              className="flex min-h-[260px] items-center justify-center animate-fade-in sm:min-h-[430px]"
+              className="flex min-h-[260px] items-center justify-center animate-fade-in sm:min-h-[300px]"
               aria-hidden="true"
             >
               {mounted && (
                 <TextFlippingBoard
                   text={BOARD_MESSAGES[msgIdx]}
-                  boardRows={isMobile ? 5 : 6}
+                  boardRows={isMobile ? 5 : 4}
                   boardCols={isMobile ? 14 : 22}
                 />
               )}
