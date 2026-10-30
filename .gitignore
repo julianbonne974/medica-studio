@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# espace clients : journaux et retours en local (repli de Netlify Blobs)
+/.data/
