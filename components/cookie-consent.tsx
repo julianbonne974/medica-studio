@@ -1,12 +1,26 @@
 "use client";
 
 import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 import * as CookieConsentLib from "vanilla-cookieconsent";
 import "vanilla-cookieconsent/dist/cookieconsent.css";
 import Script from "next/script";
 
+function estEspaceClients(chemin: string | null) {
+  return chemin === "/clients" || Boolean(chemin?.startsWith("/clients/"));
+}
+
 export function CookieConsent() {
   const measurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
+  const pathname = usePathname();
+
+  // Espace clients (/clients) : aucune mesure d'audience, même si elle a été acceptée ailleurs
+  // sur le site (désactivation officielle de gtag par la variable ga-disable-<ID>).
+  useEffect(() => {
+    if (!measurementId) return;
+    (window as unknown as Record<string, unknown>)[`ga-disable-${measurementId}`] =
+      estEspaceClients(pathname);
+  }, [pathname, measurementId]);
 
   useEffect(() => {
     CookieConsentLib.run({
@@ -45,7 +59,7 @@ export function CookieConsent() {
                 {
                   title: "Cookies strictement nécessaires",
                   description:
-                    "Ces cookies sont essentiels au fonctionnement du site et ne peuvent pas être désactivés.",
+                    "Ces cookies sont essentiels au fonctionnement du site et ne peuvent pas être désactivés. Dans l'espace client (/clients), un cookie de session strictement nécessaire garde votre connexion et votre prénom pendant 30 jours ; il se supprime à la déconnexion.",
                   linkedCategory: "necessary",
                 },
                 {
@@ -75,7 +89,7 @@ export function CookieConsent() {
   }, []);
 
   const loadGoogleAnalytics = () => {
-    if (!measurementId || window.gtag) return;
+    if (!measurementId || window.gtag || estEspaceClients(window.location.pathname)) return;
 
     const script = document.createElement("script");
     script.src = `https://www.googletagmanager.com/gtag/js?id=${measurementId}`;
