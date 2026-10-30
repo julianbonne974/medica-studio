@@ -1,0 +1,288 @@
+/* Tīfaifai : la fiche comme un appliqué de deux couleurs sur coton blanc.
+   Une famille de caractères, un indigo de structure, des piqûres en écho ;
+   rouge et ambre réservés aux rappels. */
+:root {
+  --coton: #f3f5f7;
+  --coton-2: #e9edf1;
+  --papier: #ffffff;
+  --appl: #13457b;
+  --appl-fonce: #0c3460;
+  --appl-voile: #e3eaf3;
+  --appl-trace: #13457b59;
+  --appl-plein: #13457b;
+  --sur-plein: #ffffff;
+  --encre: #0d1b2a;
+  --encre-2: #3d4b5c;
+  --encre-3: #5a6a7d;
+  --filet: #d3d8de;
+  --sur-appl: #ffffff;
+  --rappel: #b42318;
+  --rappel-voile: #fbe9e7;
+  --vigil: #8a5300;
+  --vigil-voile: #fdf1dc;
+  --ok: #1e6b46;
+  --ok-voile: #e3f2ea;
+  --ombre: 0 1px 2px #0d1b2a14, 0 6px 18px #0d1b2a12;
+
+  --texte: "Atkinson Hyperlegible Next", "Segoe UI", system-ui, sans-serif;
+  --chiffres: "Atkinson Hyperlegible Mono", "Cascadia Mono", Consolas, monospace;
+
+  --t-xs: 0.75rem; --t-s: 0.8125rem; --t-m: 0.9375rem; --t-l: 1.0625rem; --t-xl: 1.25rem; --t-2xl: 1.5rem;
+  --r: 10px; --r-s: 6px;
+  --e1: 4px; --e2: 8px; --e3: 12px; --e4: 16px; --e5: 24px; --e6: 32px;
+  --pli: 132px;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --coton: #0e1620; --coton-2: #131d29; --papier: #17222f;
+    --appl: #5b93d6; --appl-fonce: #3f78bd; --appl-voile: #1b2c42; --appl-trace: #5b93d666; --appl-plein: #1f4f86; --sur-plein: #ffffff;
+    --encre: #e8edf3; --encre-2: #b7c2cf; --encre-3: #8796a8; --filet: #2a3746; --sur-appl: #08121d;
+    --rappel: #ff7b6b; --rappel-voile: #3a1814; --vigil: #f0b552; --vigil-voile: #33260f;
+    --ok: #63c99a; --ok-voile: #12301f;
+    --ombre: 0 1px 2px #0006, 0 8px 22px #0005;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --coton: #0e1620; --coton-2: #131d29; --papier: #17222f;
+  --appl: #5b93d6; --appl-fonce: #3f78bd; --appl-voile: #1b2c42; --appl-trace: #5b93d666; --appl-plein: #1f4f86; --sur-plein: #ffffff;
+  --encre: #e8edf3; --encre-2: #b7c2cf; --encre-3: #8796a8; --filet: #2a3746; --sur-appl: #08121d;
+  --rappel: #ff7b6b; --rappel-voile: #3a1814; --vigil: #f0b552; --vigil-voile: #33260f;
+  --ok: #63c99a; --ok-voile: #12301f;
+  --ombre: 0 1px 2px #0006, 0 8px 22px #0005;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html, body { height: 100%; }
+body {
+  margin: 0; background: var(--coton); color: var(--encre);
+  font-family: var(--texte); font-size: var(--t-m); line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+}
+::selection { background: var(--appl); color: var(--sur-appl); }
+:focus-visible { outline: 2px solid var(--appl); outline-offset: 2px; }
+* { scrollbar-color: var(--appl-trace) transparent; scrollbar-width: thin; }
+h1, h2, h3 { text-wrap: balance; margin: 0; }
+button, input, select, textarea { font: inherit; color: inherit; }
+.num { font-family: var(--chiffres); font-variant-numeric: tabular-nums; letter-spacing: 0; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* Bandeau de maquette et pied ------------------------------------------- */
+.maquette {
+  display: flex; gap: var(--e3); align-items: center; justify-content: space-between; flex-wrap: wrap;
+  padding: 6px var(--e4); background: var(--coton-2); color: var(--encre-2);
+  font-size: var(--t-xs); letter-spacing: 0.02em; border-bottom: 1px solid var(--filet);
+}
+.maquette strong { color: var(--encre); font-weight: 600; }
+.pied {
+  padding: var(--e4); color: var(--encre-3); font-size: var(--t-xs);
+  display: flex; gap: var(--e3); justify-content: space-between; flex-wrap: wrap;
+}
+
+/* Barre d'application ---------------------------------------------------- */
+.barre {
+  display: flex; align-items: center; gap: var(--e4); flex-wrap: wrap;
+  padding: var(--e2) var(--e4); background: var(--papier); border-bottom: 1px solid var(--filet);
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20;
+}
+.marque { display: flex; align-items: center; gap: var(--e2); font-weight: 700; font-size: var(--t-l); color: var(--appl); }
+.marque small { font-weight: 400; color: var(--encre-3); font-size: var(--t-xs); }
+.nav { display: flex; gap: 2px; flex-wrap: wrap; }
+.nav button {
+  border: 0; background: transparent; padding: 8px 12px; border-radius: var(--r-s);
+  color: var(--encre-2); font-weight: 500; cursor: pointer;
+}
+.nav button:hover { background: var(--appl-voile); color: var(--encre); }
+.nav button[aria-current="page"] { background: var(--appl); color: var(--sur-appl); }
+.espace { flex: 1; }
+
+/* Sélecteur de rôle */
+.roles { display: inline-flex; border: 1px solid var(--filet); border-radius: 999px; padding: 2px; background: var(--coton); }
+.roles button { border: 0; background: transparent; padding: 5px 12px; border-radius: 999px; cursor: pointer; font-size: var(--t-s); color: var(--encre-2); }
+.roles button[aria-pressed="true"] { background: var(--encre); color: var(--coton); }
+
+/* Boutons ------------------------------------------------------------------ */
+.btn {
+  display: inline-flex; align-items: center; gap: var(--e2); justify-content: center;
+  min-height: 36px; padding: 0 14px; border-radius: var(--r-s); cursor: pointer;
+  border: 1px solid var(--filet); background: var(--papier); color: var(--encre); font-weight: 500;
+  transition: background 150ms ease-out, border-color 150ms ease-out, color 150ms ease-out;
+}
+.btn:hover { border-color: var(--appl); color: var(--appl); }
+.btn:disabled { opacity: 0.45; cursor: not-allowed; }
+.btn.plein { background: var(--appl); border-color: var(--appl); color: var(--sur-appl); }
+.btn.plein:hover { background: var(--appl-fonce); color: var(--sur-appl); }
+.btn.pique { border-style: dashed; border-color: var(--appl); color: var(--appl); background: transparent; }
+.btn.petit { min-height: 28px; padding: 0 10px; font-size: var(--t-s); }
+.btn svg { width: 16px; height: 16px; flex: none; }
+
+/* Bandeau patient : l'appliqué principal ------------------------------------ */
+.bandeau {
+  background: var(--appl-plein); color: var(--sur-plein);
+  padding: var(--e3) var(--e4); display: grid; gap: var(--e2) var(--e5);
+  grid-template-columns: minmax(0, 1.4fr) repeat(auto-fit, minmax(120px, 1fr)); align-items: end;
+}
+.bandeau .nom { font-size: var(--t-2xl); font-weight: 700; letter-spacing: -0.01em; line-height: 1.1; }
+.bandeau .nom small { display: block; font-size: var(--t-s); font-weight: 400; opacity: 0.85; letter-spacing: 0; margin-top: 2px; }
+.bandeau .info { font-size: var(--t-s); line-height: 1.25; min-width: 0; }
+.bandeau .info span { display: block; font-size: var(--t-xs); opacity: 0.75; letter-spacing: 0.04em; text-transform: uppercase; }
+.bandeau .info b { font-weight: 600; font-size: var(--t-m); }
+
+/* Fiche en deux moitiés autour du pli ---------------------------------------- */
+.fiche {
+  display: grid; grid-template-columns: minmax(0, 1fr) var(--pli) minmax(0, 1fr);
+  gap: 0; align-items: start; padding-block: var(--e4); padding-inline: var(--e4);
+}
+.moitie { display: grid; gap: var(--e3); min-width: 0; }
+.moitie-titre {
+  display: flex; align-items: baseline; justify-content: space-between; gap: var(--e2);
+  font-size: var(--t-xs); text-transform: uppercase; letter-spacing: 0.08em; color: var(--encre-3); padding-inline: 2px;
+}
+.pli {
+  position: sticky; top: 72px; display: grid; justify-items: center; gap: var(--e3);
+  padding-inline: var(--e3); min-height: 60vh;
+  background-image: linear-gradient(var(--appl), var(--appl));
+  background-size: 2px 100%; background-repeat: no-repeat; background-position: center;
+}
+.pli .motif { width: 64px; height: 64px; background: var(--coton); padding: 4px; border-radius: 50%; }
+.pli .btn { width: 100%; background: var(--coton); }
+.pli .btn.plein { background: var(--appl); }
+@media (max-width: 900px) {
+  .fiche { grid-template-columns: minmax(0, 1fr); gap: var(--e4); }
+  .pli { position: static; min-height: 0; grid-auto-flow: column; justify-content: start; background: none; overflow-x: auto; }
+  .pli .btn { width: auto; }
+}
+
+/* Rubrique : une pièce découpée ------------------------------------------- */
+.piece {
+  background: var(--papier); border-radius: var(--r); box-shadow: var(--ombre);
+  display: grid; min-width: 0; overflow: hidden;
+}
+.piece > header {
+  display: flex; align-items: center; justify-content: space-between; gap: var(--e2);
+  padding: 7px var(--e3); background: var(--appl-plein); color: var(--sur-plein);
+  font-weight: 700; font-size: var(--t-s); letter-spacing: 0.06em; text-transform: uppercase;
+}
+.piece > header .aide { font-weight: 400; letter-spacing: 0; text-transform: none; color: var(--sur-plein); opacity: 0.82; font-size: var(--t-xs); }
+.piece .corps { padding: var(--e3); display: grid; gap: var(--e2); min-width: 0; }
+.paire { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--e3); }
+
+/* Champ ------------------------------------------------------------------- */
+.champ { display: grid; gap: 4px; min-width: 0; position: relative; }
+.champ > label, .champ > .lib { font-size: var(--t-xs); color: var(--encre-2); font-weight: 600; letter-spacing: 0.02em; }
+.saisie, .champ input, .champ select, .champ textarea {
+  width: 100%; min-height: 36px; padding: 7px 10px; border-radius: var(--r-s);
+  border: 1px solid var(--filet); background: var(--papier); color: var(--encre);
+}
+.champ textarea { min-height: 60px; resize: vertical; }
+.champ input:hover, .champ textarea:hover, .champ select:hover { border-color: var(--encre-3); }
+.champ input:focus, .champ textarea:focus, .champ select:focus {
+  border-color: var(--appl); outline: 1.5px dashed var(--appl); outline-offset: 3px;
+}
+.champ input[readonly], .champ textarea[readonly] { background: var(--coton); color: var(--encre-2); }
+.champ.calc input { font-family: var(--chiffres); background: var(--coton); }
+.unite { position: absolute; right: 10px; bottom: 9px; font-size: var(--t-xs); color: var(--encre-3); pointer-events: none; }
+
+/* Piqûre en écho : le champ posé par RAS ------------------------------------- */
+.ras-pose { position: relative; }
+.ras-pose input, .ras-pose textarea, .ras-pose .saisie { background: var(--appl-voile); border-color: transparent; color: var(--appl-fonce); font-weight: 600; }
+:root[data-theme="dark"] .ras-pose input, :root[data-theme="dark"] .ras-pose textarea { color: var(--encre); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .ras-pose input, :root:not([data-theme="light"]) .ras-pose textarea { color: var(--encre); } }
+.ras-pose::after {
+  content: ""; position: absolute; inset: auto -5px -5px -5px; top: calc(1.2em + 4px - 5px);
+  border: 1.5px dashed var(--appl); border-radius: 9px; pointer-events: none;
+  animation: piqure 520ms cubic-bezier(.16,1,.3,1) both;
+}
+.ras-pose .marque-ras {
+  position: absolute; right: 6px; top: 0; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--appl); font-weight: 700;
+}
+@keyframes piqure {
+  from { clip-path: inset(0 100% 0 0); opacity: 0.2; }
+  to { clip-path: inset(0 0 0 0); opacity: 1; }
+}
+
+/* Valeurs de liste : jetons ------------------------------------------------- */
+.jetons { display: flex; flex-wrap: wrap; gap: 6px; }
+.jeton {
+  border: 1px solid var(--filet); background: var(--papier); color: var(--encre-2);
+  border-radius: 999px; padding: 3px 10px; font-size: var(--t-s); cursor: pointer; line-height: 1.3;
+}
+.jeton:hover { border-color: var(--appl); color: var(--appl); }
+.jeton[aria-pressed="true"] { background: var(--appl); border-color: var(--appl); color: var(--sur-appl); }
+
+/* Rappels -------------------------------------------------------------------- */
+.rappels { display: grid; gap: 6px; }
+.rappel {
+  display: flex; gap: var(--e2); align-items: flex-start; padding: 8px 12px; border-radius: var(--r-s);
+  background: var(--rappel-voile); color: var(--rappel); font-weight: 600; font-size: var(--t-s);
+}
+.rappel.vigil { background: var(--vigil-voile); color: var(--vigil); }
+.rappel.info { background: var(--appl-voile); color: var(--appl-fonce); }
+:root[data-theme="dark"] .rappel.info { color: var(--encre); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .rappel.info { color: var(--encre); } }
+.rappel svg { width: 16px; height: 16px; flex: none; margin-top: 2px; }
+.rappel p { margin: 0; font-weight: 400; color: var(--encre-2); }
+
+/* Pastilles d'état ------------------------------------------------------------- */
+.etat { display: inline-flex; align-items: center; gap: 6px; padding: 1px 8px; border-radius: 999px; font-size: var(--t-xs); font-weight: 600; white-space: nowrap; border: 1px solid transparent; }
+.etat::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+/* Progression de la pièce : à compléter (non cousue) → à valider (faufilée) → prêt (cousue) → imprimé. */
+.etat.a-faire { background: transparent; border: 1px dashed var(--appl); color: var(--appl); }
+.etat.a-faire::before { background: transparent; box-shadow: inset 0 0 0 1.5px currentColor; }
+.etat.a-valider { background: var(--appl-voile); border: 1px dashed var(--appl); color: var(--appl); }
+.etat.pret { background: var(--appl-plein); color: var(--sur-plein); }
+.etat.imprime { background: var(--ok-voile); color: var(--ok); }
+.etat.manque { background: var(--rappel-voile); color: var(--rappel); }
+.rappel.neutre { background: var(--coton-2); color: var(--encre-2); }
+
+/* Tableaux ---------------------------------------------------------------------- */
+.table-zone { overflow-x: auto; border-radius: var(--r); background: var(--papier); box-shadow: var(--ombre); }
+table.liste { width: 100%; border-collapse: collapse; font-size: var(--t-s); }
+table.liste th { text-align: left; font-size: var(--t-xs); text-transform: uppercase; letter-spacing: 0.06em; color: var(--encre-3); font-weight: 600; padding: 10px 12px; border-bottom: 1px solid var(--filet); background: var(--coton); }
+table.liste td { padding: 10px 12px; border-bottom: 1px solid var(--filet); vertical-align: middle; }
+table.liste tr:last-child td { border-bottom: 0; }
+table.liste tbody tr { cursor: pointer; }
+table.liste tbody tr:hover td { background: var(--appl-voile); }
+table.liste tbody tr[aria-selected="true"] td { background: var(--appl-voile); box-shadow: inset 0 1px 0 var(--appl-trace), inset 0 -1px 0 var(--appl-trace); }
+
+/* Aperçu d'impression A4 ------------------------------------------------------- */
+.planche { background: var(--coton-2); padding: var(--e5) var(--e4); display: grid; justify-items: center; gap: var(--e5); overflow-x: auto; }
+.a4 {
+  width: 210mm; max-width: 100%; min-height: 297mm; background: #ffffff; color: #111;
+  box-shadow: 0 2px 6px #0003, 0 18px 40px #0002; padding: 14mm 14mm 16mm;
+  font-family: "Atkinson Hyperlegible Next", Arial, sans-serif; font-size: 10.5pt; line-height: 1.38;
+  position: relative;
+}
+.a4 h1 { font-size: 14pt; letter-spacing: 0.02em; }
+.a4 h2 { font-size: 10pt; text-transform: uppercase; letter-spacing: 0.08em; color: #13457b; border-bottom: 1px solid #13457b55; padding-bottom: 2px; margin-top: 10px; }
+.a4 .entete { display: flex; justify-content: space-between; gap: 12px; border-bottom: 2px solid #13457b; padding-bottom: 8px; margin-bottom: 8px; }
+.a4 .grille { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 18px; }
+.a4 .ligne { display: flex; gap: 6px; } .a4 .ligne b { min-width: 34%; font-weight: 600; color: #444; }
+.a4 .imprime-tampon { position: absolute; top: 12mm; right: 14mm; transform: rotate(-6deg); border: 2px solid #1e6b46; color: #1e6b46; padding: 2px 8px; font-weight: 700; font-size: 9pt; letter-spacing: 0.1em; }
+.a4 .signature { margin-top: 18px; display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.a4 .signature div { border-top: 1px solid #999; padding-top: 4px; font-size: 9pt; color: #555; }
+
+/* Vide, chronomètre ---------------------------------------------------------------- */
+.vide { display: grid; justify-items: center; gap: var(--e3); padding: var(--e6) var(--e4); color: var(--encre-2); text-align: center; }
+.vide .motif { width: 96px; height: 96px; opacity: 0.85; }
+.chrono {
+  position: fixed; right: var(--e4); bottom: calc(var(--e4) + env(safe-area-inset-bottom, 0px)); z-index: 40;
+  background: var(--encre); color: var(--coton); border-radius: var(--r); padding: 8px 12px;
+  display: flex; gap: var(--e3); align-items: center; font-size: var(--t-s); box-shadow: var(--ombre);
+}
+.chrono .btn { min-height: 26px; background: transparent; color: var(--coton); border-color: #ffffff40; }
+.chrono .btn.plein { background: var(--appl); border-color: var(--appl); color: var(--sur-appl); }
+.toast {
+  position: fixed; left: 50%; bottom: calc(var(--e5) + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%);
+  background: var(--encre); color: var(--coton); padding: 10px 16px; border-radius: var(--r); z-index: 50;
+  font-size: var(--t-s); box-shadow: var(--ombre); display: flex; gap: var(--e3); align-items: center;
+}
+.toast button { background: transparent; border: 1px dashed #ffffff80; color: inherit; border-radius: var(--r-s); padding: 3px 10px; cursor: pointer; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 1ms !important; transition-duration: 1ms !important; }
+}

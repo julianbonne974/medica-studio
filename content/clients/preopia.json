@@ -1,0 +1,47 @@
+{
+  "slug": "preopia",
+  "nom": "Preopia",
+  "sousTitre": "Logiciel de consultation d'anesthésie (nom provisoire)",
+  "description": "Maquettes cliquables du futur logiciel de consultation d'anesthésie. Elles servent à comparer deux versions en chronométrant vos parcours habituels, avant la rédaction du cahier des charges.",
+  "mentionDonnees": "Données fictives : les patients et les praticiens sont inventés, les valeurs cliniques sont des exemples.",
+  "versions": [
+    {
+      "id": "v1",
+      "libelle": "V1",
+      "titre": "Version de base",
+      "description": "La consultation reprise à partir de l'acte : antécédents groupés par appareil, bandeau patient toujours visible, consignes de jeûne et d'arrêt des traitements, liste des manques avant l'impression du lot de la veille. Elle ne contient aucune fonction d'IA.",
+      "dossier": "maquette-v1",
+      "entree": "maquette-v1/index.html",
+      "miseAJour": "2026-10-23"
+    },
+    {
+      "id": "v2",
+      "libelle": "V2",
+      "titre": "Version cible",
+      "description": "La V1, plus une aide à la décision : consignes proposées par règle, pré-évaluation tirée du questionnaire patient, tri de la liste du jour, scores calculés (STOP-Bang, Apfel, Lee). Chaque proposition affiche sa source et attend la validation du médecin. Les écrans de bloc et d'activité sont de simples aperçus.",
+      "dossier": "maquette-v2",
+      "entree": "maquette-v2/index.html",
+      "miseAJour": "2026-10-23"
+    }
+  ],
+  "scenarios": [
+    {
+      "titre": "Patient connu, ASA 1-2",
+      "objectif": "Consultation d'un patient déjà venu, sans particularité, remplie avec les boutons RAS."
+    },
+    {
+      "titre": "Patient polymédiqué sous anticoagulant",
+      "objectif": "Nouveau patient avec plusieurs traitements dont un anticoagulant : saisie des traitements, consignes d'arrêt et de jeûne."
+    },
+    {
+      "titre": "Lot de la veille",
+      "objectif": "Impression des documents des patients opérés le lendemain, avec la liste de ce qui manque."
+    }
+  ],
+  "consignes": [
+    "Ouvrez une version, puis « Chronomètre de test » dans le bandeau du haut.",
+    "Choisissez le scénario et cliquez sur « Démarrer ». À la fin du parcours, arrêtez le chronomètre : le temps et le nombre de clics restent affichés.",
+    "Faites les trois scénarios sur la V1, puis sur la V2, et notez vos temps.",
+    "Le bouton « Laisser un retour », sur le bord droit de l'écran, nous transmet votre remarque avec votre prénom et la page affichée. Le bouton « Signaler » de la maquette montre seulement la future fonction : il n'envoie rien."
+  ]
+}
