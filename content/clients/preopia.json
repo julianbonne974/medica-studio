@@ -2,7 +2,7 @@
   "slug": "preopia",
   "nom": "Preopia",
   "sousTitre": "Logiciel de consultation d'anesthésie (nom provisoire)",
-  "description": "Maquettes cliquables du futur logiciel de consultation d'anesthésie. Elles servent à comparer deux versions en chronométrant vos parcours habituels, avant la rédaction du cahier des charges.",
+  "description": "Maquettes cliquables du futur logiciel de consultation d'anesthésie. Elles servent à comparer deux versions en chronométrant vos parcours habituels, avant le lancement du développement.",
   "mentionDonnees": "Données fictives : les patients et les praticiens sont inventés, les valeurs cliniques sont des exemples.",
   "versions": [
     {
