@@ -1,7 +1,7 @@
 # Espace clients (`/clients`)
 
 Espace protégé de medicastudio.fr où les clients ouvrent les prototypes HTML de leur projet
-(aujourd'hui les maquettes V1 et V2 de Preopia) et laissent leurs retours. Accès par prénom et
+(aujourd'hui les maquettes V1, V2, V2-A et V2-B de Preopia) et laissent leurs retours. Accès par prénom et
 code de projet ; administration séparée pour lire le journal et les retours.
 
 ## Routes
@@ -65,7 +65,10 @@ node scripts/sync-prototypes.mjs preopia
 
 Le script copie `maquette-v1/`, `maquette-v2/` et `commun/` depuis
 `/home/omarchy/code/preopia/prototype/` (option `--source <dossier>` pour un autre chemin) vers
-`private/clients/preopia/` :
+`private/clients/preopia/`, ainsi que les builds Vite des maquettes V2-A et V2-B
+(`v2-shadcn/apps/v2a-console/dist` → `v2a-console/`, `v2-shadcn/apps/v2b-tablette/dist` →
+`v2b-tablette/`), qui doivent exister (`pnpm build` dans `prototype/v2-shadcn/`, sinon le script
+s'arrête) :
 
 - les liens symboliques (`maquette-v1/commun -> ../commun`) deviennent des copies réelles, pour que
   les chemins relatifs `commun/…` marchent une fois servis ;
