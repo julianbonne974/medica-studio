@@ -14,11 +14,21 @@ import { fileURLToPath } from "node:url";
 
 const RACINE = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 
-/** Sources connues : dossier de prototypes et sous-dossiers à copier. */
+/** Sources connues : dossier de prototypes et sous-dossiers à copier.
+ *  Un élément de `dossiers` est soit un nom (copié sous le même nom), soit
+ *  `{ source, nom }` : un sous-dossier de la source (par exemple le `dist/` d'un build Vite)
+ *  copié sous `nom`. Les builds doivent exister avant la synchronisation (`pnpm build`
+ *  dans `prototype/v2-shadcn/`). */
 const SOURCES = {
   preopia: {
     source: "/home/omarchy/code/preopia/prototype",
-    dossiers: ["maquette-v1", "maquette-v2", "commun"],
+    dossiers: [
+      "maquette-v1",
+      "maquette-v2",
+      "commun",
+      { source: "v2-shadcn/apps/v2a-console/dist", nom: "v2a-console" },
+      { source: "v2-shadcn/apps/v2b-tablette/dist", nom: "v2b-tablette" },
+    ],
   },
 };
 
@@ -80,13 +90,18 @@ async function main() {
 
   const dates = {};
   for (const d of dossiers) {
-    const src = path.join(source, d);
-    const dst = path.join(destination, d);
+    const { source: sousDossier, nom } = typeof d === "string" ? { source: d, nom: d } : d;
+    const src = path.join(source, sousDossier);
+    const dst = path.join(destination, nom);
+    const entree = await fs.stat(path.join(src, "index.html")).catch(() => null);
+    if (sousDossier !== nom && !entree) {
+      throw new Error(`Build absent : ${src}/index.html (lancer le build avant la synchronisation)`);
+    }
     await fs.rm(dst, { recursive: true, force: true });
     await fs.cp(src, dst, { recursive: true, dereference: true, errorOnExist: false, force: true });
-    dates[d] = await derniereModification(src);
+    dates[nom] = await derniereModification(src);
     const nettoyes = await nettoyerHtml(dst);
-    console.log(`copié  ${d}/${nettoyes.length ? `  (nettoyé : ${nettoyes.join(", ")})` : ""}`);
+    console.log(`copié  ${nom}/${nettoyes.length ? `  (nettoyé : ${nettoyes.join(", ")})` : ""}`);
   }
 
   // Aucun lien symbolique ne doit rester dans la copie.
