@@ -73,41 +73,42 @@
   }
 
   // Consultations de démonstration (interventions de demain + une du jour en cours).
+  // heure : heure de passage au bloc ; heureCs : heure de la consultation d'anesthésie du lundi 19/10/2026 (fictive, ajoutée pour la V3).
   var consultations = [
-    fiche({ id: "c01", patient: "p01", intervention: "CHOLECYSTECTOMIE", heure: "07:30", chirurgien: chirurgiens[0], anesthesiste: anesthesistes[0], poids: "68", taille: "164", ta: "12/7", pouls: "72",
+    fiche({ id: "c01", patient: "p01", intervention: "CHOLECYSTECTOMIE", heure: "07:30", heureCs: "07:30", chirurgien: chirurgiens[0], anesthesiste: anesthesistes[0], poids: "68", taille: "164", ta: "12/7", pouls: "72",
       atcdChir: "RAS", atcdMed: "RAS", traitements: "PAS DE TRAITEMENT", allergies: "NON CONNUES", signes: "RAS", cardio: "B.D.C. REGULIERS", souffle: "SANS SOUFFLE", pulmo: "POUMONS SECS",
       intubation: "RAS", mallampati: "I", dtm: "> 7", asa: "I", gs: "0+", conclusion: "AMBU/ AG /INFOS DONNEES", premedication: "PARACETAMOL 1G", horaire: "A L'ADMISSION",
       docs: { consultation: "pret", consignes: "pret", consentement: "pret" } }),
-    fiche({ id: "c02", patient: "p02", intervention: "PROTHESE TOTALE DE HANCHE", precision: "DROIT", heure: "08:00", chirurgien: chirurgiens[1], anesthesiste: anesthesistes[1], poids: "92", taille: "171", ta: "15/8", pouls: "64",
+    fiche({ id: "c02", patient: "p02", intervention: "PROTHESE TOTALE DE HANCHE", precision: "DROIT", heure: "08:00", heureCs: "08:00", chirurgien: chirurgiens[1], anesthesiste: anesthesistes[1], poids: "92", taille: "171", ta: "15/8", pouls: "64",
       atcdChir: "APPENDICECTOMIE", atcdMed: "HTA, DIABETE NID, INFARCTUS (2019)", traitements: "SINTROM, COVERSYL, GLUCOPHAGE", allergies: "PENICILLINE", signes: "DYSPNEE D'EFFORT", nyha: "II",
       cardio: "B.D.C. REGULIERS", souffle: "SANS SOUFFLE", pulmo: "POUMONS SECS", ecg: "RS PR NL", intubation: "RAS", mallampati: "II", dtm: "> 7", asa: "III", gs: "A+",
       conclusion: "HOSPIT/ AG / INFOS DONNEES", consignes: "- A R R E T E R : SINTROM 5 JOURS AVANT, RELAIS LOVENOX", premedication: "CATAPRESSAN 75 µ ALD", horaire: "A 6H",
       docs: { consultation: "pret", consignes: "a-faire", consentement: "pret" } }),
-    fiche({ id: "c03", patient: "p03", intervention: "CESARIENNE", heure: "08:30", chirurgien: chirurgiens[2], anesthesiste: anesthesistes[2], poids: "74", taille: "160", ta: "11/7", pouls: "88",
+    fiche({ id: "c03", patient: "p03", intervention: "CESARIENNE", heure: "08:30", heureCs: "08:30", chirurgien: chirurgiens[2], anesthesiste: anesthesistes[2], poids: "74", taille: "160", ta: "11/7", pouls: "88",
       atcdChir: "RAS", atcdMed: "RAS", traitements: "PAS DE TRAITEMENT", allergies: "NON CONNUES", signes: "RAS", grossesses: "2", intubation: "RAS", mallampati: "II", dtm: "> 7", asa: "II", gs: "B+",
       conclusion: "INFO APD, RA, AG, TRANSFUSION", site: "Mamao",
       docs: { consultation: "pret", consignes: "pret", consentement: "a-faire" } }),
-    fiche({ id: "c04", patient: "p04", intervention: "ADENOIDECTOMIE", heure: "09:00", chirurgien: chirurgiens[3], anesthesiste: anesthesistes[0], poids: "22", taille: "118", ta: "", pouls: "96",
+    fiche({ id: "c04", patient: "p04", intervention: "ADENOIDECTOMIE", heure: "09:00", heureCs: "09:00", chirurgien: chirurgiens[3], anesthesiste: anesthesistes[0], poids: "22", taille: "118", ta: "", pouls: "96",
       atcdChir: "RAS", atcdMed: "ASTHME", traitements: "VENTOLLINE", allergies: "NON CONNUES", signes: "RAS", intubation: "RAS", mallampati: "I", asa: "II",
       docs: { consultation: "a-faire", consignes: "a-faire", consentement: "a-faire" } }),
-    fiche({ id: "c05", patient: "p06", intervention: "CATARACTE", precision: "OEIL GAUCHE", heure: "09:30", chirurgien: chirurgiens[4], anesthesiste: anesthesistes[3], poids: "70", taille: "168", ta: "14/8", pouls: "70",
+    fiche({ id: "c05", patient: "p06", intervention: "CATARACTE", precision: "OEIL GAUCHE", heure: "09:30", heureCs: "08:45", chirurgien: chirurgiens[4], anesthesiste: anesthesistes[3], poids: "70", taille: "168", ta: "14/8", pouls: "70",
       atcdChir: "CATARACTE OEIL DROIT (2024)", atcdMed: "HTA, BPCO", traitements: "AMLOR, VENTOLLINE", allergies: "IODE", signes: "DYSPNEE D'EFFORT", nyha: "II", cardio: "B.D.C. REGULIERS", souffle: "SANS SOUFFLE", pulmo: "BRONCHITIQUE CHRONIQUE",
       intubation: "RAS", mallampati: "II", asa: "III", conclusion: "AMBU / AMAC / INFOS DONNEES",
       docs: { consultation: "pret", consignes: "a-faire", consentement: "pret" } }),
-    fiche({ id: "c06", patient: "p08", intervention: "HERNIE INGUINALE", precision: "DROIT", heure: "10:00", chirurgien: chirurgiens[0], anesthesiste: anesthesistes[1], poids: "104", taille: "176", ta: "13/8", pouls: "76",
+    fiche({ id: "c06", patient: "p08", intervention: "HERNIE INGUINALE", precision: "DROIT", heure: "10:00", heureCs: "08:15", chirurgien: chirurgiens[0], anesthesiste: anesthesistes[1], poids: "104", taille: "176", ta: "13/8", pouls: "76",
       atcdChir: "RAS", atcdMed: "RAS", traitements: "PAS DE TRAITEMENT", allergies: "NON CONNUES", signes: "RAS", intubation: "cou court", mallampati: "IV", dtm: "< 7", asa: "II",
       docs: { consultation: "pret", consignes: "pret", consentement: "imprime" } }),
-    fiche({ id: "c07", patient: "p07", intervention: "HYSTERECTOMIE", heure: "07:30", chirurgien: chirurgiens[2], anesthesiste: anesthesistes[2], poids: "81", taille: "158", ta: "13/7", pouls: "68", site: "Mamao",
+    fiche({ id: "c07", patient: "p07", intervention: "HYSTERECTOMIE", heure: "07:30", heureCs: "07:45", chirurgien: chirurgiens[2], anesthesiste: anesthesistes[2], poids: "81", taille: "158", ta: "13/7", pouls: "68", site: "Mamao",
       atcdChir: "CESARIENNE", atcdMed: "HYPOTHYROIDIE", traitements: "LEVOTHYROX", allergies: "NON CONNUES", signes: "RAS", intubation: "RAS", mallampati: "II", asa: "II",
       docs: { consultation: "imprime", consignes: "imprime", consentement: "imprime" } }),
-    fiche({ id: "c08", patient: "p12", intervention: "ARTHROSCOPIE GENOU", precision: "GAUCHE", heure: "10:30", chirurgien: chirurgiens[1], anesthesiste: anesthesistes[3], poids: "52", taille: "163", ta: "11/6", pouls: "70", site: "Mamao",
+    fiche({ id: "c08", patient: "p12", intervention: "ARTHROSCOPIE GENOU", precision: "GAUCHE", heure: "10:30", heureCs: "09:45", chirurgien: chirurgiens[1], anesthesiste: anesthesistes[3], poids: "52", taille: "163", ta: "11/6", pouls: "70", site: "Mamao",
       atcdChir: "RAS", atcdMed: "RAS", traitements: "PAS DE TRAITEMENT", allergies: "NON CONNUES", signes: "RAS", intubation: "RAS", mallampati: "I", asa: "I",
       docs: { consultation: "pret", consignes: "pret", consentement: "a-faire" } }),
     // Consultation du jour, à compléter (patiente qui accouche sous péridurale plus tard)
-    fiche({ id: "c09", patient: "p10", intervention: "PERIDURALE", dateInt: "2026-11-24", heure: "", chirurgien: chirurgiens[2], anesthesiste: anesthesistes[0], poids: "71", taille: "167", ta: "11/7", pouls: "84",
+    fiche({ id: "c09", patient: "p10", intervention: "PERIDURALE", dateInt: "2026-11-24", heure: "", heureCs: "10:15", chirurgien: chirurgiens[2], anesthesiste: anesthesistes[0], poids: "71", taille: "167", ta: "11/7", pouls: "84",
       docs: { consultation: "a-faire", consignes: "a-faire", consentement: "a-faire" } }),
     // Touriste sans DN, consultation du jour
-    fiche({ id: "c10", patient: "p05", intervention: "FRACTURE POIGNET", precision: "DROIT", dateInt: "2026-10-21", heure: "", chirurgien: chirurgiens[1], anesthesiste: anesthesistes[0], poids: "60", taille: "170", ta: "12/8", pouls: "78",
+    fiche({ id: "c10", patient: "p05", intervention: "FRACTURE POIGNET", precision: "DROIT", dateInt: "2026-10-21", heure: "", heureCs: "10:45", chirurgien: chirurgiens[1], anesthesiste: anesthesistes[0], poids: "60", taille: "170", ta: "12/8", pouls: "78",
       docs: { consultation: "a-faire", consignes: "a-faire", consentement: "a-faire" } })
   ];
 
@@ -447,7 +448,7 @@
 
   // Consultation propre à la V2 : patient connu (dossier de 2023), questionnaire reçu, CPA à faire (D-02).
   var consultationsV2 = [
-    P.fiche({ id: "c11", patient: "p11", intervention: "CHOLECYSTECTOMIE", dateInt: "2026-10-27", heure: "08:00", convocation: "06:30", chirurgien: C[0], anesthesiste: A[0], site: "Cardella",
+    P.fiche({ id: "c11", patient: "p11", intervention: "CHOLECYSTECTOMIE", dateInt: "2026-10-27", heure: "08:00", heureCs: "11:15", convocation: "06:30", chirurgien: C[0], anesthesiste: A[0], site: "Cardella",
       poids: "98", taille: "172", ta: "14/8", pouls: "76", traitements: "AMLOR, KARDEGIC", allergies: "NON CONNUES",
       docs: { consultation: "a-faire", consignes: "a-faire", consentement: "a-faire" } })
   ];
