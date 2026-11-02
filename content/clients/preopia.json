@@ -2,9 +2,18 @@
   "slug": "preopia",
   "nom": "Preopia",
   "sousTitre": "Logiciel de consultation d'anesthésie (nom provisoire)",
-  "description": "Maquettes cliquables du futur logiciel de consultation d'anesthésie. Elles servent à comparer quatre versions en chronométrant vos parcours habituels, avant le lancement du développement.",
+  "description": "Maquettes cliquables du futur logiciel de consultation d'anesthésie. La V3 est la version que nous proposons ; les autres restent en ligne pour la comparaison et le chronométrage de vos parcours habituels, avant le lancement du développement.",
   "mentionDonnees": "Données fictives : les patients et les praticiens sont inventés, les valeurs cliniques sont des exemples.",
   "versions": [
+    {
+      "id": "v3",
+      "libelle": "V3",
+      "titre": "Version proposée",
+      "description": "La journée du médecin, telle qu'elle s'affichera : la liste du jour à l'ouverture, la consultation du patient suivant, l'impression de la veille. Le reste du logiciel (patients, questionnaires, visite pré-anesthésique, bloc, activité, réglages) est rangé dans la barre latérale. Même contenu que la V2, avec l'aide à la décision dans un panneau que l'on ouvre quand on en a besoin.",
+      "dossier": "v3",
+      "entree": "v3/index.html",
+      "miseAJour": "2026-11-02"
+    },
     {
       "id": "v1",
       "libelle": "V1",
@@ -59,7 +68,7 @@
   "consignes": [
     "Ouvrez une version, puis « Chronomètre de test » dans le bandeau du haut.",
     "Choisissez le scénario et cliquez sur « Démarrer ». À la fin du parcours, arrêtez le chronomètre : le temps et le nombre de clics restent affichés.",
-    "Faites les trois scénarios sur chaque version et notez vos temps. Si vous manquez de temps, comparez au moins la V2-A et la V2-B.",
+    "Commencez par la V3. Faites-y les trois scénarios et notez vos temps ; si vous en avez le temps, refaites-les sur la V2-A ou la V2-B pour comparer.",
     "Le bouton « Laisser un retour », sur le bord droit de l'écran, nous transmet votre remarque avec votre prénom et la page affichée. Le bouton « Signaler » de la maquette montre seulement la future fonction : il n'envoie rien."
   ]
 }

@@ -28,6 +28,7 @@ const SOURCES = {
       "commun",
       { source: "v2-shadcn/apps/v2a-console/dist", nom: "v2a-console" },
       { source: "v2-shadcn/apps/v2b-tablette/dist", nom: "v2b-tablette" },
+      { source: "v2-shadcn/apps/v3/dist", nom: "v3" },
     ],
   },
 };
