@@ -386,6 +386,23 @@
     for (var k in a) c[k] = a[k];
   });
 
+  // Retouches V3 du 16/11/2026 (retours du Dr Vempaire), clés ajoutées seulement, lues par la V3, valeurs fictives :
+  // réaction associée à chaque allergie (liste courte, texte libre possible) ;
+  // état général de la conclusion (convention FileMaker en capitales) ;
+  // gestité et parité du profil obstétrique.
+  P.listes.reactionsAllergie = ["urticaire", "œdème / angio-œdème", "bronchospasme", "choc anaphylactique", "troubles digestifs", "autre"];
+  P.listes.etatGeneral = ["TRÈS BON ÉTAT GÉNÉRAL", "BON ÉTAT GÉNÉRAL", "ÉTAT GÉNÉRAL MOYEN", "ÉTAT GÉNÉRAL MÉDIOCRE", "ÉTAT GÉNÉRAL CONSERVÉ"];
+  var ajoutsV3 = {
+    c02: { reactions: { PENICILLINE: "urticaire" } },
+    c03: { gestite: "2", parite: "1" },
+    c05: { reactions: { IODE: "œdème / angio-œdème" } }
+  };
+  P.consultations.forEach(function (c) {
+    var a = ajoutsV3[c.id];
+    if (!a) return;
+    for (var k in a) c[k] = a[k];
+  });
+
   P.COTE = COTE;
   P.actes = actes;
   P.acte = acte;
