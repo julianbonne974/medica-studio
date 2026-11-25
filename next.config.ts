@@ -5,7 +5,8 @@ const nextConfig: NextConfig = {
   // sont lus avec fs ; on les inclut dans le bundle des fonctions qui les servent.
   outputFileTracingIncludes: {
     "/clients/**/*": ["./private/clients/**/*", "./content/clients/**/*"],
-    "/api/clients/**/*": ["./content/clients/**/*"],
+    // L'API des questionnaires valide le fichier de contenu, dont l'existence des images citées.
+    "/api/clients/**/*": ["./content/clients/**/*", "./private/clients/*/questions/**/*"],
   },
   async headers() {
     return [
