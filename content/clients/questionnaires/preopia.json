@@ -8,33 +8,65 @@
     "Bonjour à tous les deux,",
     "Thomas, merci pour la réunion du 25 novembre. Comme convenu, vous trouverez sur cette page le compte rendu, les modifications que j'ai faites sur la maquette et les questions qui me restent avant de lancer le développement.",
     "Rien n'est obligatoire. Vos réponses s'enregistrent au fur et à mesure : vous pouvez vous arrêter et reprendre plus tard, depuis un autre poste ou votre téléphone, avec le même prénom. Quand vous avez fini, cliquez sur « Envoyer mes réponses » en bas de la page.",
-    "Si possible avant lundi 30 novembre (je pars en déplacement mardi et j'avancerai sur le projet pendant le trajet). Les sections Modifications, Choix visuels et Listes sont les plus utiles pour commencer. Vos confrères peuvent répondre aussi, chacun avec son prénom."
+    "Si possible avant lundi 30 novembre (je pars en déplacement mardi et j'avancerai sur le projet pendant le trajet). Les sections Modifications, Choix visuels, Listes et Cahier des charges V1 sont les plus utiles pour commencer. Vos confrères peuvent répondre aussi, chacun avec son prénom."
   ],
   "sections": [
     {
       "id": "compte-rendu",
       "titre": "Compte rendu",
       "blocs": [
-        { "type": "paragraphe", "texte": "Réunion en visio du mercredi 25 novembre 2026 (environ 50 minutes), entre le Dr Thomas Vempaire et Julian Bonne. Le Dr Nicolas Hantala, en Nouvelle-Zélande, n'a pas pu y assister : ce compte rendu lui est aussi destiné." },
-        { "type": "paragraphe", "texte": "Nous avons repris la maquette V3 écran par écran. Les modifications retenues sont les suivantes :" },
-        { "type": "liste", "items": [
-          "écran de consultation en trois colonnes : l'administratif à gauche, les antécédents et l'examen clinique au milieu, la fin de consultation à droite (conclusion, ASA, consignes, prémédication) ;",
-          "suppression de la colonne d'information de droite : l'acte et le chirurgien sont déjà dans le bandeau patient, les documents et la dernière consultation passent dans les onglets du haut ;",
-          "un affichage vertical, de la taille d'une feuille A4, pour un écran tourné à la verticale ;",
-          "un champ « antécédent d'intubation difficile », avec un texte libre sur ce qui s'est passé au bloc, repris d'une consultation à l'autre ;",
-          "un encadré rouge sur la feuille imprimée en cas d'intubation difficile connue ou prévisible et d'allergie connue ;",
-          "les précisions des antécédents sous forme d'étiquettes, comme pour les allergies et les traitements, avec seulement vos cases les plus fréquentes à cocher ;",
-          "les résultats d'examens complémentaires (écho, radio, ECG, EFR) en texte libre sur plusieurs lignes, les listes restant pour les signes fonctionnels et l'examen cardiovasculaire ;",
-          "plusieurs techniques possibles dans « Anesthésie prévue » (une AG avec une APD, par exemple), et l'ALR ajoutée ;",
-          "un bouton « Fin de consultation » qui imprime la feuille de consultation, le consentement et les consignes préopératoires avant que le patient quitte le bureau."
-        ] },
-        { "type": "paragraphe", "texte": "La veille de l'intervention, les secrétaires réimpriment seulement les feuilles d'anesthésie du lendemain pour le bloc. Un double de la feuille de consultation reste dans le dossier papier, en secours si les ordinateurs tombent en panne." },
-        { "type": "paragraphe", "texte": "En version 1, les listes (antécédents, anesthésies, prémédication…) sont fixées avec vous dans le code, pour aller vite. Ensuite, les administrateurs pourront les modifier eux-mêmes dans les réglages, sans compétence informatique, comme sur le logiciel que j'ai développé pour SOS MEDEVAC." },
-        { "type": "paragraphe", "texte": "Pour l'hébergement, nous partons sur un serveur principal en ligne, accessible depuis n'importe quel poste, et un petit serveur de secours dans chaque clinique, qui sauvegarde tout et prend le relais si internet coupe. Les fonctions d'intelligence artificielle prévues plus tard passeront par des services extérieurs : elles seront indisponibles pendant une coupure, le reste du logiciel non. Je compare en ce moment les hébergeurs, dont le nouveau datacenter de Tahiti repéré par Thomas." },
-        { "type": "paragraphe", "texte": "Chaque patient a un dossier unique. Chaque nouvelle consultation crée un nouveau dossier qui reprend les antécédents, les traitements et les allergies de la précédente, et les complète." },
-        { "type": "paragraphe", "texte": "Le logiciel aura trois rubriques pour son suivi : « Nouveautés » (les mises à jour au jour le jour), « Tickets » (un problème se signale en un clic, avec une capture de l'écran qui m'arrive directement) et « Documentation » (le guide complet). Un groupe WhatsApp réunira les anesthésistes, sans les secrétaires ni la facturation." },
-        { "type": "encadre", "titre": "Pièces attendues", "texte": "Une vidéo ou des captures d'une consultation complète dans FileMaker ; la liste des cases à garder dans les antécédents ; la liste des utilisateurs avec leur rôle et leur téléphone (section Équipe et accès) ; vos réponses à cette page." },
-        { "type": "encadre", "titre": "Envois prévus", "texte": "La maquette modifiée (déjà en ligne, voir Modifications) ; la feuille de route de la version 1 (plus bas sur cette page) ; l'étude des hébergeurs ; le premier devis, pour un début de facturation en décembre." }
+        {
+          "type": "paragraphe",
+          "texte": "Réunion en visio du mercredi 25 novembre 2026 (environ 50 minutes), entre le Dr Thomas Vempaire et Julian Bonne. Le Dr Nicolas Hantala, en Nouvelle-Zélande, n'a pas pu y assister : ce compte rendu lui est aussi destiné."
+        },
+        {
+          "type": "paragraphe",
+          "texte": "Nous avons repris la maquette V3 écran par écran. Les modifications retenues sont les suivantes :"
+        },
+        {
+          "type": "liste",
+          "items": [
+            "écran de consultation en trois colonnes : l'administratif à gauche, les antécédents et l'examen clinique au milieu, la fin de consultation à droite (conclusion, ASA, consignes, prémédication) ;",
+            "suppression de la colonne d'information de droite : l'acte et le chirurgien sont déjà dans le bandeau patient, les documents et la dernière consultation passent dans les onglets du haut ;",
+            "un affichage vertical, de la taille d'une feuille A4, pour un écran tourné à la verticale ;",
+            "un champ « antécédent d'intubation difficile », avec un texte libre sur ce qui s'est passé au bloc, repris d'une consultation à l'autre ;",
+            "un encadré rouge sur la feuille imprimée en cas d'intubation difficile connue ou prévisible et d'allergie connue ;",
+            "les précisions des antécédents sous forme d'étiquettes, comme pour les allergies et les traitements, avec seulement vos cases les plus fréquentes à cocher ;",
+            "les résultats d'examens complémentaires (écho, radio, ECG, EFR) en texte libre sur plusieurs lignes, les listes restant pour les signes fonctionnels et l'examen cardiovasculaire ;",
+            "plusieurs techniques possibles dans « Anesthésie prévue » (une AG avec une APD, par exemple), et l'ALR ajoutée ;",
+            "un bouton « Fin de consultation » qui imprime la feuille de consultation, le consentement et les consignes préopératoires avant que le patient quitte le bureau."
+          ]
+        },
+        {
+          "type": "paragraphe",
+          "texte": "La veille de l'intervention, les secrétaires réimpriment seulement les feuilles d'anesthésie du lendemain pour le bloc. Un double de la feuille de consultation reste dans le dossier papier, en secours si les ordinateurs tombent en panne."
+        },
+        {
+          "type": "paragraphe",
+          "texte": "En version 1, les listes (antécédents, anesthésies, prémédication…) sont fixées avec vous dans le code, pour aller vite. Ensuite, les administrateurs pourront les modifier eux-mêmes dans les réglages, sans compétence informatique, comme sur le logiciel que j'ai développé pour SOS MEDEVAC."
+        },
+        {
+          "type": "paragraphe",
+          "texte": "Pour l'hébergement, nous partons sur un serveur principal en ligne, accessible depuis n'importe quel poste, et un petit serveur de secours dans chaque clinique, qui sauvegarde tout et prend le relais si internet coupe. Les fonctions d'intelligence artificielle prévues plus tard passeront par des services extérieurs : elles seront indisponibles pendant une coupure, le reste du logiciel non. Je compare en ce moment les hébergeurs, dont le nouveau datacenter de Tahiti repéré par Thomas."
+        },
+        {
+          "type": "paragraphe",
+          "texte": "Chaque patient a un dossier unique. Chaque nouvelle consultation crée un nouveau dossier qui reprend les antécédents, les traitements et les allergies de la précédente, et les complète."
+        },
+        {
+          "type": "paragraphe",
+          "texte": "Le logiciel aura trois rubriques pour son suivi : « Nouveautés » (les mises à jour au jour le jour), « Tickets » (un problème se signale en un clic, avec une capture de l'écran qui m'arrive directement) et « Documentation » (le guide complet). Un groupe WhatsApp réunira les anesthésistes, sans les secrétaires ni la facturation."
+        },
+        {
+          "type": "encadre",
+          "titre": "Pièces attendues",
+          "texte": "Une vidéo ou des captures d'une consultation complète dans FileMaker ; la liste des cases à garder dans les antécédents ; la liste des utilisateurs avec leur rôle et leur téléphone (section Équipe et accès) ; vos réponses à cette page."
+        },
+        {
+          "type": "encadre",
+          "titre": "Envois prévus",
+          "texte": "La maquette modifiée (déjà en ligne, voir Modifications) ; le cahier des charges de la version 1 (plus bas sur cette page) ; l'étude des hébergeurs ; le premier devis, pour un début de facturation en décembre."
+        }
       ]
     },
     {
@@ -109,9 +141,24 @@
           "intitule": "Encadré rouge imprimé",
           "aide": "Exemple d'un patient avec une intubation difficile connue et une allergie.",
           "options": [
-            { "id": "a", "libelle": "A · Dans la conclusion", "image": "questions/alerte-feuille-a.png", "legende": "Lu au moment où l'on relit la conclusion." },
-            { "id": "b", "libelle": "B · En tête de feuille", "image": "questions/alerte-feuille-b.png", "legende": "Sous l'identité du patient, visible dès qu'on prend la feuille." },
-            { "id": "c", "libelle": "C · Entre l'intervention et les constantes", "image": "questions/alerte-feuille-c.png", "legende": "À l'endroit évoqué par Thomas en réunion." }
+            {
+              "id": "a",
+              "libelle": "A · Dans la conclusion",
+              "image": "questions/alerte-feuille-a.png",
+              "legende": "Lu au moment où l'on relit la conclusion."
+            },
+            {
+              "id": "b",
+              "libelle": "B · En tête de feuille",
+              "image": "questions/alerte-feuille-b.png",
+              "legende": "Sous l'identité du patient, visible dès qu'on prend la feuille."
+            },
+            {
+              "id": "c",
+              "libelle": "C · Entre l'intervention et les constantes",
+              "image": "questions/alerte-feuille-c.png",
+              "legende": "À l'endroit évoqué par Thomas en réunion."
+            }
           ],
           "aucune": true,
           "commentaire": true
@@ -122,8 +169,18 @@
           "intitule": "Écran vertical",
           "aide": "Un écran 16/9 posé en hauteur, pour voir la feuille entière d'un coup d'œil.",
           "options": [
-            { "id": "a", "libelle": "A · Une colonne", "image": "questions/vertical-a.png", "legende": "La consultation se lit de haut en bas, comme une feuille." },
-            { "id": "b", "libelle": "B · Deux colonnes", "image": "questions/vertical-b.png", "legende": "L'administratif en tête, puis l'examen à gauche et la fin de consultation à droite." }
+            {
+              "id": "a",
+              "libelle": "A · Une colonne",
+              "image": "questions/vertical-a.png",
+              "legende": "La consultation se lit de haut en bas, comme une feuille."
+            },
+            {
+              "id": "b",
+              "libelle": "B · Deux colonnes",
+              "image": "questions/vertical-b.png",
+              "legende": "L'administratif en tête, puis l'examen à gauche et la fin de consultation à droite."
+            }
           ],
           "aucune": true,
           "commentaire": true
@@ -133,8 +190,18 @@
           "type": "variantes",
           "intitule": "Place du bouton de fin",
           "options": [
-            { "id": "a", "libelle": "A · En bas de la colonne de droite", "image": "questions/fin-consultation-a.png", "legende": "Juste après la prémédication, là où se termine la saisie." },
-            { "id": "b", "libelle": "B · Dans une barre fixe en bas de l'écran", "image": "questions/fin-consultation-b.png", "legende": "Toujours visible, sans faire défiler." }
+            {
+              "id": "a",
+              "libelle": "A · En bas de la colonne de droite",
+              "image": "questions/fin-consultation-a.png",
+              "legende": "Juste après la prémédication, là où se termine la saisie."
+            },
+            {
+              "id": "b",
+              "libelle": "B · Dans une barre fixe en bas de l'écran",
+              "image": "questions/fin-consultation-b.png",
+              "legende": "Toujours visible, sans faire défiler."
+            }
           ],
           "aucune": true,
           "commentaire": true
@@ -171,11 +238,26 @@
           "intitule": "Techniques d'anesthésie",
           "aide": "Cochez celles à garder dans la liste « Anesthésie prévue ». Ajoutez celles qui manquent dans « Autre ».",
           "options": [
-            { "id": "ag", "libelle": "AG" },
-            { "id": "ra", "libelle": "RA" },
-            { "id": "apd", "libelle": "APD" },
-            { "id": "amac", "libelle": "AMAC" },
-            { "id": "alr", "libelle": "ALR" }
+            {
+              "id": "ag",
+              "libelle": "AG"
+            },
+            {
+              "id": "ra",
+              "libelle": "RA"
+            },
+            {
+              "id": "apd",
+              "libelle": "APD"
+            },
+            {
+              "id": "amac",
+              "libelle": "AMAC"
+            },
+            {
+              "id": "alr",
+              "libelle": "ALR"
+            }
           ],
           "autre": true
         },
@@ -215,11 +297,47 @@
           "intitule": "Utilisateurs",
           "aide": "Toutes les personnes qui utiliseront le logiciel : anesthésistes, IADE, secrétaires, facturation. Le téléphone me sert à les reconnaître sur WhatsApp. Les administrateurs pourront faire les réglages (Thomas et Nicolas, a priori).",
           "colonnes": [
-            { "id": "nom", "libelle": "Nom et prénom", "type": "texte" },
-            { "id": "role", "libelle": "Rôle", "type": "choix", "options": ["Anesthésiste", "IADE", "Secrétaire", "Facturation", "Autre"] },
-            { "id": "clinique", "libelle": "Clinique", "type": "choix", "options": ["Cardella", "Mamao", "Les deux"] },
-            { "id": "admin", "libelle": "Administrateur", "type": "choix", "options": ["Oui", "Non"] },
-            { "id": "telephone", "libelle": "Téléphone", "type": "tel" }
+            {
+              "id": "nom",
+              "libelle": "Nom et prénom",
+              "type": "texte"
+            },
+            {
+              "id": "role",
+              "libelle": "Rôle",
+              "type": "choix",
+              "options": [
+                "Anesthésiste",
+                "IADE",
+                "Secrétaire",
+                "Facturation",
+                "Autre"
+              ]
+            },
+            {
+              "id": "clinique",
+              "libelle": "Clinique",
+              "type": "choix",
+              "options": [
+                "Cardella",
+                "Mamao",
+                "Les deux"
+              ]
+            },
+            {
+              "id": "admin",
+              "libelle": "Administrateur",
+              "type": "choix",
+              "options": [
+                "Oui",
+                "Non"
+              ]
+            },
+            {
+              "id": "telephone",
+              "libelle": "Téléphone",
+              "type": "tel"
+            }
           ],
           "lignesInitiales": 4
         },
@@ -229,8 +347,14 @@
           "intitule": "Droits des secrétaires",
           "aide": "En réunion, nous avons parlé d'un accès au dossier sans modification. Aujourd'hui, elles saisissent pourtant l'identité, l'intervention et les constantes avant la consultation.",
           "options": [
-            { "id": "saisie-admin", "libelle": "Elles saisissent l'administratif et les constantes, sans toucher au contenu médical" },
-            { "id": "lecture", "libelle": "Lecture seule, sans aucune saisie" }
+            {
+              "id": "saisie-admin",
+              "libelle": "Elles saisissent l'administratif et les constantes, sans toucher au contenu médical"
+            },
+            {
+              "id": "lecture",
+              "libelle": "Lecture seule, sans aucune saisie"
+            }
           ],
           "commentaire": true
         },
@@ -240,9 +364,18 @@
           "intitule": "Secrétaires des chirurgiens",
           "aide": "Prendront-elles les rendez-vous de consultation directement dans le logiciel, avec un accès limité à l'agenda ?",
           "options": [
-            { "id": "oui", "libelle": "Oui" },
-            { "id": "non", "libelle": "Non, les rendez-vous passent par vos secrétaires" },
-            { "id": "a-voir", "libelle": "À voir plus tard" }
+            {
+              "id": "oui",
+              "libelle": "Oui"
+            },
+            {
+              "id": "non",
+              "libelle": "Non, les rendez-vous passent par vos secrétaires"
+            },
+            {
+              "id": "a-voir",
+              "libelle": "À voir plus tard"
+            }
           ],
           "commentaire": true
         },
@@ -257,9 +390,18 @@
           "type": "choix-unique",
           "intitule": "Groupe WhatsApp",
           "options": [
-            { "id": "anesthesistes", "libelle": "Les anesthésistes seulement" },
-            { "id": "anesth-iade", "libelle": "Les anesthésistes et les IADE" },
-            { "id": "restreint", "libelle": "Nicolas, Thomas et moi seulement" }
+            {
+              "id": "anesthesistes",
+              "libelle": "Les anesthésistes seulement"
+            },
+            {
+              "id": "anesth-iade",
+              "libelle": "Les anesthésistes et les IADE"
+            },
+            {
+              "id": "restreint",
+              "libelle": "Nicolas, Thomas et moi seulement"
+            }
           ],
           "commentaire": true
         }
@@ -274,12 +416,30 @@
           "type": "choix-multiple",
           "intitule": "Documents imprimés",
           "options": [
-            { "id": "feuille", "libelle": "Feuille de consultation" },
-            { "id": "double", "libelle": "Double de la feuille de consultation, pour le dossier papier" },
-            { "id": "consentement", "libelle": "Consentement" },
-            { "id": "consignes", "libelle": "Consignes préopératoires pour les infirmières" },
-            { "id": "patient", "libelle": "Feuille remise au patient (traitements, jeûne, prémédication)" },
-            { "id": "courrier", "libelle": "Courrier" }
+            {
+              "id": "feuille",
+              "libelle": "Feuille de consultation"
+            },
+            {
+              "id": "double",
+              "libelle": "Double de la feuille de consultation, pour le dossier papier"
+            },
+            {
+              "id": "consentement",
+              "libelle": "Consentement"
+            },
+            {
+              "id": "consignes",
+              "libelle": "Consignes préopératoires pour les infirmières"
+            },
+            {
+              "id": "patient",
+              "libelle": "Feuille remise au patient (traitements, jeûne, prémédication)"
+            },
+            {
+              "id": "courrier",
+              "libelle": "Courrier"
+            }
           ],
           "autre": true
         },
@@ -288,9 +448,18 @@
           "type": "choix-unique",
           "intitule": "Avis des confrères",
           "options": [
-            { "id": "accord", "libelle": "D'accord" },
-            { "id": "remarques", "libelle": "D'accord, avec des remarques" },
-            { "id": "pas-encore", "libelle": "Pas encore demandé" }
+            {
+              "id": "accord",
+              "libelle": "D'accord"
+            },
+            {
+              "id": "remarques",
+              "libelle": "D'accord, avec des remarques"
+            },
+            {
+              "id": "pas-encore",
+              "libelle": "Pas encore demandé"
+            }
           ],
           "commentaire": true
         },
@@ -306,9 +475,18 @@
           "intitule": "Heures de convocation et d'intervention",
           "aide": "Elles ne sont plus sur l'écran du médecin. Qui les saisit ?",
           "options": [
-            { "id": "secretariat-veille", "libelle": "Le secrétariat, la veille" },
-            { "id": "import", "libelle": "Un import du programme opératoire de la clinique" },
-            { "id": "autre", "libelle": "Autrement (précisez en commentaire)" }
+            {
+              "id": "secretariat-veille",
+              "libelle": "Le secrétariat, la veille"
+            },
+            {
+              "id": "import",
+              "libelle": "Un import du programme opératoire de la clinique"
+            },
+            {
+              "id": "autre",
+              "libelle": "Autrement (précisez en commentaire)"
+            }
           ],
           "commentaire": true
         }
@@ -343,9 +521,18 @@
           "intitule": "Accès à FileMaker",
           "aide": "Un poste a-t-il encore FileMaker Pro 5 ou 6, avec le mot de passe administrateur ? Il me permettrait de vérifier la reprise. Ne notez pas le mot de passe ici.",
           "options": [
-            { "id": "oui", "libelle": "Oui" },
-            { "id": "non", "libelle": "Non" },
-            { "id": "ne-sais-pas", "libelle": "Je ne sais pas" }
+            {
+              "id": "oui",
+              "libelle": "Oui"
+            },
+            {
+              "id": "non",
+              "libelle": "Non"
+            },
+            {
+              "id": "ne-sais-pas",
+              "libelle": "Je ne sais pas"
+            }
           ],
           "commentaire": true
         },
@@ -366,7 +553,7 @@
           "id": "r-datacenter",
           "type": "texte-court",
           "intitule": "Nom du datacenter de Tahiti",
-          "aide": "Celui que Thomas a vu passer sur Facebook, s'il lui revient."
+          "aide": "Celui que Thomas a vu passer sur Facebook. S'agit-il de Tuati (tuati.pf) ? Sinon, son nom s'il revient."
         },
         {
           "id": "r-secours",
@@ -374,9 +561,18 @@
           "intitule": "Emplacement des serveurs de secours",
           "aide": "Un petit boîtier par site (300 à 400 € pièce), sans écran ni clavier, branché au courant et au réseau par un câble. Je l'installe et je le maintiens à distance.",
           "options": [
-            { "id": "cliniques", "libelle": "Un dans chaque clinique" },
-            { "id": "cabinet", "libelle": "Au cabinet ou chez un médecin" },
-            { "id": "a-voir", "libelle": "À discuter" }
+            {
+              "id": "cliniques",
+              "libelle": "Un dans chaque clinique"
+            },
+            {
+              "id": "cabinet",
+              "libelle": "Au cabinet ou chez un médecin"
+            },
+            {
+              "id": "a-voir",
+              "libelle": "À discuter"
+            }
           ],
           "commentaire": true
         },
@@ -416,9 +612,18 @@
           "intitule": "Consigne SINTROM",
           "aide": "Les modèles FileMaker indiquent « SINTROM 5 jours avant ». Les recommandations GIHP-SFAR de 2026 placent la dernière prise d'acénocoumarol à J-4 : faut-il modifier la consigne ?",
           "options": [
-            { "id": "j4", "libelle": "Passer à J-4" },
-            { "id": "j5", "libelle": "Garder 5 jours" },
-            { "id": "autre", "libelle": "Autre (précisez)" }
+            {
+              "id": "j4",
+              "libelle": "Passer à J-4"
+            },
+            {
+              "id": "j5",
+              "libelle": "Garder 5 jours"
+            },
+            {
+              "id": "autre",
+              "libelle": "Autre (précisez)"
+            }
           ],
           "commentaire": true
         },
@@ -433,38 +638,1281 @@
           "type": "texte-court",
           "intitule": "Nouveau consentement",
           "aide": "Thomas parlait en octobre de réécrire le consentement. Quand le texte sera-t-il prêt ?"
-        },
-        {
-          "id": "m-74a",
-          "type": "choix-unique",
-          "intitule": "Feuille per-opératoire 74A",
-          "aide": "Faut-il la saisie de la 74A dès la version 1, ou peut-elle rester sur papier au début ?",
-          "options": [
-            { "id": "v1", "libelle": "Dès la version 1" },
-            { "id": "papier", "libelle": "Papier au début" }
-          ],
-          "commentaire": true
         }
       ]
     },
     {
-      "id": "feuille-de-route",
-      "titre": "Feuille de route",
-      "intro": "Les durées sont des estimations, à confirmer dans le devis. La semaine 1 commence au démarrage du projet.",
+      "id": "cahier-v1",
+      "titre": "Cahier des charges V1",
+      "intro": "La version 1 remplace FileMaker. Sa fin est prévue fin avril 2027.",
       "blocs": [
-        { "type": "tableau", "colonnes": ["Étape", "Contenu", "Durée estimée"], "lignes": [
-          ["0 · Socle", "Serveurs, sécurité, comptes et rôles, sauvegardes, serveurs de secours", "3 semaines"],
-          ["1 · Patients et agenda", "Recherche et création des patients, créneaux de consultation, liste du jour", "2 semaines"],
-          ["2 · Consultation et VPA", "Écran de consultation, données reprises, alertes, visite pré-anesthésique", "4 semaines"],
-          ["3 · Documents et impressions", "Feuille de consultation, consentement, consignes, feuille patient, impression de la veille", "3 semaines"],
-          ["En parallèle des étapes 1 à 3", "Reprise de l'historique FileMaker", "en parallèle"],
-          ["4 · Bloc et SSPI", "Feuille per-opératoire, entrée et sortie de SSPI", "2 semaines"],
-          ["5 · Activité et exports", "Statistiques d'activité, export complet de vos données", "2 semaines"],
-          ["Mise en service", "Recette avec vous, répétition de la reprise, pilote, bascule de l'équipe", "4 semaines"]
-        ] },
-        { "type": "paragraphe", "texte": "Soit environ 20 semaines. Si nous commençons début décembre, la version 1 serait en service vers la fin avril 2027 (estimation)." },
-        { "type": "paragraphe", "texte": "Un médecin peut commencer à consulter dans Preopia dès la fin de l'étape 3, vers la semaine 12, le bloc restant sur papier quelques semaines. Pendant tout le développement, je vous montre l'avancement en visio toutes les deux semaines, et vos remarques sont reprises à l'étape suivante." },
-        { "type": "paragraphe", "texte": "Ensuite viendront, dans l'ordre que vous choisirez : le questionnaire rempli par le patient avant la consultation, les recommandations sur les anticoagulants, l'import du programme opératoire, puis l'aide à la décision, la lecture des ordonnances et la dictée." }
+        {
+          "type": "paragraphe",
+          "texte": "Elle est découpée ici en dix modules. Pour chacun : ce qu'il contient, le détail des exigences (à déplier si vous voulez entrer dans le détail), puis deux questions."
+        },
+        {
+          "type": "paragraphe",
+          "texte": "La seconde question sert à fixer la date à laquelle vous pourrez commencer à utiliser Preopia avec les fonctions de base, avant la fin de la V1. Indiquez seulement les modules sans lesquels vous ne pouvez pas démarrer : je vous proposerai une date d'après vos réponses."
+        }
+      ],
+      "groupes": [
+        {
+          "id": "g-patients",
+          "titre": "Patients",
+          "blocs": [
+            {
+              "type": "liste",
+              "items": [
+                "recherche d'un patient par nom, prénom, date de naissance ou DN, même avec une faute ou sans accent ;",
+                "création en moins d'une minute, et identité provisoire en urgence ;",
+                "doublons proposés à la création, fusion réversible ;",
+                "antécédents, traitements, allergies et groupe sanguin repris d'une consultation à l'autre ;",
+                "bandeau patient sur chaque écran et chaque document (allergie, intubation difficile, acte, chirurgien)."
+              ]
+            },
+            {
+              "type": "depliant",
+              "titre": "Exigences détaillées (9)",
+              "blocs": [
+                {
+                  "type": "tableau",
+                  "colonnes": [
+                    "N°",
+                    "Exigence",
+                    "Critère de recette"
+                  ],
+                  "lignes": [
+                    [
+                      "EF-001",
+                      "Création rapide : seuls nom, prénom, date de naissance, sexe, couverture sont obligatoires.",
+                      "Création en au plus 45 s par un utilisateur formé."
+                    ],
+                    [
+                      "EF-002",
+                      "Identifiants multiples typés (interne, DN, Héloïse, IPP d'autres établissements, n° de fiche FileMaker), avec source et date. Le DN est facultatif ; son format n'étant pas publié (à vérifier), la règle de validation est un paramètre, non codée.",
+                      "Un patient porte 5 identifiants ; recherche par chacun ; patient sans DN programmable ; changer la règle sans livraison."
+                    ],
+                    [
+                      "EF-003",
+                      "Recherche tolérante : casse, accents, permutation nom/prénom, nom de naissance et d'usage, ʻokina et macrons, phonétique française.",
+                      "Sur le jeu synthétique, 95 % des variantes injectées retrouvent le patient dans les 5 premiers résultats, en 1 s."
+                    ],
+                    [
+                      "EF-004",
+                      "Dédoublonnage assisté à la création : les patients proches sont proposés ; l'utilisateur tranche.",
+                      "95 % des 100 doublons injectés sont proposés ; aucune fusion sans geste explicite."
+                    ],
+                    [
+                      "EF-005",
+                      "Fusion réversible : table d'alias, aucune suppression, défusion possible.",
+                      "Fusion puis défusion rendent l'état initial champ à champ ; deux lignes d'audit."
+                    ],
+                    [
+                      "EF-006",
+                      "Statut d'identité « provisoire » (4 champs, urgence) ou « validée », rapprochement ultérieur avec conservation de l'historique.",
+                      "Le statut figure sur chaque document imprimé."
+                    ],
+                    [
+                      "EF-007",
+                      "État civil : prénoms multiples, nom de naissance et d'usage, représentant légal, médecin traitant, cardiologue, personne de confiance. Couverture : régime dans une liste paramétrable (sans présupposer les libellés locaux), droits ouverts oui/non.",
+                      "Champs repris dans les en-têtes et l'export ; liste modifiable sans développement ; « sans couverture » valide."
+                    ],
+                    [
+                      "EF-008",
+                      "Données permanentes réutilisées : allergies, antécédents, traitements, taille, groupe/RAI, antécédents anesthésiques ; poids et taille datés. Base patient unique : chaque nouvelle consultation crée un nouveau dossier (une nouvelle CPA) qui reprend les antécédents, traitements, allergies et alertes (intubation difficile connue, EF-045) de la précédente et s'enrichit ; la précédente reste inchangée et consultable (EF-050).",
+                      "Une nouvelle CPA les préremplit avec leur date de dernière confirmation ; rien n'est repris sans cette date. Un ajout dans la nouvelle CPA ne modifie pas la précédente ; le patient n'a qu'une fiche, quel que soit le nombre de consultations."
+                    ],
+                    [
+                      "EF-009",
+                      "Bandeau permanent : allergies, intubation difficile connue, statut d'identité, dossier fusionné ; simple affichage de ce qui est saisi. Il porte aussi l'acte et le chirurgien, que la colonne d'information supprimée (EF-040) affichait. Les alertes rouges de l'EF-058 s'y affichent.",
+                      "Présent sur toutes les pages et impressions concernées ; une nouvelle allergie s'affiche sans rechargement."
+                    ]
+                  ]
+                }
+              ]
+            }
+          ],
+          "questions": [
+            {
+              "id": "cdc-patients",
+              "type": "validation",
+              "intitule": "Contenu du module",
+              "aide": "Je garde ce contenu tel quel, ou vous voulez autre chose."
+            },
+            {
+              "id": "dep-patients",
+              "type": "choix-unique",
+              "intitule": "Pour commencer",
+              "options": [
+                {
+                  "id": "indispensable",
+                  "libelle": "Indispensable pour commencer à utiliser Preopia"
+                },
+                {
+                  "id": "peut-attendre",
+                  "libelle": "Peut attendre la fin de la V1"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "g-agenda",
+          "titre": "Agenda",
+          "blocs": [
+            {
+              "type": "liste",
+              "items": [
+                "créneaux de consultation par anesthésiste et par clinique ;",
+                "fiche d'intervention : acte, côté, chirurgien, date prévue ;",
+                "prise de rendez-vous par les secrétaires des chirurgiens, avec un accès limité ;",
+                "report et annulation avec motif, convocation imprimable ;",
+                "listes de travail : interventions proches sans consultation validée, visites de la veille, planning du jour."
+              ]
+            },
+            {
+              "type": "depliant",
+              "titre": "Exigences détaillées (7)",
+              "blocs": [
+                {
+                  "type": "tableau",
+                  "colonnes": [
+                    "N°",
+                    "Exigence",
+                    "Critère de recette"
+                  ],
+                  "lignes": [
+                    [
+                      "EF-020",
+                      "Agenda par anesthésiste et par site, créneaux paramétrables.",
+                      "Un modèle de semaine publie les créneaux en 5 s."
+                    ],
+                    [
+                      "EF-021",
+                      "Fiche d'intervention programmée : acte, côté, chirurgien, clinique, date prévue, mode d'entrée, date de consultation souhaitée.",
+                      "Reprise dans la CPA sans ressaisie."
+                    ],
+                    [
+                      "EF-022",
+                      "Prise de rendez-vous par la secrétaire de chirurgien dès la programmation.",
+                      "Avec ce compte, aucune CPA, allergie ou rendez-vous d'un autre chirurgien n'est accessible (20 cas de test) ; prise complète en 90 s."
+                    ],
+                    [
+                      "EF-023",
+                      "Réservation ferme ou demande à confirmer (paramètre) ; pas de double réservation d'un créneau, alerte si le patient est déjà programmé le même jour.",
+                      "Deux réservations simultanées : une seule aboutit."
+                    ],
+                    [
+                      "EF-024",
+                      "Modification, report, annulation avec motif et historique ; avertissement si une CPA est validée.",
+                      "Aucune suppression physique ; l'alerte atteint la secrétaire d'anesthésie."
+                    ],
+                    [
+                      "EF-025",
+                      "Convocation imprimable (texte et pièces à apporter paramétrables).",
+                      "PDF en 3 s."
+                    ],
+                    [
+                      "EF-026",
+                      "Listes de travail sans donnée clinique : interventions proches sans CPA validée, VPA du lendemain, planning du jour par site.",
+                      "Recalcul à chaque modification ; 30 interventions affichées en 1 s."
+                    ]
+                  ]
+                }
+              ]
+            }
+          ],
+          "questions": [
+            {
+              "id": "cdc-agenda",
+              "type": "validation",
+              "intitule": "Contenu du module",
+              "aide": "Je garde ce contenu tel quel, ou vous voulez autre chose."
+            },
+            {
+              "id": "dep-agenda",
+              "type": "choix-unique",
+              "intitule": "Pour commencer",
+              "options": [
+                {
+                  "id": "indispensable",
+                  "libelle": "Indispensable pour commencer à utiliser Preopia"
+                },
+                {
+                  "id": "peut-attendre",
+                  "libelle": "Peut attendre la fin de la V1"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "g-consultation",
+          "titre": "Consultation",
+          "blocs": [
+            {
+              "type": "liste",
+              "items": [
+                "l'écran de la maquette V3.1, en trois colonnes, avec les boutons RAS ;",
+                "antécédents par appareil, traitements avec leur posologie, allergies avec leur réaction, voies aériennes et intubation difficile, examen clinique et examens complémentaires ;",
+                "ASA, Mallampati, NYHA, STOP-Bang et Apfel saisis par le médecin (le logiciel ne calcule rien) ;",
+                "conclusion, anesthésie prévue, état général, consignes et prémédication ;",
+                "bouton « Fin de consultation » et encadré rouge ;",
+                "consultation validée, verrouillée et datée ; toute modification est gardée avec son motif ;",
+                "modèles de consultation par intervention, saisie au clavier ou sur tablette, enregistrement continu ;",
+                "affichage vertical, à valider avec vous."
+              ]
+            },
+            {
+              "type": "depliant",
+              "titre": "Exigences détaillées (25)",
+              "blocs": [
+                {
+                  "type": "tableau",
+                  "colonnes": [
+                    "N°",
+                    "Exigence",
+                    "Critère de recette"
+                  ],
+                  "lignes": [
+                    [
+                      "EF-040",
+                      "Écran unique, avec indicateur de complétude. Il s'organise en trois colonnes pour limiter le défilement : à gauche l'administratif ; au milieu les antécédents, les signes et l'examen clinique ; à droite la fin de consultation (conclusion, ASA, état général, anesthésie prévue, consignes, prémédication, bouton « Fin de consultation », EF-056). La colonne d'information de la V3 du 07/11/2026 (acte, chirurgien, documents, dernière consultation) disparaît : ces éléments passent dans le bandeau patient (EF-009) et dans les onglets. L'ordre du raisonnement reste celui de la lecture de gauche à droite.",
+                      "Toutes les rubriques de l'annexe A sont atteignables sans changer de page ; sur l'écran de référence, le défilement vertical est réduit par rapport à la V3 du 07/11/2026 (seuil à fixer en recette, aucun chiffre à ce jour)."
+                    ],
+                    [
+                      "EF-041",
+                      "Antécédents structurés par appareil (cardiovasculaire, respiratoire, rénal, neurologique, endocrinien, hémostase, digestif, ORL, ophtalmologique, orthopédique, urologique), obstétricaux (cadre propre : gestité, parité, texte libre ; retour T. Vempaire du 07/11/2026), transfusionnels, anesthésiques ; texte libre associé. Les précisions d'antécédent se saisissent en liste d'étiquettes (Entrée ajoute, un clic supprime), comme les allergies et les traitements. Les cases à cocher sont réduites aux favoris de l'équipe ; tout le reste se saisit librement.",
+                      "« RAS » en un geste par appareil ; chaque favori coché et chaque étiquette est exporté en ressource structurée (texte libre, sans code, tant qu'aucune terminologie n'est retenue) ; gestité et parité sont deux entiers distincts ; Entrée ajoute une étiquette, un clic la supprime."
+                    ],
+                    [
+                      "EF-042",
+                      "Traitement habituel structuré : spécialité ou DCI dans une liste locale restreinte, dosage, voie, posologie, horaire, dernière prise ; repli en texte libre. Dose et fréquence se saisissent dans le même geste que la molécule, que le traitement vienne d'une ordonnance lue ou soit entré à la main (retour T. Vempaire du 07/11/2026).",
+                      "Un produit absent se saisit en texte libre ; liste modifiable ; aucune interaction calculée ; un traitement sans posologie reste enregistrable."
+                    ],
+                    [
+                      "EF-043",
+                      "Allergies structurées : agent, famille (latex, antibiotiques, produits de contraste, curares), réaction, gravité, statut. La réaction est rattachée à chaque agent, jamais dans un champ libre commun à toutes les allergies (retour T. Vempaire du 07/11/2026).",
+                      "Alimentent le bandeau, la page des prescriptions et l'export ; chaque agent imprimé porte sa réaction."
+                    ],
+                    [
+                      "EF-044",
+                      "Habitus, capacité d'effort (METs), NYHA, mesures (poids, taille, tension, pouls, SpO2, température), IMC calculé sans grade d'obésité.",
+                      "L'IMC suit le poids et la taille ; valeur hors plage plausible : confirmation."
+                    ],
+                    [
+                      "EF-045",
+                      "Voies aériennes : Mallampati, distance thyro-mentonnière, distance inter-incisive, mobilité cervicale, dentition et prothèses, ventilation au masque difficile prévisible, intubation difficile antérieure. Le champ « Antécédent d'intubation difficile » est un oui/non accompagné d'un texte libre décrivant ce qui s'est passé au bloc ; il est repris d'une consultation à l'autre (EF-008).",
+                      "Valeurs saisies ; aucun libellé de risque n'apparaît sans saisie du médecin ; le oui/non et le texte d'une consultation précédente apparaissent dans la suivante, datés."
+                    ],
+                    [
+                      "EF-046",
+                      "Examens cardiovasculaire, pulmonaire, ECG, échographie, radiographie, EFR, biologie, avec défaut « normal » activable d'un geste. Les examens complémentaires (échographie, radiographie, ECG, EFR) se saisissent en texte libre multiligne, retours à la ligne conservés à l'impression. Les listes à choix sont conservées pour les signes fonctionnels et l'examen cardiovasculaire. Le défaut « normal » sur un texte libre complémentaire n'est pas arbitré.",
+                      "Le geste remplit le bloc ; un bloc modifié est tracé ; un texte de trois lignes saisi s'imprime sur trois lignes."
+                    ],
+                    [
+                      "EF-047",
+                      "Risques saisis : ASA, risque hémorragique, risque thromboembolique, Apfel, STOP-Bang (EF-081).",
+                      "Aucun risque n'est déduit d'une autre donnée."
+                    ],
+                    [
+                      "EF-048",
+                      "Conclusion : texte, anesthésie prévue, induction, antibioprophylaxie, prévention de l'endocardite, protocole analgésique, prémédication (plusieurs choix possibles), bilan demandé, bénéfice/risque, décisions pour l'admission, état général apprécié par le médecin. Stratégie écrite obligatoire avant validation (paramétrable, réf. D.6124-94).",
+                      "Validation refusée si la stratégie est vide et exigée ; champs repris dans la feuille per-op ; l'état général est facultatif et n'alimente aucun score ; deux types d'anesthésie cochés ensemble sont enregistrés, imprimés et exportés."
+                    ],
+                    [
+                      "EF-049",
+                      "Information et consentement : documents remis, accompagnant, accord du patient, compréhension (« faire dire »), accord de l'anesthésiste.",
+                      "Cases et champs datés."
+                    ],
+                    [
+                      "EF-050",
+                      "Validation : verrouillage, horodatage, médecin, version. Toute modification crée une version avec motif.",
+                      "L'ancienne version reste consultable et exportable."
+                    ],
+                    [
+                      "EF-051",
+                      "Compte rendu PDF et courrier au chirurgien et au médecin traitant.",
+                      "Contient tous les champs saisis, l'étiquette et le bandeau ; 3 s."
+                    ],
+                    [
+                      "EF-052",
+                      "Ancienneté de la CPA affichée à la date d'intervention (seuil paramétrable, avertissement administratif) ; consultation sans intervention retenue avec motif ; copie d'une CPA antérieure (la reprise des antécédents, traitements, allergies et alertes d'un dossier précédent est le comportement par défaut d'une nouvelle consultation, EF-008 ; la copie intégrale reste un geste distinct).",
+                      "L'avertissement ne bloque pas et ne contient aucun conseil clinique."
+                    ],
+                    [
+                      "EF-056",
+                      "Bouton « Fin de consultation », qui remplace « Marquer prêt » de la maquette V3. Il contrôle d'abord les manques (champs obligatoires, EF-091 ; stratégie écrite, EF-048), puis imprime immédiatement la feuille de consultation (EF-051), le consentement (EF-049) et les consignes préopératoires (EF-099), avant que le patient quitte le bureau. Un double de la feuille de consultation reste dans le dossier papier, qui sert de secours en cas de panne (ENF-005). Proposition retenue le 25/11/2026, à confirmer par l'équipe : le Dr Vempaire recueille l'avis de ses confrères. Le lien avec la validation et le verrouillage (EF-050) reste à préciser.",
+                      "Un dossier incomplet affiche ses manques et n'imprime rien ; un dossier complet imprime les trois documents en un geste ; chaque impression crée une ligne du journal (EF-093) ; le double papier porte la même version que l'original."
+                    ],
+                    [
+                      "EF-058",
+                      "Alertes visuelles rouges « intubation difficile connue ou prévisible » et « allergie connue », à l'écran et sur la feuille de consultation imprimée ; l'emplacement sur l'écran et sur la feuille est soumis au choix de l'équipe. Une alerte n'apparaît que si le médecin a saisi la donnée (antécédent d'intubation difficile ou intubation difficile prévisible, EF-045 ; une allergie, EF-043) : elle met en évidence une valeur saisie, elle ne la calcule ni ne la déduit d'une autre (Mallampati, par exemple). Son articulation avec la règle de la V1 « aucune alerte » et avec EF-102 (« aucune alerte d'allergie » sur la prescription) est à faire valider.",
+                      "Sur données synthétiques, aucune alerte sans saisie du médecin ; une allergie saisie produit l'alerte à l'écran et à l'impression ; le texte de l'alerte est la valeur saisie, sans conseil."
+                    ],
+                    [
+                      "EF-070",
+                      "Modèles de consultation par intervention ou spécialité : rubriques, ordre, défauts, phrases types.",
+                      "Le choix d'un modèle applique ses défauts sans autre geste."
+                    ],
+                    [
+                      "EF-071",
+                      "Édition des modèles par l'administrateur sans développement ; versionnés ; la CPA garde la version utilisée.",
+                      "Modifier un modèle ne change aucune CPA validée."
+                    ],
+                    [
+                      "EF-072",
+                      "Choix fermés avant texte libre ; navigation clavier et raccourcis.",
+                      "Scénario type sans souris ; au plus 20 % de champs en texte libre."
+                    ],
+                    [
+                      "EF-073",
+                      "Usage tablette : paysage, cibles d'au moins 44 px, sans survol.",
+                      "Scénario type sur l'iPad de référence sans zoom."
+                    ],
+                    [
+                      "EF-074",
+                      "Enregistrement continu, reprise après interruption, annulation de la dernière action.",
+                      "Après coupure forcée, au plus la dernière saisie est perdue."
+                    ],
+                    [
+                      "EF-075",
+                      "Compteur d'interactions et de durée par CPA, sans contenu clinique.",
+                      "Écart au chronométrage observé de 10 % au plus."
+                    ],
+                    [
+                      "EF-077",
+                      "Mode d'affichage vertical de type « feuille A4 », pour un écran 16/9 tourné en portrait ; les trois colonnes de l'EF-040 s'y réorganisent. À valider avec l'équipe.",
+                      "Écran de référence tourné : toutes les rubriques lisibles, cibles d'au moins 44 px (EF-073), sans défilement horizontal."
+                    ],
+                    [
+                      "EF-080",
+                      "Scores saisis : ASA (1 à 6, suffixe E), Mallampati, Cormack, NYHA, METs.",
+                      "Jamais modifiés par le système ; hors échelle refusé."
+                    ],
+                    [
+                      "EF-082",
+                      "Registre des scores : version, source primaire, items, date de revue.",
+                      "Un score sans source ne s'active pas (annexe B)."
+                    ],
+                    [
+                      "EF-083",
+                      "Activation par équipe ; masquage sans perte d'historique.",
+                      "Un score désactivé reste dans l'historique."
+                    ]
+                  ]
+                }
+              ]
+            }
+          ],
+          "questions": [
+            {
+              "id": "cdc-consultation",
+              "type": "validation",
+              "intitule": "Contenu du module",
+              "aide": "Je garde ce contenu tel quel, ou vous voulez autre chose."
+            },
+            {
+              "id": "dep-consultation",
+              "type": "choix-unique",
+              "intitule": "Pour commencer",
+              "options": [
+                {
+                  "id": "indispensable",
+                  "libelle": "Indispensable pour commencer à utiliser Preopia"
+                },
+                {
+                  "id": "peut-attendre",
+                  "libelle": "Peut attendre la fin de la V1"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "g-vpa",
+          "titre": "Visite pré-anesthésique",
+          "blocs": [
+            {
+              "type": "liste",
+              "items": [
+                "« RAS depuis la consultation » en un geste, sinon les écarts (traitement, jeûne, état, allergie) ;",
+                "la consultation affichée à côté, les changements mis en évidence ;",
+                "un écart important crée une nouvelle version de la consultation."
+              ]
+            },
+            {
+              "type": "depliant",
+              "titre": "Exigences détaillées (3)",
+              "blocs": [
+                {
+                  "type": "tableau",
+                  "colonnes": [
+                    "N°",
+                    "Exigence",
+                    "Critère de recette"
+                  ],
+                  "lignes": [
+                    [
+                      "EF-060",
+                      "VPA : date, médecin, case « RAS depuis la consultation » ; à défaut, écarts (traitement, jeûne, état clinique, allergie, motif de modification de la procédure).",
+                      "VPA RAS en 3 interactions ; un écart exige un commentaire."
+                    ],
+                    [
+                      "EF-061",
+                      "CPA validée affichée à côté de la VPA, champs modifiés mis en évidence ; contrôles saisis (jeûne respecté, dernière prise, identité, consentement).",
+                      "Aucun message clinique ; chaque contrôle est une case datée."
+                    ],
+                    [
+                      "EF-062",
+                      "Un écart important crée une nouvelle version de la CPA.",
+                      "La version précédente reste consultable."
+                    ]
+                  ]
+                }
+              ]
+            }
+          ],
+          "questions": [
+            {
+              "id": "cdc-vpa",
+              "type": "validation",
+              "intitule": "Contenu du module",
+              "aide": "Je garde ce contenu tel quel, ou vous voulez autre chose."
+            },
+            {
+              "id": "dep-vpa",
+              "type": "choix-unique",
+              "intitule": "Pour commencer",
+              "options": [
+                {
+                  "id": "indispensable",
+                  "libelle": "Indispensable pour commencer à utiliser Preopia"
+                },
+                {
+                  "id": "peut-attendre",
+                  "libelle": "Peut attendre la fin de la V1"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "g-documents",
+          "titre": "Documents et impressions",
+          "blocs": [
+            {
+              "type": "liste",
+              "items": [
+                "feuille de consultation, consentement et information, consignes préopératoires, courriers au chirurgien et au médecin traitant, à partir de vos modèles ;",
+                "feuille remise au patient : ses traitements avec la consigne de chacun, le jeûne et la prémédication ;",
+                "jeûne en heures avant l'intervention, avec vos valeurs par défaut ;",
+                "prescriptions postopératoires reprises de la page 2 de FileMaker (antalgiques, PCA, antiémétiques, anticoagulation préventive), chaque valeur renseignée par le médecin ;",
+                "impression de la veille limitée aux feuilles de consultation ;",
+                "trace de chaque document imprimé."
+              ]
+            },
+            {
+              "type": "depliant",
+              "titre": "Exigences détaillées (10)",
+              "blocs": [
+                {
+                  "type": "tableau",
+                  "colonnes": [
+                    "N°",
+                    "Exigence",
+                    "Critère de recette"
+                  ],
+                  "lignes": [
+                    [
+                      "EF-090",
+                      "Bibliothèque de modèles rédigés et validés par l'équipe : consignes préopératoires, information anesthésie, courriers.",
+                      "Auteur, validateur médical, version et date ; un modèle non validé ne s'imprime pas."
+                    ],
+                    [
+                      "EF-091",
+                      "Champs de fusion (identité, intervention, dates, valeurs saisies par le médecin). Aucun champ ne calcule une date ni une dose.",
+                      "Le document contient exactement les valeurs saisies ; impression refusée si un champ obligatoire est vide."
+                    ],
+                    [
+                      "EF-092",
+                      "Jeûne : champs « solides » et « liquides clairs », défauts d'équipe modifiables par patient (par exemple 6 h et 2 h comme à Uturoa). Ces valeurs relèvent du protocole de l'équipe (texte SFAR à vérifier). En consultation, le jeûne s'exprime en relatif (H-6, H-2) avec un texte libre : les heures de convocation et d'intervention ne sont presque jamais connues à ce moment (retour T. Vempaire du 07/11/2026), elles ne figurent pas sur l'écran du médecin. Une heure n'est affichée qu'une fois la convocation saisie (secrétariat, programme de la veille, VPA), en plus du relatif.",
+                      "Défaut paramétré par l'équipe, visible sur le document ; aucune heure calculée sans convocation saisie."
+                    ],
+                    [
+                      "EF-093",
+                      "PDF avec logo et mentions d'équipe, étiquette, version du modèle ; journal des documents émis (quoi, pour qui, par qui, version du modèle et du référentiel).",
+                      "Chaque impression crée une ligne non modifiable."
+                    ],
+                    [
+                      "EF-099",
+                      "Document remis au patient en fin de consultation : ses traitements habituels avec la consigne retenue pour chacun (continuer, arrêter, dernière prise saisie), le jeûne en relatif (EF-092) et son texte libre, la prémédication, les coordonnées de l'équipe. Modèle de la bibliothèque (EF-090), champs de fusion (EF-091) : aucune date ni dose calculée. Demande du Dr Vempaire du 07/11/2026. Il s'imprime avec les autres documents au bouton « Fin de consultation » (EF-056), en même temps que le consentement et la feuille de consultation.",
+                      "Imprimable depuis la consultation validée ; le document reprend exactement les consignes saisies ; une impression crée une ligne du journal (EF-093)."
+                    ],
+                    [
+                      "EF-057",
+                      "Lot de la veille : le secrétariat réimprime seulement les feuilles d'anesthésie du lendemain ; il ne réimprime ni les consignes, ni les consentements, ni les courriers, remis le jour de la consultation (EF-056). Le sens exact de « feuilles d'anesthésie » (feuille de consultation ou feuille per-op, EF-120) est à confirmer.",
+                      "Le lot de la veille ne contient aucun document d'une autre nature que les feuilles d'anesthésie ; une impression crée une ligne du journal (EF-093)."
+                    ],
+                    [
+                      "EF-100",
+                      "Bibliothèque de modèles tirés de la page 2 FileMaker : antalgiques (paracétamol, néfopam, tramadol, kétoprofène + IPP, oxycodone conditionnelle), titration morphine en SSPI, PCA morphine (bolus, période réfractaire, débit, dose maxi), phloroglucinol, ondansétron, énoxaparine, hydratation, surveillance, USC, reprise des boissons et de l'alimentation.",
+                      "Chaque élément de l'annexe A (page 2) correspond à un élément de modèle ; chaque modèle est validé nominativement (version, date)."
+                    ],
+                    [
+                      "EF-101",
+                      "Application d'un modèle par le médecin, qui renseigne chaque valeur et valide. Aucune dose n'est calculée (ni selon le poids ni selon la fonction rénale), aucun modèle n'est appliqué automatiquement.",
+                      "Modifier le poids ne change aucune dose."
+                    ],
+                    [
+                      "EF-102",
+                      "En-tête repris du dossier (identité, intervention, chirurgien, anesthésiste, poids, traitements, allergies, ASA) en simple affichage ; impression seulement après validation.",
+                      "Aucune alerte d'interaction ou d'allergie ; une prescription non validée est marquée « brouillon »."
+                    ],
+                    [
+                      "EF-103",
+                      "Consignes préopératoires, bilan demandé ou non, prémédication saisis dans la même page.",
+                      "Éléments de la page 2 saisis et imprimés."
+                    ]
+                  ]
+                }
+              ]
+            }
+          ],
+          "questions": [
+            {
+              "id": "cdc-documents",
+              "type": "validation",
+              "intitule": "Contenu du module",
+              "aide": "Je garde ce contenu tel quel, ou vous voulez autre chose."
+            },
+            {
+              "id": "dep-documents",
+              "type": "choix-unique",
+              "intitule": "Pour commencer",
+              "options": [
+                {
+                  "id": "indispensable",
+                  "libelle": "Indispensable pour commencer à utiliser Preopia"
+                },
+                {
+                  "id": "peut-attendre",
+                  "libelle": "Peut attendre la fin de la V1"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "g-bloc",
+          "titre": "Bloc",
+          "blocs": [
+            {
+              "type": "liste",
+              "items": [
+                "feuille per-opératoire reprise de la 74A, saisie à la main : ventilation, voies aériennes, abords, position, drogues, ALR, péridurale, rachianesthésie ;",
+                "constantes et courbes saisies point par point, sans alarme ;",
+                "repères horaires, entrée et sortie de salle et de SSPI, incidents ;",
+                "impression proche de la 74A, et feuille vierge pour le mode papier."
+              ]
+            },
+            {
+              "type": "depliant",
+              "titre": "Exigences détaillées (11)",
+              "blocs": [
+                {
+                  "type": "tableau",
+                  "colonnes": [
+                    "N°",
+                    "Exigence",
+                    "Critère de recette"
+                  ],
+                  "lignes": [
+                    [
+                      "EF-110",
+                      "Création depuis la CPA ; en-tête : date, anesthésiste, IADE, protocole, case « check-list effectuée », étiquette patient.",
+                      "Créée en un geste ; tous les champs d'en-tête de l'annexe A présents."
+                    ],
+                    [
+                      "EF-111",
+                      "Ventilation (pré-O2, masque, débit, AI/PEP, mode VC/VS/AF/PC/VS-AI) et voies aériennes (lame, IOT, ML, packing, Cormack, ballonnet, auscultation, atraumatique, bris dentaire ; IOT difficile : mandrin, Airtraq, BURP, Eschmann, nombre de laryngoscopies).",
+                      "Chaque champ du 74A saisissable ; une IOT difficile alimente le bandeau après confirmation du médecin."
+                    ],
+                    [
+                      "EF-112",
+                      "Conditionnement : VVP (calibre, site), autres abords, SNG, sonde urinaire, réchauffement, position (DD, DL, DV, gynéco, bras, appuis).",
+                      "Idem."
+                    ],
+                    [
+                      "EF-113",
+                      "Grille temporelle à colonnes horodatées : température, FR × Vt, Ppic/Pplat, PEP, FiO2, débit de gaz frais, curamètre, saignement, diurèse, garrot / PIA, fractions de sévoflurane et de N2O.",
+                      "60 colonnes de 5 min saisies sans rechargement ; colonne ajoutable à toute heure ; unités affichées."
+                    ],
+                    [
+                      "EF-114",
+                      "Repères horodatés (pré-O2, induction, intubation, incision, extubation) et entrée/sortie de salle et de SSPI.",
+                      "Posés en un geste, à l'heure courante ou saisie."
+                    ],
+                    [
+                      "EF-115",
+                      "Courbes TA et FC, SpO2, EtCO2 : points saisis et tracés, sans seuil ni alarme.",
+                      "Tracé identique aux points saisis ; aucune couleur d'alerte."
+                    ],
+                    [
+                      "EF-116",
+                      "Drogues en lignes : palette configurable (xylocaïne, kétamine, alfentanil, rémifentanil, sufentanil, propofol, étomidate, suxaméthonium, atracurium / rocuronium, antibiotique, éphédrine / néosynéphrine, midazolam…), dose, unité, heure, voie ; ligne libre.",
+                      "Palette modifiable sans développement ; une administration en 3 interactions."
+                    ],
+                    [
+                      "EF-117",
+                      "Antalgiques horodatés ; ALR ophtalmologique ; péridurale (niveau, distance de l'espace, KT à la peau, test, produits, bolus, débit PSE) ; rachianesthésie (niveau, ponctions, LCR, produits) ; autres ALR (échoguidée, neurostimulation, aiguille, produits, volume, côté).",
+                      "Champs du 74A saisissables et exportés."
+                    ],
+                    [
+                      "EF-118",
+                      "Incidents per-opératoires (oui/non, texte, heure).",
+                      "Chaque incident crée une ligne datée comptée dans les statistiques."
+                    ],
+                    [
+                      "EF-119",
+                      "Validation de la feuille : verrouillage, version, amendement tracé avec motif.",
+                      "Aucune modification sans amendement."
+                    ],
+                    [
+                      "EF-120",
+                      "Impression proche du 74A (A3 ou A4) pour le dossier de la clinique et le mode papier de secours ; feuille vierge imprimable.",
+                      "Toutes les données saisies figurent ; vierge utilisable à la main."
+                    ]
+                  ]
+                }
+              ]
+            }
+          ],
+          "questions": [
+            {
+              "id": "cdc-bloc",
+              "type": "validation",
+              "intitule": "Contenu du module",
+              "aide": "Je garde ce contenu tel quel, ou vous voulez autre chose."
+            },
+            {
+              "id": "dep-bloc",
+              "type": "choix-unique",
+              "intitule": "Pour commencer",
+              "options": [
+                {
+                  "id": "indispensable",
+                  "libelle": "Indispensable pour commencer à utiliser Preopia"
+                },
+                {
+                  "id": "peut-attendre",
+                  "libelle": "Peut attendre la fin de la V1"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "g-reprise",
+          "titre": "Reprise de FileMaker",
+          "blocs": [
+            {
+              "type": "liste",
+              "items": [
+                "reprise des fiches de Cardella, et de Mamao dès réception, consultables en lecture seule avec leur numéro de fiche ;",
+                "doublons fusionnés seulement quand c'est quasi certain, sinon soumis à une personne de l'équipe ;",
+                "archive d'origine conservée intacte."
+              ]
+            },
+            {
+              "type": "depliant",
+              "titre": "Exigences détaillées (5)",
+              "blocs": [
+                {
+                  "type": "tableau",
+                  "colonnes": [
+                    "N°",
+                    "Exigence",
+                    "Critère de recette"
+                  ],
+                  "lignes": [
+                    [
+                      "EF-150",
+                      "Chaîne en trois zones (brute, normalisée, cible), scripts versionnés et rejouables, rapport de reprise ; archive brute immuable et hachée.",
+                      "Rejeu sur la même entrée : même empreinte de sortie ; empreinte de l'archive vérifiée à chaque accès."
+                    ],
+                    [
+                      "EF-151",
+                      "Reprise des champs structurés de l'annexe A en champs typés, des champs libres en texte « repris », des allergies et traitements avec statut « repris, non structuré ».",
+                      "Aucune valeur non vide d'allergie ou de traitement perdue."
+                    ],
+                    [
+                      "EF-152",
+                      "Consultation en lecture seule des consultations historiques, avec source et n° de fiche.",
+                      "Ouverture depuis le dossier ; non modifiable."
+                    ],
+                    [
+                      "EF-153",
+                      "Dédoublonnage réversible à trois seuils : fusion automatique réservée aux cas quasi certains (identifiant fort et date de naissance identiques, sans attribut contradictoire), revue humaine en zone grise, rejet sinon.",
+                      "Aucune fusion erronée sur ≥ 300 paires étiquetées ; précision et rappel publiés avec intervalles."
+                    ],
+                    [
+                      "EF-154",
+                      "Interface de revue des paires douteuses.",
+                      "Une paire tranchée en 3 interactions, décision tracée."
+                    ]
+                  ]
+                }
+              ]
+            }
+          ],
+          "questions": [
+            {
+              "id": "cdc-reprise",
+              "type": "validation",
+              "intitule": "Contenu du module",
+              "aide": "Je garde ce contenu tel quel, ou vous voulez autre chose."
+            },
+            {
+              "id": "dep-reprise",
+              "type": "choix-unique",
+              "intitule": "Pour commencer",
+              "options": [
+                {
+                  "id": "indispensable",
+                  "libelle": "Indispensable pour commencer à utiliser Preopia"
+                },
+                {
+                  "id": "peut-attendre",
+                  "libelle": "Peut attendre la fin de la V1"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "g-activite",
+          "titre": "Activité et export",
+          "blocs": [
+            {
+              "type": "liste",
+              "items": [
+                "statistiques de base : consultations et anesthésies par médecin, clinique, type et ASA, avec export pour Excel ;",
+                "statistiques réservées à l'équipe ;",
+                "export complet de vos données à tout moment, lisible sans Preopia ;",
+                "restitution des données en fin de contrat ;",
+                "aucune fonction de la V1 ne dépend d'Héloïse."
+              ]
+            },
+            {
+              "type": "depliant",
+              "titre": "Exigences détaillées (8)",
+              "blocs": [
+                {
+                  "type": "tableau",
+                  "colonnes": [
+                    "N°",
+                    "Exigence",
+                    "Critère de recette"
+                  ],
+                  "lignes": [
+                    [
+                      "EF-140",
+                      "Journal d'activité et statistiques de base : consultations, anesthésies par médecin, site, type, ASA saisi, mode d'entrée, durée, incidents ; filtres, export CSV, définition écrite de chaque indicateur.",
+                      "Totaux égaux au détail des dossiers sur le jeu synthétique."
+                    ],
+                    [
+                      "EF-141",
+                      "Statistiques réservées à l'équipe ; aucun usage secondaire par l'éditeur ; télémétrie sans donnée patient.",
+                      "Aucune statistique hors équipe."
+                    ],
+                    [
+                      "EF-160",
+                      "Export complet CSV par entité avec dictionnaire de données (colonnes, types, unités, valeurs).",
+                      "Rechargé dans un tableur sans explication orale."
+                    ],
+                    [
+                      "EF-161",
+                      "Export FHIR R4 (FR Core quand il existe) : Patient, Encounter, Appointment, Procedure, AllergyIntolerance, MedicationStatement, Condition, Observation, QuestionnaireResponse, DocumentReference, plus MedicationAdministration et AuditEvent.",
+                      "Aucune erreur d'un validateur FHIR R4 sur le jeu synthétique ; chaque champ saisi est exporté ou listé comme non exporté."
+                    ],
+                    [
+                      "EF-162",
+                      "Export des pièces et du journal d'audit ; export chiffré, tracé, produit par l'administrateur.",
+                      "Hachés identiques aux originaux ; illisible sans la clé ; ligne d'audit créée."
+                    ],
+                    [
+                      "EF-163",
+                      "Restitution et destruction attestée en fin de contrat, sur accord formel.",
+                      "Procédure écrite, exécutée en recette, attestation produite."
+                    ],
+                    [
+                      "EF-171",
+                      "Couche d'import idempotente : clé externe, horodatage, charge brute conservée, rejeu sans effet, événements plus anciens ignorés.",
+                      "Rejeu de 1 000 événements : état identique."
+                    ],
+                    [
+                      "EF-172",
+                      "Aucune fonction de V1 ne dépend d'Héloïse.",
+                      "Usage complet avec le seul réseau local."
+                    ]
+                  ]
+                }
+              ]
+            }
+          ],
+          "questions": [
+            {
+              "id": "cdc-activite",
+              "type": "validation",
+              "intitule": "Contenu du module",
+              "aide": "Je garde ce contenu tel quel, ou vous voulez autre chose."
+            },
+            {
+              "id": "dep-activite",
+              "type": "choix-unique",
+              "intitule": "Pour commencer",
+              "options": [
+                {
+                  "id": "indispensable",
+                  "libelle": "Indispensable pour commencer à utiliser Preopia"
+                },
+                {
+                  "id": "peut-attendre",
+                  "libelle": "Peut attendre la fin de la V1"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "g-acces",
+          "titre": "Comptes et sécurité",
+          "blocs": [
+            {
+              "type": "liste",
+              "items": [
+                "un compte par personne et des rôles (administrateur, médecin, secrétaire, facturation, secrétaires des chirurgiens) ;",
+                "code à usage unique sur le téléphone à la connexion, déconnexion après inactivité ;",
+                "données de santé chiffrées, journal de qui a consulté ou modifié quoi ;",
+                "rubriques Nouveautés, Tickets (avec capture d'écran) et Documentation ;",
+                "revue de sécurité indépendante avant la mise en service."
+              ]
+            },
+            {
+              "type": "depliant",
+              "titre": "Exigences détaillées (19)",
+              "blocs": [
+                {
+                  "type": "tableau",
+                  "colonnes": [
+                    "N°",
+                    "Exigence",
+                    "Critère de recette"
+                  ],
+                  "lignes": [
+                    [
+                      "EF-180",
+                      "Utilisateurs, rôles, rattachements (chirurgiens d'une secrétaire, sites d'un médecin). Rôles annoncés le 25/11/2026 : administrateurs (Dr Vempaire, Dr Hantala) ; secrétaires en lecture du dossier sans modification du contenu médical ; liste nominative à fournir par l'équipe.",
+                      "Création, suspension, réactivation en 2 min ; audit."
+                    ],
+                    [
+                      "EF-181",
+                      "Catalogues et paramètres d'équipe : établissements, salles, chirurgiens, actes, régimes, palette de drogues, en-têtes de documents, durées, activation des scores et des lots. En V1, les listes métier sont codées en dur ; les paramètres qui ne sont pas des listes métier (utilisateurs, rattachements, durées, activation des scores) gardent leur critère actuel, sauf avis contraire de l'équipe. Les réglages métier modifiables viennent avec l'EF-191.",
+                      "V1 : paramètres non cliniques modifiés sans redéploiement, versionnés ; une liste métier se change par une livraison. Version ultérieure : critère de l'EF-191."
+                    ],
+                    [
+                      "EF-182",
+                      "Journal d'audit consultable avec filtres (utilisateur, patient, période, action).",
+                      "Toute modification d'un champ retrouvée en 3 interactions."
+                    ],
+                    [
+                      "EF-183",
+                      "Réinitialisation du second facteur par deux personnes autorisées.",
+                      "Impossible avec une seule personne ; tracée."
+                    ],
+                    [
+                      "EF-185",
+                      "Supervision pour l'administrateur : sauvegardes, dernière réplication, espace disque, file locale.",
+                      "Chaque indicateur est daté."
+                    ],
+                    [
+                      "EF-188",
+                      "Module « Nouveautés » intégré au logiciel : journal des mises à jour, lisible par tous les utilisateurs (ce qui change, à quelle date, pour quelle version, ENF-063).",
+                      "Chaque livraison ajoute une entrée datée, visible sans quitter le logiciel ; la version affichée (ENF-063) correspond à la dernière entrée."
+                    ],
+                    [
+                      "EF-189",
+                      "Module « Tickets » intégré : l'utilisateur signale un problème ou une demande depuis l'écran en cause ; une capture d'écran est jointe automatiquement et le signalement est reçu directement par le développeur. La capture peut montrer des données de santé : l'utilisateur la voit avant l'envoi, et son traitement (masquage, durée de conservation, accès) est à arrêter en conformité avec ENF-016 (accès du support), ENF-060 (aucune donnée de santé dans la télémétrie) et ENF-074 (développement sur données synthétiques).",
+                      "Un ticket créé depuis une page de consultation de test arrive au développeur avec sa capture ; sur données synthétiques ; aucune capture n'est envoyée sans affichage préalable à l'utilisateur ; l'envoi est tracé (EF-182)."
+                    ],
+                    [
+                      "EF-190",
+                      "Module « Documentation » intégré : guide complet d'utilisation, consultable depuis le logiciel, versionné avec lui.",
+                      "Chaque écran de saisie renvoie à sa page du guide ; le guide d'une version est consultable après la suivante."
+                    ],
+                    [
+                      "ENF-010",
+                      "Second facteur TOTP obligatoire pour tous les comptes, secrétaires de chirurgien comprises.",
+                      "Connexion refusée sans second facteur ; 100 % des comptes actifs enrôlés après délai de grâce de 7 jours (provisoire)."
+                    ],
+                    [
+                      "ENF-011",
+                      "Anti-rejeu du code TOTP, codes de secours à usage unique, verrouillage après échecs répétés (5, provisoire), déblocage automatique sans écraser un blocage administrateur.",
+                      "Un code réutilisé est refusé ; un code de secours n'est consommé qu'une fois, y compris en requêtes concurrentes."
+                    ],
+                    [
+                      "ENF-012",
+                      "Sessions : durée absolue, expiration sur inactivité paramétrable par profil (poste de cabinet : 15 min ; poste de bloc plus long, avec masquage rapide de l'écran), révocation immédiate par l'administrateur.",
+                      "Session révoquée : refus à la requête suivante."
+                    ],
+                    [
+                      "ENF-013",
+                      "Droits par rôle conformes au tableau des rôles, vérifié côté serveur, séparant identité et données cliniques, avec périmètre (une secrétaire ne voit que ses chirurgiens).",
+                      "Test d'accès croisé de tous les rôles : 0 accès hors matrice ; test d'isolation de périmètre."
+                    ],
+                    [
+                      "ENF-014",
+                      "Audit au niveau du champ : utilisateur, date, poste, valeur avant et après, motif pour un document validé.",
+                      "Toute modification de test est retrouvée avec ses deux valeurs."
+                    ],
+                    [
+                      "ENF-015",
+                      "Journal en ajout seul, chaîné par hachage ou exporté vers un support non modifiable ; lectures de dossiers tracées ; horloge synchronisée ; conservation au moins égale à celle du dossier concerné (proposition).",
+                      "Toute altération du journal est détectée par vérification de chaîne ; chaque ouverture de dossier crée une ligne."
+                    ],
+                    [
+                      "ENF-016",
+                      "Accès exceptionnel du support : ticket, autorisation d'un administrateur d'équipe, durée limitée, journal visible par l'équipe.",
+                      "Sans autorisation, aucune lecture de donnée de santé par le support (test)."
+                    ],
+                    [
+                      "ENF-017",
+                      "Chiffrement des champs de santé au niveau applicatif (algorithme à l'état de l'art), clés par équipe, rotation possible, gardées à Tahiti ; recherche d'un patient maintenue.",
+                      "Sauvegarde et base lues sans clé : aucune donnée de santé en clair ; ENF-001 respectée."
+                    ],
+                    [
+                      "ENF-018",
+                      "Chiffrement en transit (TLS) et au repos (volumes, sauvegardes, exports) ; en-têtes de sécurité, protection contre le rejeu et les requêtes intersites.",
+                      "Scan de configuration sans défaut critique."
+                    ],
+                    [
+                      "ENF-019",
+                      "Exposition minimale : les comptes externes (secrétaires de chirurgien) et le questionnaire patient n'ouvrent aucun accès au reste du système ; leur chemin d'accès (Internet, relais sans stockage, réseau des cliniques) est arrêté avec l'architecture.",
+                      "Test d'intrusion avant ouverture."
+                    ],
+                    [
+                      "ENF-020",
+                      "Revue de sécurité indépendante avant production (type OWASP ASVS niveau 2) ; correctifs critiques sous 7 jours.",
+                      "Rapport sans vulnérabilité critique ou haute ouverte."
+                    ]
+                  ]
+                }
+              ]
+            }
+          ],
+          "questions": [
+            {
+              "id": "cdc-acces",
+              "type": "validation",
+              "intitule": "Contenu du module",
+              "aide": "Je garde ce contenu tel quel, ou vous voulez autre chose."
+            },
+            {
+              "id": "dep-acces",
+              "type": "choix-unique",
+              "intitule": "Pour commencer",
+              "options": [
+                {
+                  "id": "indispensable",
+                  "libelle": "Indispensable pour commencer à utiliser Preopia"
+                },
+                {
+                  "id": "peut-attendre",
+                  "libelle": "Peut attendre la fin de la V1"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "g-fonctionnement",
+          "titre": "Fonctionnement",
+          "blocs": [
+            {
+              "type": "liste",
+              "items": [
+                "serveur principal en ligne et un serveur de secours par clinique, qui prend le relais si internet coupe ;",
+                "saisies gardées sur le poste si le lien avec le serveur tombe, puis renvoyées ;",
+                "sauvegardes chiffrées en trois copies, restaurations testées ;",
+                "postes Windows ou Mac avec un navigateur récent, et iPad ;",
+                "support aux heures de Tahiti, mises à jour en dehors des heures de bloc ;",
+                "fonctions d'intelligence artificielle désactivées en V1."
+              ]
+            },
+            {
+              "type": "depliant",
+              "titre": "Exigences détaillées (31)",
+              "blocs": [
+                {
+                  "type": "tableau",
+                  "colonnes": [
+                    "N°",
+                    "Exigence",
+                    "Critère de recette"
+                  ],
+                  "lignes": [
+                    [
+                      "ENF-001",
+                      "Temps de réponse local, serveur et postes sur le même réseau local.",
+                      "p95 des actions de saisie ≤ 200 ms ; ouverture d'un dossier ≤ 1 s ; recherche ≤ 1 s ; PDF ≤ 3 s. Test de charge avec chiffrement actif."
+                    ],
+                    [
+                      "ENF-002",
+                      "Capacité : au moins 400 000 enregistrements, 15 utilisateurs simultanés, tenue à trois fois la charge nominale.",
+                      "Les critères d'ENF-001 tiennent à 45 utilisateurs sur le jeu synthétique."
+                    ],
+                    [
+                      "ENF-003",
+                      "Coupure de la liaison internationale : aucune fonction clinique ne change. Seuls la réplication hors site, le support à distance et les mises à jour sont différés ; un indicateur signale un retard de réplication de plus de 24 h. Quand le serveur principal est hors du territoire, la continuité repose sur le serveur local de secours (ENF-008) ; les fonctions d'IA en sont exclues.",
+                      "Coupure simulée de 72 h : tous les scénarios de recette passent (hors fonctions d'IA, ENF-008) ; alerte déclenchée."
+                    ],
+                    [
+                      "ENF-004",
+                      "Coupure entre un poste et le serveur : file de saisie locale chiffrée, rejeu automatique au retour, planning et dossiers des patients des 48 prochaines heures préchargés sur chaque poste et tablette.",
+                      "Coupure de 2 h : saisie et lecture possibles ; 0 saisie perdue au rejeu."
+                    ],
+                    [
+                      "ENF-005",
+                      "Serveur indisponible : « dossier de secours » en lecture seule sur tablette (planning du jour, allergies, dernière CPA) et feuilles papier vierges imprimables (EF-120). Dernier recours, après le serveur local de secours (ENF-008) ; le double papier de la feuille de consultation (EF-056) en fait partie.",
+                      "Serveur éteint : le dossier de secours s'ouvre ; le papier couvre la feuille per-op et les prescriptions."
+                    ],
+                    [
+                      "ENF-006",
+                      "Aucune perte silencieuse en cas d'écritures concurrentes : les deux versions sont conservées et la résolution est humaine.",
+                      "Édition simultanée en mode dégradé : les deux versions sont visibles et exportées."
+                    ],
+                    [
+                      "ENF-007",
+                      "Les données non synchronisées sont signalées en permanence, avec leur ancienneté ; le stockage d'un navigateur (iPad en particulier) peut être purgé par le système, il n'est donc jamais la seule copie durable.",
+                      "Données non synchronisées depuis plus de 4 h : bandeau et alerte à l'administrateur."
+                    ],
+                    [
+                      "ENF-008",
+                      "« Web d'abord, secours local ». Le serveur principal est en ligne. Chaque clinique dispose d'un serveur local de secours qui sauvegarde les données du serveur principal et prend le relais pour la brique principale (identité, consultation, documents ; périmètre exact à fixer) en cas de coupure. Les fonctions d'IA, futures et appuyées sur des API externes, sont indisponibles pendant la coupure (EF-200). Le retour au serveur principal ne perd aucune saisie faite sur le serveur de secours et applique ENF-006 en cas d'écritures concurrentes. Aucune valeur chiffrée (délai de bascule, retard de sauvegarde) n'est fixée ici.",
+                      "Serveur principal coupé en recette : la consultation, la recherche d'un patient et l'impression de la feuille de consultation (EF-056) restent possibles sur le serveur de secours ; une fonction d'IA activée annonce son indisponibilité ; au retour, 0 saisie perdue et les conflits sont listés (ENF-006)."
+                    ],
+                    [
+                      "ENF-030",
+                      "Sauvegardes 3-2-1 : trois copies (production, copie locale sur un autre support, copie chiffrée hors site chez un hébergeur de niveau HDS en métropole), deux types de support, une copie hors ligne contre les rançongiciels. Clés gardées à Tahiti.",
+                      "Inventaire daté des quatre copies ; copie hors site déchiffrable avec les seules clés de Tahiti."
+                    ],
+                    [
+                      "ENF-031",
+                      "RPO au plus 15 min, RTO au plus 4 h (hypothèses non sourcées).",
+                      "Mesurés lors d'un test de restauration complète."
+                    ],
+                    [
+                      "ENF-032",
+                      "Tests de restauration : partiel chaque trimestre, complet chronométré chaque année ; procès-verbal.",
+                      "Procès-verbaux disponibles."
+                    ],
+                    [
+                      "ENF-033",
+                      "PRA écrit pour : coupure internationale, coupure électrique (arrêt propre sur onduleur), panne serveur, cyclone, rançongiciel ; connectivité de secours à étudier (à vérifier).",
+                      "Chaque scénario est exercé une fois avant la bascule."
+                    ],
+                    [
+                      "ENF-050",
+                      "Navigateurs : les deux dernières versions majeures de Chrome, Edge, Firefox et Safari. Parc réel à inventorier.",
+                      "Suite de recette passée sur chacun."
+                    ],
+                    [
+                      "ENF-051",
+                      "iPad : les deux dernières versions majeures d'iPadOS, Safari, paysage et portrait, saisie tactile.",
+                      "Scénarios EF-073 et EF-121 passés sur l'iPad de référence."
+                    ],
+                    [
+                      "ENF-052",
+                      "Accessibilité visée : WCAG 2.1 niveau AA (contraste, clavier, étiquettes, taille des cibles) ; thème lisible en salle sombre.",
+                      "Audit automatisé sans erreur AA ; revue manuelle des écrans de saisie."
+                    ],
+                    [
+                      "ENF-053",
+                      "Interface en français, textes externalisés pour une traduction ultérieure ; caractères polynésiens acceptés partout (Unicode).",
+                      "Un nom avec ʻokina et macrons se saisit, s'imprime (A4, A3) et s'exporte sans altération."
+                    ],
+                    [
+                      "ENF-060",
+                      "Journaux techniques et télémétrie sans donnée de santé ni identité.",
+                      "Revue automatique des journaux : 0 champ clinique ou nominatif."
+                    ],
+                    [
+                      "ENF-061",
+                      "Métriques et alertes : latence, erreurs, file locale, retard de réplication, succès des sauvegardes, espace disque, expiration des certificats.",
+                      "Chaque indicateur alerte lors d'un test de panne simulée."
+                    ],
+                    [
+                      "ENF-062",
+                      "Support et exploitation : plages de support en heure de Tahiti (UTC−10, 11 à 12 h de décalage avec Paris), astreinte, fenêtres de mise à jour hors heures de bloc.",
+                      "Engagements écrits au contrat."
+                    ],
+                    [
+                      "ENF-063",
+                      "Mises à jour sans perte de données, migrations testées sur copie, version affichée, retour arrière documenté.",
+                      "Une montée de version sur le jeu synthétique conserve 100 % des données."
+                    ],
+                    [
+                      "ENF-070",
+                      "Loi 78-17 applicable en Polynésie (art. 125-126, probable) et RGPD respecté comme si applicable ; pas de formalité préalable pour le dossier de soins (probable) ; registre des traitements ; AIPD avant mise en production et avant la reprise (probable) ; DPO : à vérifier.",
+                      "AIPD signée par le responsable de traitement avant la bascule."
+                    ],
+                    [
+                      "ENF-071",
+                      "Contrat de sous-traitance (art. 28) : instruction documentée, confidentialité, sécurité, sous-traitants ultérieurs autorisés, assistance, restitution ou suppression, notification de violation.",
+                      "Annexe au contrat signée avant toute donnée réelle."
+                    ],
+                    [
+                      "ENF-072",
+                      "Conservation : 20 ans comme durée plancher (R.1112-7 non étendu à la PF : prudence ; règle locale à vérifier), aucune purge automatique, durée et source documentées.",
+                      "Aucune suppression physique de dossier clinique par l'application."
+                    ],
+                    [
+                      "ENF-073",
+                      "Aucune finalité propre de l'éditeur sur les données patient (amélioration du produit, entraînement de modèles, statistiques non anonymisées) sauf accord exprès et distinct.",
+                      "Clause au contrat ; télémétrie auditée."
+                    ],
+                    [
+                      "ENF-074",
+                      "Développement et tests sur données synthétiques uniquement ; données réelles seulement dans l'environnement de reprise et de production, accès nominatifs.",
+                      "Aucun jeu de données réelles hors de ces environnements."
+                    ],
+                    [
+                      "ENF-075",
+                      "Destination documentée : « documentation, traçabilité, partage », sans promesse d'aide au diagnostic ou à la prescription, dans l'interface, la notice et la communication.",
+                      "Revue des textes avant livraison."
+                    ],
+                    [
+                      "ENF-076",
+                      "Développement « dans une logique HDS » : le logiciel est conçu pour pouvoir être hébergé chez un hébergeur de données de santé (ENF-081, position par défaut au niveau équivalent HDS v2), sans que cela vaille engagement de certification. Le format FHIR R4 sert à la portabilité (EF-161, ENF-082). Statut réglementaire inchangé : l'obligation de certificat HDS ne paraît pas s'appliquer en Polynésie française au titre du CSP (recherche réglementaire du projet), la règle locale n'est pas confirmée.",
+                      "Revue de conception : chaque point de la position par défaut de la recherche réglementaire du projet (clauses de R. 1111-11, stockage en EEE ou en PF chiffré, cartographie des transferts) a sa réponse écrite ; export FHIR validé (EF-161)."
+                    ],
+                    [
+                      "ENF-080",
+                      "Déployable sur un serveur unique (conteneurs) et sur un hébergeur, sans service managé propriétaire ; installation reproductible par script.",
+                      "Installation à blanc sur deux environnements différents, résultat identique."
+                    ],
+                    [
+                      "ENF-081",
+                      "Choix d'hébergement fondé sur mesures : RTT de chaque site vers Tahiti, la métropole et la côte ouest des États-Unis sur une semaine, deux devis locaux au moins, état de la règle polynésienne sur l'hébergement (à vérifier). Position par défaut tant que la règle est inconnue : niveau équivalent HDS v2.",
+                      "Dossier de décision signé avant le déploiement."
+                    ],
+                    [
+                      "ENF-082",
+                      "Standards ouverts (FHIR R4, CSV, PDF, TLS, TOTP) ; documentation d'exploitation et d'architecture livrée.",
+                      "Un tiers installe et exploite avec cette seule documentation."
+                    ],
+                    [
+                      "EF-200",
+                      "Cadre commun : interrupteur par équipe, désactivé par défaut ; traitement local ou service au statut HDS ou équivalent démontré ; aucune donnée nominative vers un modèle externe non autorisé ; validation humaine ligne par ligne ; journal des appels. Les futures fonctions d'IA passeraient par des API externes : elles sont indisponibles en coupure (ENF-008), l'interface le dit et chaque fonction garde un repli sans IA (EF-212).",
+                      "Aucune fonction d'IA accessible par défaut ; activation tracée ; en coupure simulée, une fonction d'IA activée annonce son indisponibilité sans bloquer la consultation."
+                    ]
+                  ]
+                }
+              ]
+            }
+          ],
+          "questions": [
+            {
+              "id": "cdc-fonctionnement",
+              "type": "validation",
+              "intitule": "Contenu du module",
+              "aide": "Je garde ce contenu tel quel, ou vous voulez autre chose."
+            },
+            {
+              "id": "dep-fonctionnement",
+              "type": "choix-unique",
+              "intitule": "Pour commencer",
+              "options": [
+                {
+                  "id": "indispensable",
+                  "libelle": "Indispensable pour commencer à utiliser Preopia"
+                },
+                {
+                  "id": "peut-attendre",
+                  "libelle": "Peut attendre la fin de la V1"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "g-manques",
+          "titre": "Manques",
+          "questions": [
+            {
+              "id": "cdc-manques",
+              "type": "texte-long",
+              "intitule": "Fonctions absentes de la V1",
+              "aide": "Ce qui vous manque par rapport à FileMaker ou à votre pratique, et qui devrait être dans la V1."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "versions-suivantes",
+      "titre": "Versions suivantes",
+      "blocs": [
+        {
+          "type": "paragraphe",
+          "texte": "Ces fonctions ne sont pas dans la V1. Elles viendront ensuite, dans l'ordre que vous choisirez :"
+        },
+        {
+          "type": "liste",
+          "items": [
+            "le questionnaire rempli par le patient avant la consultation ;",
+            "les recommandations sur les anticoagulants, consultables, la consigne restant choisie par le médecin ;",
+            "le passeport antithrombotique remis au patient ;",
+            "l'import du programme opératoire de la clinique ;",
+            "les réglages des listes par les administrateurs eux-mêmes ;",
+            "l'aide à la décision : durées d'arrêt proposées par règle, scores calculés, tri des patients du jour ;",
+            "la lecture de la photo d'ordonnance, les rappels par SMS, la surveillance complète en SSPI, la cotation ;",
+            "plus tard, la capture des moniteurs au bloc et la dictée."
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "f-priorites",
+          "type": "texte-court",
+          "intitule": "Ordre des évolutions",
+          "aide": "Ce que vous voulez en premier après la V1."
+        }
+      ]
+    },
+    {
+      "id": "mise-en-service",
+      "titre": "Mise en service",
+      "blocs": [
+        {
+          "type": "liste",
+          "items": [
+            "recette : chaque fonction vérifiée avec vous sur des données fictives ;",
+            "répétition : reprise de l'historique sur une copie des bases, contrôle des comptes et des doublons ;",
+            "pilote : un médecin pendant deux semaines, FileMaker gardé en lecture seule ;",
+            "bascule : toute l'équipe passe sur Preopia, FileMaker reste consultable en archive."
+          ]
+        },
+        {
+          "type": "paragraphe",
+          "texte": "Pendant tout le développement, je vous montre l'avancement en visio toutes les deux semaines, et vos remarques sont reprises à l'étape suivante."
+        },
+        {
+          "type": "encadre",
+          "titre": "Prérequis",
+          "texte": "La base de Mamao et les sauvegardes du NAS ; un médecin référent qui valide les modèles et les listes ; un contact informatique par clinique ; le consentement et l'information patient à jour."
+        }
       ],
       "questions": [
         {
@@ -477,7 +1925,7 @@
           "id": "f-pilote",
           "type": "texte-court",
           "intitule": "Médecin pilote",
-          "aide": "Qui consulte en premier dans Preopia ? Dès la fin de l'étape 3, ou seulement à la fin ?"
+          "aide": "Qui consulte en premier dans Preopia ?"
         },
         {
           "id": "f-demo",
@@ -485,12 +1933,6 @@
           "intitule": "Créneau des démonstrations",
           "aide": "Un jour fixe toutes les deux semaines, en début de matinée à Tahiti (fin d'après-midi à Paris).",
           "exemple": "Le jeudi à 7 h"
-        },
-        {
-          "id": "f-priorites",
-          "type": "texte-court",
-          "intitule": "Ordre des évolutions",
-          "aide": "Ce que vous voulez en premier après la version 1."
         }
       ]
     },
@@ -498,9 +1940,18 @@
       "id": "conditions",
       "titre": "Conditions",
       "blocs": [
-        { "type": "paragraphe", "texte": "Comme annoncé en réunion, je vous propose le même fonctionnement qu'avec SOS MEDEVAC : un forfait mensuel de 3 000 €, qui peut monter jusqu'à 3 500 € une fois les serveurs en service (je vous refacture leur coût)." },
-        { "type": "paragraphe", "texte": "Le forfait couvre le développement jusqu'à la version finale, puis la maintenance et les améliorations au fil de l'eau. Une fonction importante et nouvelle (par exemple une application qui écoute la consultation et remplit les champs) ferait l'objet d'un devis à part." },
-        { "type": "paragraphe", "texte": "Vos données vous appartiennent : vous pouvez les exporter en entier à tout moment. Le devis vous parvient dans les prochains jours, pour une facturation à partir de décembre." }
+        {
+          "type": "paragraphe",
+          "texte": "Comme annoncé en réunion, je vous propose le même fonctionnement qu'avec SOS MEDEVAC : un forfait mensuel de 3 000 €, qui peut monter jusqu'à 3 500 € une fois les serveurs en service (je vous refacture leur coût)."
+        },
+        {
+          "type": "paragraphe",
+          "texte": "Le forfait couvre le développement jusqu'à la version finale, puis la maintenance et les améliorations au fil de l'eau. Une fonction importante et nouvelle (par exemple une application qui écoute la consultation et remplit les champs) ferait l'objet d'un devis à part."
+        },
+        {
+          "type": "paragraphe",
+          "texte": "Vos données vous appartiennent : vous pouvez les exporter en entier à tout moment. Le devis vous parvient dans les prochains jours, pour une facturation à partir de décembre."
+        }
       ],
       "questions": [
         {
@@ -508,9 +1959,18 @@
           "type": "choix-unique",
           "intitule": "Avis de l'équipe sur le forfait",
           "options": [
-            { "id": "accord", "libelle": "D'accord" },
-            { "id": "questions", "libelle": "D'accord sur le principe, avec des questions" },
-            { "id": "pas-encore", "libelle": "Pas encore discuté" }
+            {
+              "id": "accord",
+              "libelle": "D'accord"
+            },
+            {
+              "id": "questions",
+              "libelle": "D'accord sur le principe, avec des questions"
+            },
+            {
+              "id": "pas-encore",
+              "libelle": "Pas encore discuté"
+            }
           ],
           "commentaire": true
         },
