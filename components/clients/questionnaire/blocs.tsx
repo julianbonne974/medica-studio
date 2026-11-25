@@ -1,10 +1,10 @@
 "use client";
 
-import { Maximize2 } from "lucide-react";
+import { ChevronDown, Maximize2 } from "lucide-react";
 import type { Bloc } from "@/lib/clients/questionnaire-modele";
 import type { Agrandir } from "./champs";
 
-/** Contenu à lire d'une section : paragraphes, listes, images, tableaux, encadrés. */
+/** Contenu à lire d'une section : paragraphes, listes, images, tableaux, encadrés, dépliants. */
 export function Blocs({
   blocs,
   urlImage,
@@ -18,6 +18,24 @@ export function Blocs({
     <div className="space-y-5">
       {blocs.map((b, i) => {
         switch (b.type) {
+          case "depliant":
+            return (
+              <details
+                key={i}
+                className="group/depliant border border-zinc-200 bg-white open:border-zinc-300 dark:border-zinc-800 dark:bg-zinc-950 dark:open:border-zinc-700"
+              >
+                <summary className="flex min-h-12 cursor-pointer list-none items-center justify-between gap-4 px-4 py-3 font-medium text-zinc-900 transition-colors hover:bg-zinc-50 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-emerald-600 dark:text-zinc-100 dark:hover:bg-zinc-900 [&::-webkit-details-marker]:hidden">
+                  <span className="text-pretty">{b.titre}</span>
+                  <ChevronDown
+                    className="size-4 shrink-0 text-zinc-500 transition-transform duration-200 group-open/depliant:rotate-180"
+                    aria-hidden="true"
+                  />
+                </summary>
+                <div className="border-t border-zinc-200 px-4 py-5 dark:border-zinc-800">
+                  <Blocs blocs={b.blocs} urlImage={urlImage} agrandir={agrandir} />
+                </div>
+              </details>
+            );
           case "paragraphe":
             return (
               <p key={i} className="max-w-[68ch] whitespace-pre-line text-pretty leading-relaxed text-zinc-700 dark:text-zinc-300">
@@ -58,8 +76,15 @@ export function Blocs({
             );
           case "tableau":
             return (
-              <div key={i} className="overflow-x-auto border border-zinc-200 dark:border-zinc-800">
-                <table className="w-full min-w-[32rem] border-collapse text-sm">
+              // Largeur minimale par colonne : sur téléphone, le tableau défile dans son cadre.
+              <div
+                key={i}
+                role="region"
+                aria-label={`Tableau : ${b.colonnes.join(", ")}`}
+                tabIndex={0}
+                className="overflow-x-auto overscroll-x-contain border border-zinc-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-600 dark:border-zinc-800"
+              >
+                <table className="w-full border-collapse text-sm" style={{ minWidth: `${b.colonnes.length * 9}rem` }}>
                   <thead className="bg-zinc-50 dark:bg-zinc-900">
                     <tr>
                       {b.colonnes.map((c, j) => (
@@ -79,7 +104,7 @@ export function Blocs({
                         {l.map((cellule, k) => (
                           <td
                             key={k}
-                            className={`px-3 py-2.5 align-top text-pretty ${k === 0 ? "font-medium text-zinc-900 dark:text-zinc-100" : "text-zinc-700 dark:text-zinc-300"}`}
+                            className={`px-3 py-2.5 align-top text-pretty break-words whitespace-pre-line ${k === 0 ? "font-medium text-zinc-900 dark:text-zinc-100" : "text-zinc-700 dark:text-zinc-300"}`}
                           >
                             {cellule}
                           </td>

@@ -6,12 +6,18 @@
 
 /* Contenu ------------------------------------------------------------------------- */
 
-export type Bloc =
+/** Blocs simples : ceux qu'un dépliant peut contenir. */
+export type BlocSimple =
   | { type: "paragraphe"; texte: string }
   | { type: "liste"; items: string[] }
   | { type: "image"; src: string; alt: string; legende?: string }
   | { type: "tableau"; colonnes: string[]; lignes: string[][] }
   | { type: "encadre"; titre?: string; texte: string };
+
+/** Dépliant : fermé par défaut, sans dépliant imbriqué. */
+export type BlocDepliant = { type: "depliant"; titre: string; blocs: BlocSimple[] };
+
+export type Bloc = BlocSimple | BlocDepliant;
 
 export type OptionChoix = { id: string; libelle: string };
 export type OptionVariante = { id: string; libelle: string; image: string; legende?: string };
@@ -59,12 +65,23 @@ export type Question =
   | QuestionVariantes
   | QuestionTableau;
 
+/** Groupe d'une section : intertitre, puis ses blocs et ses questions. */
+export type Groupe = {
+  id: string;
+  titre: string;
+  intro?: string;
+  blocs?: Bloc[];
+  questions?: Question[];
+};
+
 export type Section = {
   id: string;
   titre: string;
   intro?: string;
   blocs?: Bloc[];
   questions?: Question[];
+  /** rendus après les blocs et les questions propres de la section */
+  groupes?: Groupe[];
 };
 
 export type Questionnaire = {
@@ -125,10 +142,18 @@ export const BORNES = {
 
 /* Fonctions pures ----------------------------------------------------------------- */
 
-export function toutesLesQuestions(q: Questionnaire): { section: Section; question: Question }[] {
-  return q.sections.flatMap((section) =>
-    (section.questions ?? []).map((question) => ({ section, question })),
-  );
+/** Questions d'une section, dans l'ordre d'affichage : les siennes, puis celles de chaque groupe. */
+export function questionsDeSection(section: Section): { groupe?: Groupe; question: Question }[] {
+  return [
+    ...(section.questions ?? []).map((question) => ({ question })),
+    ...(section.groupes ?? []).flatMap((groupe) =>
+      (groupe.questions ?? []).map((question) => ({ groupe, question })),
+    ),
+  ];
+}
+
+export function toutesLesQuestions(q: Questionnaire): { section: Section; groupe?: Groupe; question: Question }[] {
+  return q.sections.flatMap((section) => questionsDeSection(section).map((x) => ({ section, ...x })));
 }
 
 const plein = (s: unknown) => typeof s === "string" && s.trim().length > 0;

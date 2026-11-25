@@ -7,6 +7,9 @@ import {
   AUCUNE,
   AUTRE,
   BORNES,
+  questionsDeSection,
+  toutesLesQuestions,
+  type Bloc,
   type DossierReponses,
   type Question,
   type Questionnaire,
@@ -130,7 +133,7 @@ function validerQuestionnaire(brut: unknown, slug: string, fichier: string): Que
   const idsQuestions = new Set<string>();
   (v.tableau(racine, "sections", "") as unknown[]).forEach((s, i) => {
     const cs = `sections[${i}]`;
-    const section = v.objet(s, cs, ["id", "titre", "intro", "blocs", "questions"]);
+    const section = v.objet(s, cs, ["id", "titre", "intro", "blocs", "questions", "groupes"]);
     v.identifiant(section, "id", cs, idsSections);
     v.texte(section, "titre", cs);
     v.texte(section, "intro", cs, true);
@@ -138,15 +141,35 @@ function validerQuestionnaire(brut: unknown, slug: string, fichier: string): Que
     (v.tableau(section, "questions", cs, true) ?? []).forEach((q, j) =>
       validerQuestion(v, q, `${cs}.questions[${j}]`, idsQuestions),
     );
+    // Groupes : identifiants uniques dans la section ; questions uniques dans tout le fichier.
+    const idsGroupes = new Set<string>();
+    (v.tableau(section, "groupes", cs, true) ?? []).forEach((g, j) => {
+      const cg = `${cs}.groupes[${j}]`;
+      const groupe = v.objet(g, cg, ["id", "titre", "intro", "blocs", "questions"]);
+      v.identifiant(groupe, "id", cg, idsGroupes);
+      v.texte(groupe, "titre", cg);
+      v.texte(groupe, "intro", cg, true);
+      (v.tableau(groupe, "blocs", cg, true) ?? []).forEach((b, k) => validerBloc(v, b, `${cg}.blocs[${k}]`));
+      (v.tableau(groupe, "questions", cg, true) ?? []).forEach((q, k) =>
+        validerQuestion(v, q, `${cg}.questions[${k}]`, idsQuestions),
+      );
+    });
   });
   return brut as Questionnaire;
 }
 
 type V = ReturnType<typeof validateur>;
 
-function validerBloc(v: V, brut: unknown, c: string) {
+function validerBloc(v: V, brut: unknown, c: string, dansDepliant = false) {
   const type = (brut as Obj)?.type;
   switch (type) {
+    case "depliant": {
+      if (dansDepliant) v.echec(`${c}.type`, "un dépliant ne peut pas contenir de dépliant");
+      const b = v.objet(brut, c, ["type", "titre", "blocs"]);
+      v.texte(b, "titre", c);
+      (v.tableau(b, "blocs", c) as unknown[]).forEach((x, i) => validerBloc(v, x, `${c}.blocs[${i}]`, true));
+      return;
+    }
     case "paragraphe": {
       v.texte(v.objet(brut, c, ["type", "texte"]), "texte", c);
       return;
@@ -185,7 +208,7 @@ function validerBloc(v: V, brut: unknown, c: string) {
       return;
     }
     default:
-      v.echec(`${c}.type`, `type de bloc inconnu « ${String(type)} » (paragraphe, liste, image, tableau, encadre)`);
+      v.echec(`${c}.type`, `type de bloc inconnu « ${String(type)} » (paragraphe, liste, image, tableau, encadre, depliant)`);
   }
 }
 
@@ -295,9 +318,16 @@ export function chargerQuestionnaire(slug: string): Chargement {
 /** Chemins d'images cités par le questionnaire (blocs et variantes) : seuls servis à l'administration. */
 export function imagesDuQuestionnaire(q: Questionnaire): Set<string> {
   const images = new Set<string>();
+  const blocs = (liste: Bloc[] = []) => {
+    for (const b of liste) {
+      if (b.type === "image") images.add(b.src);
+      if (b.type === "depliant") blocs(b.blocs);
+    }
+  };
   for (const s of q.sections) {
-    for (const b of s.blocs ?? []) if (b.type === "image") images.add(b.src);
-    for (const question of s.questions ?? []) {
+    blocs(s.blocs);
+    for (const g of s.groupes ?? []) blocs(g.blocs);
+    for (const { question } of questionsDeSection(s)) {
       if (question.image) images.add(question.image);
       if (question.type === "variantes") for (const o of question.options) images.add(o.image);
     }
@@ -435,7 +465,7 @@ function validerReponse(question: Question, brut: unknown): Reponse | null {
 /** Contrôle strict d'un envoi : la moindre valeur non prévue fait refuser l'ensemble. */
 export function validerReponses(q: Questionnaire, brut: unknown): Reponses {
   if (!brut || typeof brut !== "object" || Array.isArray(brut)) throw new ReponseRefusee("réponses : objet attendu");
-  const parId = new Map(q.sections.flatMap((s) => s.questions ?? []).map((x) => [x.id, x]));
+  const parId = new Map(toutesLesQuestions(q).map(({ question }) => [question.id, question]));
   const sortie: Reponses = {};
   for (const [id, valeur] of Object.entries(brut)) {
     const question = parId.get(id);
@@ -451,7 +481,7 @@ export function validerReponses(q: Questionnaire, brut: unknown): Reponses {
  * retirée, option renommée), seules les réponses encore valides sont rendues.
  */
 export function reponsesEncoreValides(q: Questionnaire, reponses: Reponses | undefined): Reponses {
-  const parId = new Map(q.sections.flatMap((s) => s.questions ?? []).map((x) => [x.id, x]));
+  const parId = new Map(toutesLesQuestions(q).map(({ question }) => [question.id, question]));
   const sortie: Reponses = {};
   for (const [id, valeur] of Object.entries(reponses ?? {})) {
     const question = parId.get(id);

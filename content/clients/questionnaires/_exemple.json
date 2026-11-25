@@ -19,7 +19,25 @@
         { "type": "liste", "items": ["La liste du jour s'ouvre au démarrage.", "Le jeûne s'exprime en heures avant l'intervention.", "Les allergies portent la réaction observée."] },
         { "type": "image", "src": "questions/schema-ecran.png", "alt": "Schéma de l'écran de consultation (exemple)", "legende": "Disposition discutée en séance." },
         { "type": "tableau", "colonnes": ["Sujet", "Décision", "Échéance"], "lignes": [["Liste du jour", "Ouverte au démarrage", "V4"], ["Jeûne", "En heures relatives", "V4"]] },
-        { "type": "encadre", "titre": "À noter", "texte": "Les maquettes restent remplies de données fictives." }
+        { "type": "encadre", "titre": "À noter", "texte": "Les maquettes restent remplies de données fictives." },
+        {
+          "type": "depliant",
+          "titre": "Détail des décisions, module par module",
+          "blocs": [
+            { "type": "paragraphe", "texte": "Tableau complet, à faire défiler sur téléphone." },
+            {
+              "type": "tableau",
+              "colonnes": ["Module", "Décision", "Raison donnée en séance", "Version", "Responsable"],
+              "lignes": [
+                ["Liste du jour", "Ouverte au démarrage, triée par heure d'intervention", "Le médecin commence toujours par elle", "V4", "Medica Studio"],
+                ["Allergies", "Réaction observée notée pour chaque allergie, liste de choix et texte libre", "Distinguer intolérance et allergie vraie", "V4", "Medica Studio"],
+                ["Jeûne", "Exprimé en heures avant l'intervention", "L'heure de convocation n'est pas connue du médecin", "V4", "Secrétariat"]
+              ]
+            },
+            { "type": "liste", "items": ["Point resté ouvert : impression recto verso.", "Point resté ouvert : signature numérisée."] },
+            { "type": "encadre", "texte": "Ce détail n'appelle pas de réponse." }
+          ]
+        }
       ]
     },
     {
@@ -46,6 +64,47 @@
           ],
           "aucune": true,
           "commentaire": true
+        }
+      ]
+    },
+    {
+      "id": "cahier",
+      "titre": "Cahier des charges de la V1",
+      "intro": "Un groupe par module : lisez ce qui est prévu, puis dites si cela vous convient.",
+      "groupes": [
+        {
+          "id": "consultation",
+          "titre": "Module consultation",
+          "intro": "Ce que la V1 couvre pour la consultation.",
+          "blocs": [
+            {
+              "type": "depliant",
+              "titre": "Ce qui est prévu",
+              "blocs": [
+                { "type": "liste", "items": ["Bandeau patient toujours visible.", "Antécédents groupés par appareil.", "Conclusion avec état général."] },
+                { "type": "image", "src": "questions/schema-ecran.png", "alt": "Écran de consultation prévu (image fictive)" }
+              ]
+            }
+          ],
+          "questions": [
+            { "id": "q-cdc-consultation", "type": "validation", "intitule": "Le périmètre du module consultation vous convient-il ?" }
+          ]
+        },
+        {
+          "id": "impression",
+          "titre": "Module impression",
+          "blocs": [
+            { "type": "depliant", "titre": "Ce qui est prévu", "blocs": [{ "type": "paragraphe", "texte": "Impression du lot de la veille avec la liste de ce qui manque." }] }
+          ],
+          "questions": [
+            {
+              "id": "q-cdc-impression",
+              "type": "choix-unique",
+              "intitule": "Quand imprimez-vous le lot ?",
+              "options": [{ "id": "veille", "libelle": "La veille au soir" }, { "id": "matin", "libelle": "Le matin même" }],
+              "commentaire": true
+            }
+          ]
         }
       ]
     },

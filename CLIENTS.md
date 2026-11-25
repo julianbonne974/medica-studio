@@ -115,7 +115,8 @@ toute autre clé inconnue est refusée (pour attraper les fautes de frappe).
         { "type": "liste", "items": ["…"] },
         { "type": "image", "src": "questions/fichier.png", "alt": "…", "legende": "…" },
         { "type": "tableau", "colonnes": ["…"], "lignes": [["…", "…"]] },
-        { "type": "encadre", "titre": "…", "texte": "…" }
+        { "type": "encadre", "titre": "…", "texte": "…" },
+        { "type": "depliant", "titre": "…", "blocs": [ … ] }   // fermé par défaut, sans dépliant imbriqué
       ],
       "questions": [                                      // facultatif
         { "id": "q-…", "type": "choix-unique" | "choix-multiple", "intitule": "…", "aide": "…",
@@ -128,11 +129,26 @@ toute autre clé inconnue est refusée (pour attraper les fautes de frappe).
         { "id": "q-…", "type": "tableau-saisie", "intitule": "…", "aide": "…",
           "colonnes": [{ "id": "nom", "libelle": "Nom", "type": "texte" | "tel" | "choix", "options": ["…"] }],
           "lignesInitiales": 3 }
+      ],
+      "groupes": [                                        // facultatif, rendus après blocs et questions
+        { "id": "consultation", "titre": "…", "intro": "…", "blocs": [ … ], "questions": [ … ] }
       ]
     }
   ]
 }
 ```
+
+- **Groupes** : une section peut regrouper ses questions sous des intertitres. Chaque groupe
+  affiche son titre, son intro, ses blocs puis ses questions, après les blocs et les questions
+  propres de la section. Les identifiants de groupe sont uniques dans la section, ceux de
+  question dans tout le fichier. Le sommaire reste au niveau des sections (son compteur inclut
+  les questions des groupes) ; l'administration affiche le groupe sous la section, et la colonne
+  « Section » du CSV vaut « Section › Groupe ».
+- **Dépliant** : `{ "type": "depliant", "titre", "blocs" }`, fermé par défaut (`<details>`,
+  ouvert au clic, à Entrée ou à Espace). Il contient des paragraphes, listes, tableaux, encadrés
+  et images, pas de dépliant. Les tableaux prennent environ 9 rem par colonne au moins : sur
+  téléphone, ils défilent horizontalement dans leur cadre, et le texte des cellules revient à la
+  ligne.
 
 - Toute question accepte aussi `"image": "questions/….png"` et `"legende": "…"` : une
   illustration affichée sous l'intitulé et l'aide, agrandissable au clic, légende dessous.

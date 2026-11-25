@@ -44,12 +44,12 @@ export async function GET(request: NextRequest) {
     lignes = [
       ["Répondant", "Section", "Question", "Réponse", "Autre", "Commentaire", "Modifié le (Paris)", "Dernier envoi (Paris)"],
       ...dossiers.flatMap((d) =>
-        toutesLesQuestions(questionnaire).map(({ section, question }) => {
+        toutesLesQuestions(questionnaire).map(({ section, groupe, question }) => {
           const l = reponseLisible(question, d.reponses[question.id]);
           const envoi = d.envois.at(-1);
           return [
             d.prenom,
-            section.titre,
+            groupe ? `${section.titre} › ${groupe.titre}` : section.titre,
             question.intitule,
             l.reponse,
             l.autre,

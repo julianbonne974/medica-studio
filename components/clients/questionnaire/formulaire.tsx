@@ -5,6 +5,7 @@ import { CircleAlert, CircleCheck, Send, X } from "lucide-react";
 import {
   compterRepondues,
   estRepondue,
+  questionsDeSection,
   toutesLesQuestions,
   type Question,
   type Questionnaire,
@@ -213,7 +214,11 @@ export function FormulaireQuestionnaire({
     calculer();
     window.addEventListener("scroll", surDefilement, { passive: true });
     window.addEventListener("resize", surDefilement);
+    // Images chargées, dépliant ouvert : la page change de hauteur sans défilement.
+    const taille = new ResizeObserver(surDefilement);
+    taille.observe(document.body);
     return () => {
+      taille.disconnect();
       cancelAnimationFrame(image);
       window.removeEventListener("scroll", surDefilement);
       window.removeEventListener("resize", surDefilement);
@@ -287,6 +292,19 @@ export function FormulaireQuestionnaire({
     }
   };
 
+  const question = (q: Question) => (
+    <CadreQuestion
+      key={q.id}
+      question={q}
+      numero={numeros.get(q.id) ?? 0}
+      reponse={reponses[q.id]}
+      urlImage={urlImage}
+      agrandir={setImage}
+    >
+      {champ(q)}
+    </CadreQuestion>
+  );
+
   return (
     <>
       <div className="mt-14 grid gap-12 lg:grid-cols-[15rem_minmax(0,1fr)] lg:gap-16 xl:grid-cols-[17rem_minmax(0,1fr)]">
@@ -296,7 +314,7 @@ export function FormulaireQuestionnaire({
               <h2 className="text-sm font-medium uppercase tracking-wider text-zinc-900 dark:text-zinc-100">Sommaire</h2>
               <ol className="mt-4 border-l border-zinc-200 dark:border-zinc-800">
                 {questionnaire.sections.map((s) => {
-                  const qs = s.questions ?? [];
+                  const qs = questionsDeSection(s).map(({ question }) => question);
                   const faites = qs.filter((q) => estRepondue(q, reponses[q.id])).length;
                   const ici = active === s.id;
                   return (
@@ -372,17 +390,29 @@ export function FormulaireQuestionnaire({
                 )}
               </div>
               {s.blocs && s.blocs.length > 0 && <Blocs blocs={s.blocs} urlImage={urlImage} agrandir={setImage} />}
-              {(s.questions ?? []).map((q) => (
-                <CadreQuestion
-                  key={q.id}
-                  question={q}
-                  numero={numeros.get(q.id) ?? 0}
-                  reponse={reponses[q.id]}
-                  urlImage={urlImage}
-                  agrandir={setImage}
+              {(s.questions ?? []).map(question)}
+              {(s.groupes ?? []).map((g) => (
+                <div
+                  key={g.id}
+                  id={`g-${s.id}-${g.id}`}
+                  role="group"
+                  aria-labelledby={`t-${s.id}-${g.id}`}
+                  className="scroll-mt-32 space-y-8 pt-6"
                 >
-                  {champ(q)}
-                </CadreQuestion>
+                  <div className="space-y-2.5 border-t-2 border-zinc-900 pt-6 dark:border-zinc-100">
+                    <h3
+                      id={`t-${s.id}-${g.id}`}
+                      className="text-2xl font-medium tracking-tight text-balance text-zinc-900 dark:text-zinc-100"
+                    >
+                      {g.titre}
+                    </h3>
+                    {g.intro && (
+                      <p className="max-w-[68ch] text-pretty leading-relaxed text-zinc-600 dark:text-zinc-400">{g.intro}</p>
+                    )}
+                  </div>
+                  {g.blocs && g.blocs.length > 0 && <Blocs blocs={g.blocs} urlImage={urlImage} agrandir={setImage} />}
+                  {(g.questions ?? []).map(question)}
+                </div>
               ))}
             </section>
           ))}
