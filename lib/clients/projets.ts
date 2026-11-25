@@ -48,6 +48,27 @@ export function slugValide(slug: string): boolean {
   return SLUG.test(slug) && !RESERVES.has(slug);
 }
 
+/**
+ * Projet d'essai, en développement seulement (`next dev`) : le slug « exemple » lit
+ * `content/clients/_exemple.json`, `content/clients/questionnaires/_exemple.json` et
+ * `private/clients/_exemple/`. Un fichier dont le nom commence par « _ » n'est jamais chargé en
+ * production (`next build` / `next start` posent NODE_ENV=production).
+ */
+export const SLUG_ESSAI = "exemple";
+
+export function estProjetEssai(slug: string): boolean {
+  return process.env.NODE_ENV === "development" && slug === SLUG_ESSAI;
+}
+
+/** Nom de fichier (sans extension) ou de dossier qui porte le projet. */
+export function nomFichierProjet(slug: string): string {
+  return estProjetEssai(slug) ? `_${slug}` : slug;
+}
+
+export function racinePrototypes(slug: string): string {
+  return path.join(RACINE_PROTOTYPES, nomFichierProjet(slug));
+}
+
 export function variableCode(slug: string): string {
   return `CLIENT_CODE_${slug.toUpperCase().replace(/-/g, "_")}`;
 }
@@ -60,7 +81,7 @@ export function empreinteConfiguree(slug: string): string | undefined {
 export function chargerProjet(slug: string): ProjetClient | null {
   if (!slugValide(slug)) return null;
   try {
-    const brut = fs.readFileSync(path.join(RACINE_CONTENU, `${slug}.json`), "utf8");
+    const brut = fs.readFileSync(path.join(RACINE_CONTENU, `${nomFichierProjet(slug)}.json`), "utf8");
     const projet = JSON.parse(brut) as ProjetClient;
     if (projet.slug !== slug) return null;
     return projet;
@@ -77,7 +98,7 @@ export function listerProjets(): ProjetClient[] {
     return [];
   }
   return fichiers
-    .map((f) => chargerProjet(f.slice(0, -5)))
+    .map((f) => chargerProjet(f === `_${SLUG_ESSAI}.json` ? SLUG_ESSAI : f.slice(0, -5)))
     .filter((p): p is ProjetClient => p !== null)
     .sort((a, b) => a.nom.localeCompare(b.nom, "fr"));
 }

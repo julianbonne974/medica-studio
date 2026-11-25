@@ -1,0 +1,10 @@
+{
+  "slug": "exemple",
+  "nom": "Projet d'essai",
+  "sousTitre": "Développement seulement : jamais chargé en production",
+  "description": "Projet fictif qui sert à essayer l'espace client en local (next dev). Le préfixe « _ » du fichier l'exclut de toute version déployée.",
+  "mentionDonnees": "Données fictives.",
+  "versions": [],
+  "scenarios": [],
+  "consignes": []
+}
