@@ -1,6 +1,8 @@
 import type { NextRequest } from "next/server";
 import { chargerProjet } from "@/lib/clients/projets";
 import { listerAcces, listerRetours } from "@/lib/clients/journal";
+import { chargerQuestionnaire, listerDossiers } from "@/lib/clients/questionnaires";
+import { reponseLisible, toutesLesQuestions } from "@/lib/clients/questionnaire-modele";
 import { COOKIE_ADMIN, CHEMIN_ADMIN, rediriger, sessionAdmin } from "@/lib/clients/session";
 
 export const dynamic = "force-dynamic";
@@ -26,12 +28,40 @@ export async function GET(request: NextRequest) {
 
   const q = request.nextUrl.searchParams;
   const slug = q.get("projet") ?? "";
-  const type = q.get("type") === "retours" ? "retours" : "acces";
+  const demande = q.get("type");
+  const type = demande === "retours" || demande === "questionnaire" ? demande : "acces";
   const projet = chargerProjet(slug);
   if (!projet) return new Response("Projet inconnu", { status: 404 });
   const filtre = { du: q.get("du") ?? undefined, au: q.get("au") ?? undefined, limite: 10000 };
 
   let lignes: string[][];
+  if (type === "questionnaire") {
+    // Une ligne par répondant et par question, réponses vides comprises ; pas de filtre de dates.
+    const chargement = chargerQuestionnaire(slug);
+    if (chargement.etat !== "ok") return new Response("Questionnaire absent ou invalide", { status: 404 });
+    const questionnaire = chargement.questionnaire;
+    const dossiers = await listerDossiers(slug, questionnaire);
+    lignes = [
+      ["Répondant", "Section", "Question", "Réponse", "Autre", "Commentaire", "Modifié le (Paris)", "Dernier envoi (Paris)"],
+      ...dossiers.flatMap((d) =>
+        toutesLesQuestions(questionnaire).map(({ section, question }) => {
+          const l = reponseLisible(question, d.reponses[question.id]);
+          const envoi = d.envois.at(-1);
+          return [
+            d.prenom,
+            section.titre,
+            question.intitule,
+            l.reponse,
+            l.autre,
+            l.commentaire,
+            dateParis(d.majLe),
+            envoi ? dateParis(envoi) : "",
+          ];
+        }),
+      ),
+    ];
+    return csv(lignes, `${slug}-questionnaire-${questionnaire.id}.csv`);
+  }
   if (type === "acces") {
     const acces = await listerAcces(slug, filtre);
     lignes = [
@@ -56,14 +86,18 @@ export async function GET(request: NextRequest) {
     ];
   }
 
-  // Point-virgule et BOM : le fichier s'ouvre tel quel dans Excel en français.
-  const csv = "﻿" + lignes.map((l) => l.map(cellule).join(";")).join("\r\n") + "\r\n";
   const periode =
     [filtre.du, filtre.au].filter((d) => d && /^\d{4}-\d{2}-\d{2}$/.test(d)).join("_") || "tout";
-  return new Response(csv, {
+  return csv(lignes, `${slug}-${type}-${periode}.csv`);
+}
+
+function csv(lignes: string[][], fichier: string) {
+  // Point-virgule et BOM : le fichier s'ouvre tel quel dans Excel en français.
+  const corps = "﻿" + lignes.map((l) => l.map(cellule).join(";")).join("\r\n") + "\r\n";
+  return new Response(corps, {
     headers: {
       "Content-Type": "text/csv; charset=utf-8",
-      "Content-Disposition": `attachment; filename="${slug}-${type}-${periode}.csv"`,
+      "Content-Disposition": `attachment; filename="${fichier}"`,
       "Cache-Control": "private, no-store",
       "X-Robots-Tag": "noindex, nofollow",
     },

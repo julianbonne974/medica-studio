@@ -7,6 +7,8 @@ import { BarreSession } from "@/components/clients/barre-session";
 import { listerProjets } from "@/lib/clients/projets";
 import { listerAcces, listerRetours, type EntreeAcces, type Retour } from "@/lib/clients/journal";
 import { modeStockage } from "@/lib/clients/stockage";
+import { chargerQuestionnaire, listerDossiers } from "@/lib/clients/questionnaires";
+import { ReponsesQuestionnaire } from "@/components/clients/reponses-questionnaire";
 import { CHEMIN_ADMIN, COOKIE_ADMIN, sessionAdmin } from "@/lib/clients/session";
 
 export const dynamic = "force-dynamic";
@@ -175,11 +177,16 @@ export default async function PageAdmin({ searchParams }: Props) {
   const visibles = projetFiltre ? projets.filter((p) => p.slug === projetFiltre) : projets;
 
   const donnees = await Promise.all(
-    visibles.map(async (p) => ({
-      projet: p,
-      acces: await listerAcces(p.slug, { du, au }),
-      retours: await listerRetours(p.slug, { du, au }),
-    })),
+    visibles.map(async (p) => {
+      const chargement = chargerQuestionnaire(p.slug);
+      return {
+        projet: p,
+        acces: await listerAcces(p.slug, { du, au }),
+        retours: await listerRetours(p.slug, { du, au }),
+        chargement,
+        dossiers: chargement.etat === "ok" ? await listerDossiers(p.slug, chargement.questionnaire) : [],
+      };
+    }),
   );
 
   const filtreCsv = (slug: string, type: string) => {
@@ -252,7 +259,7 @@ export default async function PageAdmin({ searchParams }: Props) {
         </p>
       )}
 
-      {donnees.map(({ projet, acces, retours }) => {
+      {donnees.map(({ projet, acces, retours, chargement, dossiers }) => {
         const personnes = new Set(acces.map((a) => a.prenom.toLocaleLowerCase("fr"))).size;
         return (
           <section
@@ -275,12 +282,45 @@ export default async function PageAdmin({ searchParams }: Props) {
                 </p>
               </div>
               <div className="flex flex-wrap gap-2">
+                {chargement.etat === "ok" && (
+                  <LienCsv href={filtreCsv(projet.slug, "questionnaire")}>Questionnaire (CSV)</LienCsv>
+                )}
                 <LienCsv href={filtreCsv(projet.slug, "retours")}>Retours (CSV)</LienCsv>
                 <LienCsv href={filtreCsv(projet.slug, "acces")}>Accès (CSV)</LienCsv>
               </div>
             </div>
 
-            <h3 className="mt-8 mb-3 text-sm font-medium uppercase tracking-wider text-zinc-900 dark:text-zinc-100">
+            {chargement.etat !== "absent" && (
+              <>
+                <h3 className="mt-8 mb-3 text-sm font-medium uppercase tracking-wider text-zinc-900 dark:text-zinc-100">
+                  Questionnaire
+                  {chargement.etat === "ok" && (
+                    <span className="ml-2 font-normal normal-case tracking-normal text-zinc-600 dark:text-zinc-400">
+                      {chargement.questionnaire.titre} · {dossiers.length}{" "}
+                      {dossiers.length > 1 ? "répondants" : "répondant"} · tout le questionnaire, sans filtre de dates
+                    </span>
+                  )}
+                </h3>
+                {chargement.etat === "ok" ? (
+                  <ReponsesQuestionnaire
+                    questionnaire={chargement.questionnaire}
+                    dossiers={dossiers}
+                    urlImage={(src) =>
+                      `${CHEMIN_ADMIN}/image?${new URLSearchParams({ projet: projet.slug, src }).toString()}`
+                    }
+                  />
+                ) : (
+                  <p
+                    role="alert"
+                    className="border border-red-200 bg-red-50 px-4 py-3 text-sm break-words whitespace-pre-wrap text-red-800 dark:border-red-900/60 dark:bg-red-950/40 dark:text-red-200"
+                  >
+                    Fichier du questionnaire invalide, non affiché aux clients. {chargement.erreur}
+                  </p>
+                )}
+              </>
+            )}
+
+            <h3 className="mt-10 mb-3 text-sm font-medium uppercase tracking-wider text-zinc-900 dark:text-zinc-100">
               Retours
             </h3>
             <TableRetours retours={retours} />
