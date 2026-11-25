@@ -117,19 +117,32 @@ export function CadreQuestion({
           </div>
         )}
         {question.image && (
-          <button
-            type="button"
-            onClick={() => agrandir({ src: urlImage(question.image as string), alt: question.intitule })}
-            className="group/image relative mb-5 block w-full cursor-zoom-in border border-zinc-200 bg-zinc-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-600 dark:border-zinc-800 dark:bg-zinc-900"
-            aria-label={`Agrandir l'image : ${question.intitule}`}
-          >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={urlImage(question.image)} alt="" loading="lazy" decoding="async" className="mx-auto max-h-[28rem] w-auto object-contain" />
-            <span className="absolute right-2 bottom-2 inline-flex items-center gap-1.5 border border-zinc-200 bg-white/95 px-2 py-1 text-xs font-medium text-zinc-700 dark:border-zinc-700 dark:bg-zinc-900/95 dark:text-zinc-200">
-              <Maximize2 className="size-3.5" aria-hidden="true" />
-              Agrandir
-            </span>
-          </button>
+          <figure className="mb-5 space-y-2">
+            <button
+              type="button"
+              onClick={() =>
+                agrandir({ src: urlImage(question.image as string), alt: question.intitule, legende: question.legende })
+              }
+              className="group/image relative block w-full cursor-zoom-in border border-zinc-200 bg-zinc-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-600 dark:border-zinc-800 dark:bg-zinc-900"
+              aria-label={`Agrandir l'image : ${question.legende ?? question.intitule}`}
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={urlImage(question.image)}
+                alt=""
+                loading="lazy"
+                decoding="async"
+                className="mx-auto max-h-[28rem] w-auto object-contain transition-transform duration-300 ease-out group-hover/image:scale-[1.01]"
+              />
+              <span className="absolute right-2 bottom-2 inline-flex items-center gap-1.5 border border-zinc-200 bg-white/95 px-2 py-1 text-xs font-medium text-zinc-700 dark:border-zinc-700 dark:bg-zinc-900/95 dark:text-zinc-200">
+                <Maximize2 className="size-3.5" aria-hidden="true" />
+                Agrandir
+              </span>
+            </button>
+            {question.legende && (
+              <figcaption className="text-sm text-pretty text-zinc-600 dark:text-zinc-400">{question.legende}</figcaption>
+            )}
+          </figure>
         )}
         {children}
       </div>
@@ -419,7 +432,7 @@ export function ChampVariantes({
         <Commentaire
           valeur={r.commentaire ?? ""}
           onChange={(c) => onChange({ choix: r.choix ?? "", commentaire: c })}
-          libelle={r.choix === AUCUNE ? "Ce qui ne vous convient pas (facultatif)" : "Commentaire (facultatif)"}
+          libelle={question.aucune && r.choix === AUCUNE ? "Ce qui ne vous convient pas (facultatif)" : "Commentaire (facultatif)"}
         />
       )}
     </>

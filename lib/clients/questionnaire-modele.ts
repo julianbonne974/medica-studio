@@ -28,6 +28,8 @@ type BaseQuestion = {
   aide?: string;
   /** illustration facultative, relative à private/clients/<projet>/ */
   image?: string;
+  /** légende de l'illustration */
+  legende?: string;
 };
 
 export type QuestionChoix = BaseQuestion & {
@@ -171,17 +173,18 @@ export function reponseLisible(question: Question, reponse: Reponse | undefined)
   switch (question.type) {
     case "choix-unique": {
       const r = reponse as ReponseChoixUnique;
-      const libelle =
-        r.choix === AUTRE ? "Autre" : (question.options.find((o) => o.id === r.choix)?.libelle ?? "");
-      return { reponse: libelle, autre: r.choix === AUTRE ? (r.autre ?? "") : "", commentaire: r.commentaire ?? "" };
+      const autre = Boolean(question.autre) && r.choix === AUTRE;
+      const libelle = autre ? "Autre" : (question.options.find((o) => o.id === r.choix)?.libelle ?? "");
+      return { reponse: libelle, autre: autre ? (r.autre ?? "") : "", commentaire: r.commentaire ?? "" };
     }
     case "choix-multiple": {
       const r = reponse as ReponseChoixMultiple;
       const libelles = question.options.filter((o) => r.choix.includes(o.id)).map((o) => o.libelle);
-      if (r.choix.includes(AUTRE)) libelles.push("Autre");
+      const autre = Boolean(question.autre) && r.choix.includes(AUTRE);
+      if (autre) libelles.push("Autre");
       return {
         reponse: libelles.join(" | "),
-        autre: r.choix.includes(AUTRE) ? (r.autre ?? "") : "",
+        autre: autre ? (r.autre ?? "") : "",
         commentaire: r.commentaire ?? "",
       };
     }
@@ -199,7 +202,7 @@ export function reponseLisible(question: Question, reponse: Reponse | undefined)
     case "variantes": {
       const r = reponse as ReponseVariantes;
       const libelle =
-        r.choix === AUCUNE
+        question.aucune && r.choix === AUCUNE
           ? "Aucune ne me convient"
           : (question.options.find((o) => o.id === r.choix)?.libelle ?? "");
       return { reponse: libelle, autre: "", commentaire: r.commentaire ?? "" };

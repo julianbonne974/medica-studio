@@ -99,7 +99,7 @@ export function ReponsesQuestionnaire({
                         q.type === "variantes"
                           ? q.options.find((o) => o.id === (d.reponses[q.id] as ReponseVariantes | undefined)?.choix)
                           : undefined;
-                      const aucune = q.type === "variantes" && (d.reponses[q.id] as ReponseVariantes | undefined)?.choix === AUCUNE;
+                      const aucune = q.type === "variantes" && q.aucune && (d.reponses[q.id] as ReponseVariantes | undefined)?.choix === AUCUNE;
                       return (
                         <div key={q.id} className="grid gap-1.5 py-3 md:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] md:gap-6">
                           <dt className="text-sm text-pretty text-zinc-600 dark:text-zinc-400">{q.intitule}</dt>

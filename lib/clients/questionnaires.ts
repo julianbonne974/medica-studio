@@ -194,7 +194,7 @@ function validerQuestion(v: V, brut: unknown, c: string, ids: Set<string>) {
   if (typeof type !== "string" || !TYPES_QUESTIONS.has(type)) {
     v.echec(`${c}.type`, `type de question inconnu « ${String(type)} » (${[...TYPES_QUESTIONS].join(", ")})`);
   }
-  const base = ["id", "type", "intitule", "aide", "image"];
+  const base = ["id", "type", "intitule", "aide", "image", "legende"];
   const cles: Record<string, string[]> = {
     "choix-unique": [...base, "options", "autre", "commentaire"],
     "choix-multiple": [...base, "options", "autre", "commentaire"],
@@ -209,14 +209,20 @@ function validerQuestion(v: V, brut: unknown, c: string, ids: Set<string>) {
   v.texte(q, "intitule", c);
   v.texte(q, "aide", c, true);
   if (q.image !== undefined) v.image(q, "image", c);
+  v.texte(q, "legende", c, true);
+  if (q.legende !== undefined && q.image === undefined) v.echec(`${c}.legende`, "légende sans image");
 
   if (type === "choix-unique" || type === "choix-multiple" || type === "variantes") {
-    const idsOptions = new Set<string>([AUTRE, AUCUNE]);
+    // « autre » et « aucune » ne sont réservés que si le choix correspondant est activé.
+    const reserve = type === "variantes" ? (q.aucune === true ? AUCUNE : "") : q.autre === true ? AUTRE : "";
+    const idsOptions = new Set<string>();
     (v.tableau(q, "options", c) as unknown[]).forEach((o, i) => {
       const co = `${c}.options[${i}]`;
       const opt = v.objet(o, co, type === "variantes" ? ["id", "libelle", "image", "legende"] : ["id", "libelle"]);
       const id = (opt as Obj).id;
-      if (id === AUTRE || id === AUCUNE) v.echec(`${co}.id`, `« ${id} » est réservé, choisissez un autre identifiant`);
+      if (reserve && id === reserve) {
+        v.echec(`${co}.id`, `« ${id} » est réservé quand « ${type === "variantes" ? "aucune" : "autre"} » vaut true, choisissez un autre identifiant`);
+      }
       v.identifiant(opt, "id", co, idsOptions);
       v.texte(opt, "libelle", co);
       if (type === "variantes") {
@@ -338,13 +344,13 @@ function validerReponse(question: Question, brut: unknown): Reponse | null {
     case "choix-unique": {
       const r = objetReponse(brut, ou, ["choix", "autre", "commentaire"]);
       const choix = chaine(r.choix, 64, ou);
-      if (choix && choix !== AUTRE && !question.options.some((o) => o.id === choix)) {
+      const autreChoisi = Boolean(question.autre) && choix === AUTRE;
+      if (choix && !autreChoisi && !question.options.some((o) => o.id === choix)) {
         throw new ReponseRefusee(`${ou} : option inconnue « ${choix} »`);
       }
-      if (choix === AUTRE && !question.autre) throw new ReponseRefusee(`${ou} : « Autre » non prévu`);
       if (r.autre !== undefined && !question.autre) throw new ReponseRefusee(`${ou} : « Autre » non prévu`);
       if (r.commentaire !== undefined && !question.commentaire) throw new ReponseRefusee(`${ou} : commentaire non prévu`);
-      const autre = choix === AUTRE ? chaine(r.autre, BORNES.texteCourt, ou, true) : "";
+      const autre = autreChoisi ? chaine(r.autre, BORNES.texteCourt, ou, true) : "";
       const commentaire = chaine(r.commentaire, BORNES.texte, ou);
       if (!choix && !commentaire) return null;
       return { ...(choix && { choix }), ...(autre && { autre }), ...(commentaire && { commentaire }) };
@@ -358,14 +364,14 @@ function validerReponse(question: Question, brut: unknown): Reponse | null {
       const choix: string[] = [];
       for (const c of liste) {
         if (typeof c !== "string") throw new ReponseRefusee(`${ou} : choix invalide`);
-        if (c === AUTRE ? !question.autre : !question.options.some((o) => o.id === c)) {
+        if (!(question.options.some((o) => o.id === c) || (c === AUTRE && question.autre))) {
           throw new ReponseRefusee(`${ou} : option inconnue « ${c} »`);
         }
         if (!choix.includes(c)) choix.push(c);
       }
       if (r.autre !== undefined && !question.autre) throw new ReponseRefusee(`${ou} : « Autre » non prévu`);
       if (r.commentaire !== undefined && !question.commentaire) throw new ReponseRefusee(`${ou} : commentaire non prévu`);
-      const autre = choix.includes(AUTRE) ? chaine(r.autre, BORNES.texteCourt, ou, true) : "";
+      const autre = question.autre && choix.includes(AUTRE) ? chaine(r.autre, BORNES.texteCourt, ou, true) : "";
       const commentaire = chaine(r.commentaire, BORNES.texte, ou);
       if (choix.length === 0 && !commentaire) return null;
       return { choix, ...(autre && { autre }), ...(commentaire && { commentaire }) };
@@ -390,7 +396,7 @@ function validerReponse(question: Question, brut: unknown): Reponse | null {
     case "variantes": {
       const r = objetReponse(brut, ou, ["choix", "commentaire"]);
       const choix = chaine(r.choix, 64, ou);
-      if (choix && (choix === AUCUNE ? !question.aucune : !question.options.some((o) => o.id === choix))) {
+      if (choix && !(question.options.some((o) => o.id === choix) || (choix === AUCUNE && question.aucune))) {
         throw new ReponseRefusee(`${ou} : variante inconnue « ${choix} »`);
       }
       if (r.commentaire !== undefined && !question.commentaire) throw new ReponseRefusee(`${ou} : commentaire non prévu`);

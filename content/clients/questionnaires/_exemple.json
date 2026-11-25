@@ -27,7 +27,7 @@
       "titre": "Changements à valider",
       "questions": [
         { "id": "q-jeune", "type": "validation", "intitule": "Jeûne exprimé en heures avant l'intervention", "aide": "Par exemple « 6 h avant » plutôt qu'une heure fixe." },
-        { "id": "q-allergie", "type": "validation", "intitule": "Réaction notée pour chaque allergie", "image": "questions/schema-ecran.png" }
+        { "id": "q-allergie", "type": "validation", "intitule": "Réaction notée pour chaque allergie", "image": "questions/schema-ecran.png", "legende": "Colonne Réaction ajoutée au tableau des allergies (image fictive)." }
       ]
     },
     {

@@ -134,10 +134,11 @@ toute autre clé inconnue est refusée (pour attraper les fautes de frappe).
 }
 ```
 
-- Toute question accepte aussi `"image": "questions/….png"` : une illustration affichée sous
-  l'aide, agrandissable.
+- Toute question accepte aussi `"image": "questions/….png"` et `"legende": "…"` : une
+  illustration affichée sous l'intitulé et l'aide, agrandissable au clic, légende dessous.
 - Les identifiants de section et de question sont uniques dans le fichier, ceux d'option dans la
-  question ; `autre` et `aucune` sont réservés.
+  question. `autre` est réservé quand la question a `"autre": true`, `aucune` quand elle a
+  `"aucune": true` ; sinon ce sont des identifiants comme les autres.
 - Images (`src`, `image`) : relatives à `private/clients/<projet>/`, sans `..`, en png, jpg, webp,
   gif, avif ou svg ; le fichier doit exister. Le client les reçoit par `/clients/<projet>/m/…`
   (session exigée), l'administration par `/clients/admin/image`.

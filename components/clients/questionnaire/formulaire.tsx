@@ -193,21 +193,31 @@ export function FormulaireQuestionnaire({
     [base],
   );
 
-  // Sommaire : section visible à l'écran.
+  // Sommaire : dernière section dont le titre a passé le tiers haut de l'écran.
   const [active, setActive] = useState(questionnaire.sections[0]?.id);
   useEffect(() => {
-    const cibles = questionnaire.sections
-      .map((s) => document.getElementById(`s-${s.id}`))
-      .filter((e): e is HTMLElement => Boolean(e));
-    const obs = new IntersectionObserver(
-      (entrees) => {
-        const visible = entrees.filter((e) => e.isIntersecting).sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)[0];
-        if (visible) setActive(visible.target.id.slice(2));
-      },
-      { rootMargin: "-20% 0px -65% 0px" },
-    );
-    cibles.forEach((c) => obs.observe(c));
-    return () => obs.disconnect();
+    let image = 0;
+    const calculer = () => {
+      image = 0;
+      const seuil = window.innerHeight * 0.33;
+      let courante = questionnaire.sections[0]?.id;
+      for (const s of questionnaire.sections) {
+        const el = document.getElementById(`s-${s.id}`);
+        if (el && el.getBoundingClientRect().top <= seuil) courante = s.id;
+      }
+      setActive(courante);
+    };
+    const surDefilement = () => {
+      if (!image) image = requestAnimationFrame(calculer);
+    };
+    calculer();
+    window.addEventListener("scroll", surDefilement, { passive: true });
+    window.addEventListener("resize", surDefilement);
+    return () => {
+      cancelAnimationFrame(image);
+      window.removeEventListener("scroll", surDefilement);
+      window.removeEventListener("resize", surDefilement);
+    };
   }, [questionnaire]);
 
   const dernierEnvoi = envois.at(-1);
