@@ -2,10 +2,10 @@ import { promises as fs } from "node:fs";
 import path from "node:path";
 import type { NextRequest } from "next/server";
 import {
-  RACINE_PROTOTYPES,
   chargerProjet,
   cheminApiProjet,
   cheminProjet,
+  racinePrototypes,
   versionDuChemin,
 } from "@/lib/clients/projets";
 import { empreinteIp, ipDeLaRequete, navigateurAbrege } from "@/lib/clients/securite";
@@ -93,7 +93,7 @@ export async function GET(
     return rediriger(`${cheminProjet(slug)}?suite=maquette`, 307);
   }
 
-  const racine = path.join(RACINE_PROTOTYPES, slug);
+  const racine = racinePrototypes(slug);
   const cible = path.resolve(racine, ...segments);
   if (!cible.startsWith(racine + path.sep)) return refus(400, "Chemin invalide");
 

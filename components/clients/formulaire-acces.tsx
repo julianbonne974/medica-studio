@@ -15,11 +15,14 @@ export function FormulaireAcces({
   avecPrenom,
   message,
   bloque,
+  suite,
 }: {
   action: string;
   avecPrenom: boolean;
   message?: Message;
   bloque?: boolean;
+  /** page où revenir après la connexion (liste fermée, contrôlée par la route d'accès) */
+  suite?: string;
 }) {
   const [envoi, setEnvoi] = useState(false);
   const idMessage = "acces-message";
@@ -50,6 +53,8 @@ export function FormulaireAcces({
           <span>{message.texte}</span>
         </p>
       )}
+
+      {suite && <input type="hidden" name="suite" value={suite} />}
 
       {avecPrenom && (
         <div className="space-y-2">

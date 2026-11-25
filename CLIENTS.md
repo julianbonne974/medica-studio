@@ -13,9 +13,12 @@ code de projet ; administration séparée pour lire le journal et les retours.
 | `POST /clients/<projet>/deconnexion` | Efface la session. |
 | `GET /clients/<projet>/m/<chemin…>` | Sert un fichier de `private/clients/<projet>/` si la session est valide, sinon renvoie vers l'accès. Injecte le bouton « Laisser un retour » dans les pages HTML. |
 | `POST /api/clients/<projet>/retours` | Enregistre un retour (session exigée, 8 Ko au plus, texte de 4000 caractères au plus). |
+| `GET /clients/<projet>/questions` | Questionnaire du projet (voir « Questionnaires ») ; sans session, formulaire d'accès qui ramène ici. |
+| `GET`, `PUT /api/clients/<projet>/questions` | Lit ou remplace les réponses de la personne connectée ; `PUT` avec `"envoyer": true` marque l'envoi. |
+| `GET /clients/admin/image?projet=…&src=…` | Image d'un questionnaire pour l'administration (seules les images citées par le fichier sont servies). |
 | `GET /clients/admin` | Administration : journal des accès et retours par projet, filtre par date. |
 | `POST /clients/admin/acces`, `/deconnexion` | Connexion et déconnexion de l'administration. |
-| `GET /clients/admin/export?projet=…&type=acces\|retours&du=…&au=…` | Export CSV (séparateur `;`, UTF-8 avec BOM, s'ouvre dans Excel). |
+| `GET /clients/admin/export?projet=…&type=acces\|retours\|questionnaire&du=…&au=…` | Export CSV (séparateur `;`, UTF-8 avec BOM, s'ouvre dans Excel). Le filtre de dates ne s'applique pas au questionnaire. |
 
 Les prototypes ne sont **pas** dans `public/` : rien n'est servi sans passer par le contrôle de
 session. Les fichiers sont inclus dans la fonction Netlify par `outputFileTracingIncludes`
@@ -82,6 +85,129 @@ s'arrête) :
 Puis relire le diff, commiter, et déployer. Les maquettes ne doivent contenir que des données
 fictives.
 
+## Questionnaires
+
+Après une réunion, le client lit un compte rendu, valide des changements, choisit entre des
+variantes d'écran et répond à des questions, sur `/clients/<projet>/questions`. Une carte en tête
+de l'accueil du projet y mène et montre où en est la personne connectée (pas commencé, en cours,
+envoyé le …). Aucune question n'est obligatoire.
+
+### Fichier de contenu
+
+Un questionnaire par projet : `content/clients/questionnaires/<projet>.json`. Il est validé à
+chaque chargement ; s'il est invalide, la carte et la page sont masquées côté client et
+l'administration affiche l'erreur avec son emplacement (`sections[1].questions[0].image : image
+introuvable : …`). Les clés qui commencent par `_` ou `$` sont des notes de rédaction, ignorées ;
+toute autre clé inconnue est refusée (pour attraper les fautes de frappe).
+
+```jsonc
+{
+  "id": "reunion-2026-11-25",          // minuscules, chiffres, tirets : sert aux clés de stockage
+  "projet": "preopia",                 // identique au nom du fichier
+  "titre": "…", "sousTitre": "…",      // titre repris tel quel sur la carte de l'accueil
+  "dateSouhaitee": "2026-11-30",       // facultatif, affiché « si possible avant le … »
+  "intro": ["paragraphe", "…"],        // facultatif
+  "sections": [
+    {
+      "id": "compte-rendu", "titre": "…", "intro": "…",   // intro facultative
+      "blocs": [                                          // facultatif : contenu à lire
+        { "type": "paragraphe", "texte": "…" },
+        { "type": "liste", "items": ["…"] },
+        { "type": "image", "src": "questions/fichier.png", "alt": "…", "legende": "…" },
+        { "type": "tableau", "colonnes": ["…"], "lignes": [["…", "…"]] },
+        { "type": "encadre", "titre": "…", "texte": "…" },
+        { "type": "depliant", "titre": "…", "blocs": [ … ] }   // fermé par défaut, sans dépliant imbriqué
+      ],
+      "questions": [                                      // facultatif
+        { "id": "q-…", "type": "choix-unique" | "choix-multiple", "intitule": "…", "aide": "…",
+          "options": [{ "id": "a", "libelle": "…" }], "autre": true, "commentaire": true },
+        { "id": "q-…", "type": "texte-court" | "texte-long", "intitule": "…", "aide": "…", "exemple": "…" },
+        { "id": "q-…", "type": "validation", "intitule": "…", "aide": "…" },
+        { "id": "q-…", "type": "variantes", "intitule": "…", "aide": "…",
+          "options": [{ "id": "a", "libelle": "Variante A", "image": "questions/x-a.png", "legende": "…" }],
+          "aucune": true, "commentaire": true },
+        { "id": "q-…", "type": "tableau-saisie", "intitule": "…", "aide": "…",
+          "colonnes": [{ "id": "nom", "libelle": "Nom", "type": "texte" | "tel" | "choix", "options": ["…"] }],
+          "lignesInitiales": 3 }
+      ],
+      "groupes": [                                        // facultatif, rendus après blocs et questions
+        { "id": "consultation", "titre": "…", "intro": "…", "blocs": [ … ], "questions": [ … ] }
+      ]
+    }
+  ]
+}
+```
+
+- **Groupes** : une section peut regrouper ses questions sous des intertitres. Chaque groupe
+  affiche son titre, son intro, ses blocs puis ses questions, après les blocs et les questions
+  propres de la section. Les identifiants de groupe sont uniques dans la section, ceux de
+  question dans tout le fichier. Le sommaire reste au niveau des sections (son compteur inclut
+  les questions des groupes) ; l'administration affiche le groupe sous la section, et la colonne
+  « Section » du CSV vaut « Section › Groupe ».
+- **Dépliant** : `{ "type": "depliant", "titre", "blocs" }`, fermé par défaut (`<details>`,
+  ouvert au clic, à Entrée ou à Espace). Il contient des paragraphes, listes, tableaux, encadrés
+  et images, pas de dépliant. Les tableaux prennent environ 9 rem par colonne au moins : sur
+  téléphone, ils défilent horizontalement dans leur cadre, et le texte des cellules revient à la
+  ligne.
+
+- Toute question accepte aussi `"image": "questions/….png"` et `"legende": "…"` : une
+  illustration affichée sous l'intitulé et l'aide, agrandissable au clic, légende dessous.
+- Les identifiants de section et de question sont uniques dans le fichier, ceux d'option dans la
+  question. `autre` est réservé quand la question a `"autre": true`, `aucune` quand elle a
+  `"aucune": true` ; sinon ce sont des identifiants comme les autres.
+- Images (`src`, `image`) : relatives à `private/clients/<projet>/`, sans `..`, en png, jpg, webp,
+  gif, avif ou svg ; le fichier doit exister. Le client les reçoit par `/clients/<projet>/m/…`
+  (session exigée), l'administration par `/clients/admin/image`.
+- `validation` affiche « Je garde » / « Je change » ; « Je change » ouvre « Ce que vous voulez à
+  la place ». `variantes` affiche des cartes dont l'image s'agrandit au clic, le choix se fait par
+  le bouton radio sous l'image. `tableau-saisie` : 40 lignes au plus ; `tel` n'accepte que
+  chiffres, espaces et `+ ( ) . / -`.
+- Changer d'`id` repart de zéro (nouvelles clés de stockage). Retirer une question ou une option
+  n'efface rien : les réponses devenues invalides sont simplement ignorées à la lecture.
+
+### Enregistrement et envoi
+
+- Brouillon enregistré côté serveur 1,5 s après la dernière frappe, à la sortie d'un champ et à la
+  fermeture de la page ; restauré à la réouverture, sur n'importe quel appareil, avec le même
+  prénom. État visible : « Enregistrement… », « Enregistré à 14 h 32 », ou l'erreur et ce qu'il
+  faut faire (se reconnecter, réessayer).
+- « Envoyer mes réponses » ajoute la date aux envois ; on peut continuer à modifier et renvoyer.
+- Une personne ne voit que ses réponses : la clé est le prénom de la session, normalisé
+  (minuscules, sans accents). Deux personnes qui se connectent avec le même prénom partagent donc
+  les mêmes réponses.
+
+### API
+
+`PUT /api/clients/<projet>/questions`, corps `{ "reponses": { "<id question>": … }, "envoyer"?: true }`,
+remplace toutes les réponses de la personne. Mêmes protections que les retours : session, en-tête
+`Origin`, JSON seulement, 64 Ko au plus, anti-rafale (90 écritures par minute et par IP et
+prénom, en mémoire). Chaque réponse est contrôlée contre le fichier de contenu (question connue,
+option connue, forme attendue, textes nettoyés et bornés à 4000 caractères, 500 pour un texte
+court ou une cellule) ; la moindre valeur non prévue fait refuser l'envoi (400 avec le détail).
+Formes : `choix-unique` `{ choix, autre?, commentaire? }`, `choix-multiple` `{ choix: [], autre?, commentaire? }`,
+textes `{ texte }`, `validation` `{ decision: "garder" | "changer", precision? }`,
+`variantes` `{ choix, commentaire? }` (`choix` vaut `aucune` pour « Aucune ne me convient »),
+`tableau-saisie` `{ lignes: [{ <id colonne>: "…" }] }`. L'ouverture de la page est notée au
+journal des accès (page `questions`).
+
+### Stockage et lecture des réponses
+
+- Clé `questionnaires/<projet>/<id du questionnaire>/<prénom normalisé>`, valeur
+  `{ prenom, reponses, majLe, envois: [dates ISO] }` (Netlify Blobs en ligne, `.data/` en local).
+- **Administration** : pour chaque projet qui a un questionnaire, la liste des répondants
+  (prénom, dernière modification, envoi, nombre de réponses) et, en dépliant, les réponses de
+  chacun, intitulé par intitulé, avec l'image des variantes choisies. « Questionnaire (CSV) » :
+  une ligne par répondant et par question (répondant, section, question, réponse, autre,
+  commentaire, modifié le, dernier envoi), réponses vides comprises.
+
+### Projet d'essai (développement)
+
+En `next dev` seulement, le projet `exemple` lit `content/clients/_exemple.json`,
+`content/clients/questionnaires/_exemple.json` (tous les types de blocs et de questions) et
+`private/clients/_exemple/`. Un fichier dont le nom commence par `_` n'est jamais chargé par
+`next build` / `next start`. Pour l'ouvrir : `CLIENT_CODE_EXEMPLE` (empreinte d'un code de test)
+dans `.env.development.local`, puis `http://localhost:3000/clients/exemple/questions`.
+
 ## Lire les retours
 
 - **Administration** : `https://medicastudio.fr/clients/admin`, code d'administration. Par
@@ -111,6 +237,9 @@ fictives.
   ni de caractère de contrôle), le chemin résolu doit rester sous `private/clients/<projet>/`, les
   liens symboliques ne sont pas suivis, seuls les types connus sont servis (`Content-Type` exact,
   `nosniff`). Un dossier renvoie vers son `index.html`.
+- **Retour après connexion** : le formulaire d'accès porte un champ `suite` ; seule la valeur
+  `questions` est reconnue (renvoi vers `/clients/<projet>/questions`), toute autre valeur ramène
+  à l'accueil du projet. Aucune adresse reçue n'est suivie telle quelle.
 - **Requêtes modifiantes** : en-tête `Origin` contrôlé (même hôte) en plus de `SameSite=Lax` ;
   retours en JSON uniquement, taille bornée, caractères de contrôle et de direction retirés,
   affichage échappé par React, cellules CSV neutralisées contre les formules.

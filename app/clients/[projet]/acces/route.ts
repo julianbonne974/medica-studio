@@ -17,19 +17,22 @@ export async function POST(request: NextRequest, { params }: { params: Promise<{
   const { projet: slug } = await params;
   const projet = chargerProjet(slug);
   if (!projet) return new Response("Introuvable", { status: 404 });
-  const base = cheminProjet(slug);
+  const accueil = cheminProjet(slug);
+  // Pages où l'on revient après la connexion : liste fermée, jamais une adresse reçue telle quelle.
+  let base = accueil;
 
   if (!origineAcceptable(request)) return new Response("Origine refusée", { status: 403 });
-  if (!secretConfigure() || !empreinteConfiguree(slug)) return rediriger(`${base}?erreur=indisponible`);
+  if (!secretConfigure() || !empreinteConfiguree(slug)) return rediriger(`${accueil}?erreur=indisponible`);
 
   let prenom = "";
   let code = "";
   try {
     const form = await request.formData();
+    if (form.get("suite") === "questions") base = `${accueil}/questions`;
     prenom = nettoyerPrenom(form.get("prenom"));
     code = String(form.get("code") ?? "").trim();
   } catch {
-    return rediriger(`${base}?erreur=formulaire`);
+    return rediriger(`${accueil}?erreur=formulaire`);
   }
 
   const ip = empreinteIp(ipDeLaRequete(request.headers));

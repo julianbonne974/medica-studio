@@ -9,10 +9,10 @@
       "id": "v3",
       "libelle": "V3",
       "titre": "Version proposée",
-      "description": "La journée du médecin, telle qu'elle s'affichera : la liste du jour à l'ouverture, la consultation du patient suivant, l'impression de la veille. Le reste du logiciel (patients, questionnaires, visite pré-anesthésique, bloc, activité, réglages) est rangé dans la barre latérale. Même contenu que la V2, avec l'aide à la décision dans un panneau que l'on ouvre quand on en a besoin. Mise à jour du 16 novembre, d'après les remarques du Dr Vempaire du 7 novembre : réaction notée pour chaque allergie, dose et fréquence saisies avec le traitement, jeûne exprimé en heures avant l'intervention sans heure de convocation, prémédication à plusieurs choix, état général dans la conclusion, cadre obstétrique dans les antécédents.",
+      "description": "La journée du médecin, telle qu'elle s'affichera : la liste du jour à l'ouverture, la consultation du patient suivant, l'impression de la veille. Le reste du logiciel (patients, questionnaires, visite pré-anesthésique, bloc, activité, réglages) est rangé dans la barre latérale. Même contenu que la V2, avec l'aide à la décision dans un panneau que l'on ouvre quand on en a besoin. Mise à jour du 25 novembre, après la réunion avec le Dr Vempaire : consultation en trois colonnes, affichage vertical (deux variantes, à choisir dans le bouton « Maquette »), antécédent d'intubation difficile repris d'une consultation à l'autre, encadré rouge à l'écran et sur la feuille imprimée, précisions des antécédents en étiquettes, examens complémentaires en texte libre, plusieurs techniques d'anesthésie, bouton « Fin de consultation » qui imprime les documents, impression de la veille limitée aux feuilles de consultation. Les remarques du 7 novembre restent intégrées (réaction par allergie, posologie, jeûne en heures, prémédication multiple, état général, cadre obstétrique).",
       "dossier": "v3",
       "entree": "v3/index.html",
-      "miseAJour": "2026-11-16"
+      "miseAJour": "2026-11-25"
     },
     {
       "id": "v1",
@@ -21,7 +21,7 @@
       "description": "La consultation reprise à partir de l'acte : antécédents groupés par appareil, bandeau patient toujours visible, consignes de jeûne et d'arrêt des traitements, liste des manques avant l'impression du lot de la veille. Elle ne contient aucune fonction d'IA.",
       "dossier": "maquette-v1",
       "entree": "maquette-v1/index.html",
-      "miseAJour": "2026-11-16"
+      "miseAJour": "2026-11-25"
     },
     {
       "id": "v2",
@@ -30,7 +30,7 @@
       "description": "La V1, plus une aide à la décision : consignes proposées par règle, pré-évaluation tirée du questionnaire patient, tri de la liste du jour, scores calculés (STOP-Bang, Apfel, Lee). Chaque proposition affiche sa source et attend la validation du médecin. Les écrans de bloc et d'activité sont de simples aperçus.",
       "dossier": "maquette-v2",
       "entree": "maquette-v2/index.html",
-      "miseAJour": "2026-11-16"
+      "miseAJour": "2026-11-25"
     },
     {
       "id": "v2a",
@@ -39,7 +39,7 @@
       "description": "Le contenu de la V2, pensé pour le clavier : palette de commandes, raccourcis affichés à côté de chaque bouton, liste du jour et fiche côte à côte, aide à la décision dans un panneau latéral. Pour un médecin qui enchaîne les consultations sur un poste fixe.",
       "dossier": "v2a-console",
       "entree": "v2a-console/index.html",
-      "miseAJour": "2026-11-16"
+      "miseAJour": "2026-11-25"
     },
     {
       "id": "v2b",
@@ -48,7 +48,7 @@
       "description": "La V2 au doigt : une étape à la fois, grandes cibles, listes de valeurs en tiroir, mode bloc lisible pour la visite pré-anesthésique. Conçue pour la tablette, elle reste utilisable sur un poste.",
       "dossier": "v2b-tablette",
       "entree": "v2b-tablette/index.html",
-      "miseAJour": "2026-11-16"
+      "miseAJour": "2026-11-25"
     }
   ],
   "scenarios": [

@@ -1,0 +1,147 @@
+{
+  "_note": "Fixture de développement : couvre tous les types de blocs et de questions. Chargée seulement par next dev, pour le projet d'essai « exemple ».",
+  "id": "essai-2026-11-25",
+  "projet": "exemple",
+  "titre": "Questions après la réunion du 25 novembre",
+  "sousTitre": "Compte rendu, changements à valider et choix d'écrans (contenu d'essai)",
+  "dateSouhaitee": "2026-11-30",
+  "intro": [
+    "Voici ce que nous avons retenu de la réunion, puis les points sur lesquels nous avons besoin de votre avis.",
+    "Comptez une quinzaine de minutes. Vous pouvez vous arrêter et reprendre plus tard."
+  ],
+  "sections": [
+    {
+      "id": "compte-rendu",
+      "titre": "Compte rendu",
+      "intro": "Les décisions prises en séance.",
+      "blocs": [
+        { "type": "paragraphe", "texte": "La réunion a porté sur l'écran de consultation et sur l'impression de la veille." },
+        { "type": "liste", "items": ["La liste du jour s'ouvre au démarrage.", "Le jeûne s'exprime en heures avant l'intervention.", "Les allergies portent la réaction observée."] },
+        { "type": "image", "src": "questions/schema-ecran.png", "alt": "Schéma de l'écran de consultation (exemple)", "legende": "Disposition discutée en séance." },
+        { "type": "tableau", "colonnes": ["Sujet", "Décision", "Échéance"], "lignes": [["Liste du jour", "Ouverte au démarrage", "V4"], ["Jeûne", "En heures relatives", "V4"]] },
+        { "type": "encadre", "titre": "À noter", "texte": "Les maquettes restent remplies de données fictives." },
+        {
+          "type": "depliant",
+          "titre": "Détail des décisions, module par module",
+          "blocs": [
+            { "type": "paragraphe", "texte": "Tableau complet, à faire défiler sur téléphone." },
+            {
+              "type": "tableau",
+              "colonnes": ["Module", "Décision", "Raison donnée en séance", "Version", "Responsable"],
+              "lignes": [
+                ["Liste du jour", "Ouverte au démarrage, triée par heure d'intervention", "Le médecin commence toujours par elle", "V4", "Medica Studio"],
+                ["Allergies", "Réaction observée notée pour chaque allergie, liste de choix et texte libre", "Distinguer intolérance et allergie vraie", "V4", "Medica Studio"],
+                ["Jeûne", "Exprimé en heures avant l'intervention", "L'heure de convocation n'est pas connue du médecin", "V4", "Secrétariat"]
+              ]
+            },
+            { "type": "liste", "items": ["Point resté ouvert : impression recto verso.", "Point resté ouvert : signature numérisée."] },
+            { "type": "encadre", "texte": "Ce détail n'appelle pas de réponse." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "changements",
+      "titre": "Changements à valider",
+      "questions": [
+        { "id": "q-jeune", "type": "validation", "intitule": "Jeûne exprimé en heures avant l'intervention", "aide": "Par exemple « 6 h avant » plutôt qu'une heure fixe." },
+        { "id": "q-allergie", "type": "validation", "intitule": "Réaction notée pour chaque allergie", "image": "questions/schema-ecran.png", "legende": "Colonne Réaction ajoutée au tableau des allergies (image fictive)." }
+      ]
+    },
+    {
+      "id": "ecrans",
+      "titre": "Choix d'écrans",
+      "questions": [
+        {
+          "id": "q-disposition",
+          "type": "variantes",
+          "intitule": "Quelle disposition préférez-vous pour la consultation ?",
+          "aide": "Cliquez sur une image pour l'agrandir.",
+          "options": [
+            { "id": "a", "libelle": "Variante A", "image": "questions/variante-a.png", "legende": "Bandeau patient en haut, fiche en dessous." },
+            { "id": "b", "libelle": "Variante B", "image": "questions/variante-b.png", "legende": "Liste du jour à gauche, fiche à droite." },
+            { "id": "c", "libelle": "Variante C", "image": "questions/variante-c.webp", "legende": "Fiche découpée en cartes." }
+          ],
+          "aucune": true,
+          "commentaire": true
+        }
+      ]
+    },
+    {
+      "id": "cahier",
+      "titre": "Cahier des charges de la V1",
+      "intro": "Un groupe par module : lisez ce qui est prévu, puis dites si cela vous convient.",
+      "groupes": [
+        {
+          "id": "consultation",
+          "titre": "Module consultation",
+          "intro": "Ce que la V1 couvre pour la consultation.",
+          "blocs": [
+            {
+              "type": "depliant",
+              "titre": "Ce qui est prévu",
+              "blocs": [
+                { "type": "liste", "items": ["Bandeau patient toujours visible.", "Antécédents groupés par appareil.", "Conclusion avec état général."] },
+                { "type": "image", "src": "questions/schema-ecran.png", "alt": "Écran de consultation prévu (image fictive)" }
+              ]
+            }
+          ],
+          "questions": [
+            { "id": "q-cdc-consultation", "type": "validation", "intitule": "Le périmètre du module consultation vous convient-il ?" }
+          ]
+        },
+        {
+          "id": "impression",
+          "titre": "Module impression",
+          "blocs": [
+            { "type": "depliant", "titre": "Ce qui est prévu", "blocs": [{ "type": "paragraphe", "texte": "Impression du lot de la veille avec la liste de ce qui manque." }] }
+          ],
+          "questions": [
+            {
+              "id": "q-cdc-impression",
+              "type": "choix-unique",
+              "intitule": "Quand imprimez-vous le lot ?",
+              "options": [{ "id": "veille", "libelle": "La veille au soir" }, { "id": "matin", "libelle": "Le matin même" }],
+              "commentaire": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "questions",
+      "titre": "Vos réponses",
+      "questions": [
+        {
+          "id": "q-poste",
+          "type": "choix-unique",
+          "intitule": "Sur quel appareil consultez-vous le plus ?",
+          "options": [{ "id": "fixe", "libelle": "Poste fixe" }, { "id": "portable", "libelle": "Ordinateur portable" }, { "id": "tablette", "libelle": "Tablette" }],
+          "autre": true,
+          "commentaire": true
+        },
+        {
+          "id": "q-documents",
+          "type": "choix-multiple",
+          "intitule": "Quels documents imprimez-vous la veille ?",
+          "options": [{ "id": "cr", "libelle": "Compte rendu de consultation" }, { "id": "consignes", "libelle": "Consignes au patient" }, { "id": "ordonnance", "libelle": "Ordonnance de prémédication" }],
+          "autre": true
+        },
+        { "id": "q-cabinet", "type": "texte-court", "intitule": "Nom du cabinet ou de la clinique", "exemple": "Clinique du Parc" },
+        { "id": "q-remarques", "type": "texte-long", "intitule": "Autres remarques", "aide": "Ce qui vous a gêné, ce qui manque." },
+        {
+          "id": "q-contacts",
+          "type": "tableau-saisie",
+          "intitule": "Confrères à inviter aux essais",
+          "aide": "Laissez vide si personne.",
+          "colonnes": [
+            { "id": "nom", "libelle": "Nom", "type": "texte" },
+            { "id": "tel", "libelle": "Téléphone", "type": "tel" },
+            { "id": "role", "libelle": "Fonction", "type": "choix", "options": ["Anesthésiste", "IADE", "Secrétaire"] }
+          ],
+          "lignesInitiales": 2
+        }
+      ]
+    }
+  ]
+}

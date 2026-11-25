@@ -10,6 +10,8 @@ const compat = new FlatCompat({
 });
 
 const eslintConfig = [
+  // Builds de Next et prototypes clients (bundles minifiés copiés tels quels) : pas du code source.
+  { ignores: [".next/**", "out/**", "private/**", "next-env.d.ts"] },
   ...compat.extends("next/core-web-vitals", "next/typescript"),
   {
     rules: {
