@@ -104,7 +104,7 @@ export function Blocs({
                         {l.map((cellule, k) => (
                           <td
                             key={k}
-                            className={`px-3 py-2.5 align-top text-pretty break-words whitespace-pre-line ${k === 0 ? "font-medium text-zinc-900 dark:text-zinc-100" : "text-zinc-700 dark:text-zinc-300"}`}
+                            className={`px-3 py-2.5 align-top text-pretty break-words whitespace-pre-line ${k === 0 ? "font-medium text-zinc-900 dark:text-zinc-100" : "text-zinc-700 dark:text-zinc-300"}${k === 0 && cellule.length <= 12 ? " whitespace-nowrap" : ""}`}
                           >
                             {cellule}
                           </td>

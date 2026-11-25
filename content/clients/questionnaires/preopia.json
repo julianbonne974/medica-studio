@@ -912,7 +912,7 @@
                     ],
                     [
                       "EF-047",
-                      "Risques saisis : ASA, risque hémorragique, risque thromboembolique, Apfel, STOP-Bang (EF-081).",
+                      "Risques saisis : ASA, risque hémorragique, risque thromboembolique, Apfel, STOP-Bang (leur calcul vient en version 2).",
                       "Aucun risque n'est déduit d'une autre donnée."
                     ],
                     [
@@ -1518,8 +1518,8 @@
                     ],
                     [
                       "EF-181",
-                      "Catalogues et paramètres d'équipe : établissements, salles, chirurgiens, actes, régimes, palette de drogues, en-têtes de documents, durées, activation des scores et des lots. En V1, les listes métier sont codées en dur ; les paramètres qui ne sont pas des listes métier (utilisateurs, rattachements, durées, activation des scores) gardent leur critère actuel, sauf avis contraire de l'équipe. Les réglages métier modifiables viennent avec l'EF-191.",
-                      "V1 : paramètres non cliniques modifiés sans redéploiement, versionnés ; une liste métier se change par une livraison. Version ultérieure : critère de l'EF-191."
+                      "Catalogues et paramètres d'équipe : établissements, salles, chirurgiens, actes, régimes, palette de drogues, en-têtes de documents, durées, activation des scores et des lots. En V1, les listes métier sont codées en dur ; les paramètres qui ne sont pas des listes métier (utilisateurs, rattachements, durées, activation des scores) gardent leur critère actuel, sauf avis contraire de l'équipe. Les réglages métier modifiables viennent dans une version suivante.",
+                      "V1 : paramètres non cliniques modifiés sans redéploiement, versionnés ; une liste métier se change par une livraison. Version ultérieure : réglages par les administrateurs."
                     ],
                     [
                       "EF-182",
@@ -1730,7 +1730,7 @@
                     [
                       "ENF-051",
                       "iPad : les deux dernières versions majeures d'iPadOS, Safari, paysage et portrait, saisie tactile.",
-                      "Scénarios EF-073 et EF-121 passés sur l'iPad de référence."
+                      "Scénarios de l'EF-073 passés sur l'iPad de référence."
                     ],
                     [
                       "ENF-052",
@@ -1814,7 +1814,7 @@
                     ],
                     [
                       "EF-200",
-                      "Cadre commun : interrupteur par équipe, désactivé par défaut ; traitement local ou service au statut HDS ou équivalent démontré ; aucune donnée nominative vers un modèle externe non autorisé ; validation humaine ligne par ligne ; journal des appels. Les futures fonctions d'IA passeraient par des API externes : elles sont indisponibles en coupure (ENF-008), l'interface le dit et chaque fonction garde un repli sans IA (EF-212).",
+                      "Cadre commun : interrupteur par équipe, désactivé par défaut ; traitement local ou service au statut HDS ou équivalent démontré ; aucune donnée nominative vers un modèle externe non autorisé ; validation humaine ligne par ligne ; journal des appels. Les futures fonctions d'IA passeraient par des API externes : elles sont indisponibles en coupure (ENF-008), l'interface le dit et chaque fonction garde un repli sans IA.",
                       "Aucune fonction d'IA accessible par défaut ; activation tracée ; en coupure simulée, une fonction d'IA activée annonce son indisponibilité sans bloquer la consultation."
                     ]
                   ]
