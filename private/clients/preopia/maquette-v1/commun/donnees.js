@@ -403,6 +403,18 @@
     for (var k in a) c[k] = a[k];
   });
 
+  // V3.1 (réunion du 25/11/2026 avec le Dr Vempaire), clés ajoutées seulement, lues par la V3, valeurs fictives :
+  // antécédent d'intubation difficile et récit du bloc, repris de l'ancien dossier FM-2021-0920 (TEMAURI Vaea), à confirmer.
+  var ajoutsV31 = {
+    c07: { atcdIntubDiff: "OUI", intubDiffTexte: "Cholécystectomie en 2021, Cormack III, intubée au 2e essai sous vidéolaryngoscope, sans désaturation",
+      repris: { atcdIntubDiff: "2021-09-20", intubDiffTexte: "2021-09-20" } }
+  };
+  P.consultations.forEach(function (c) {
+    var a = ajoutsV31[c.id];
+    if (!a) return;
+    for (var k in a) c[k] = a[k];
+  });
+
   P.COTE = COTE;
   P.actes = actes;
   P.acte = acte;

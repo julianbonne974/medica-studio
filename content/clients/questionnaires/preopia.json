@@ -1,0 +1,539 @@
+{
+  "id": "reunion-2026-11-25",
+  "projet": "preopia",
+  "titre": "Réunion du 25 novembre",
+  "sousTitre": "Compte rendu, modifications de la maquette et questions",
+  "dateSouhaitee": "2026-11-30",
+  "intro": [
+    "Bonjour à tous les deux,",
+    "Thomas, merci pour la réunion du 25 novembre. Comme convenu, vous trouverez sur cette page le compte rendu, les modifications que j'ai faites sur la maquette et les questions qui me restent avant de lancer le développement.",
+    "Rien n'est obligatoire. Vos réponses s'enregistrent au fur et à mesure : vous pouvez vous arrêter et reprendre plus tard, depuis un autre poste ou votre téléphone, avec le même prénom. Quand vous avez fini, cliquez sur « Envoyer mes réponses » en bas de la page.",
+    "Si possible avant lundi 30 novembre (je pars en déplacement mardi et j'avancerai sur le projet pendant le trajet). Les sections Modifications, Choix visuels et Listes sont les plus utiles pour commencer. Vos confrères peuvent répondre aussi, chacun avec son prénom."
+  ],
+  "sections": [
+    {
+      "id": "compte-rendu",
+      "titre": "Compte rendu",
+      "blocs": [
+        { "type": "paragraphe", "texte": "Réunion en visio du mercredi 25 novembre 2026 (environ 50 minutes), entre le Dr Thomas Vempaire et Julian Bonne. Le Dr Nicolas Hantala, en Nouvelle-Zélande, n'a pas pu y assister : ce compte rendu lui est aussi destiné." },
+        { "type": "paragraphe", "texte": "Nous avons repris la maquette V3 écran par écran. Les modifications retenues sont les suivantes :" },
+        { "type": "liste", "items": [
+          "écran de consultation en trois colonnes : l'administratif à gauche, les antécédents et l'examen clinique au milieu, la fin de consultation à droite (conclusion, ASA, consignes, prémédication) ;",
+          "suppression de la colonne d'information de droite : l'acte et le chirurgien sont déjà dans le bandeau patient, les documents et la dernière consultation passent dans les onglets du haut ;",
+          "un affichage vertical, de la taille d'une feuille A4, pour un écran tourné à la verticale ;",
+          "un champ « antécédent d'intubation difficile », avec un texte libre sur ce qui s'est passé au bloc, repris d'une consultation à l'autre ;",
+          "un encadré rouge sur la feuille imprimée en cas d'intubation difficile connue ou prévisible et d'allergie connue ;",
+          "les précisions des antécédents sous forme d'étiquettes, comme pour les allergies et les traitements, avec seulement vos cases les plus fréquentes à cocher ;",
+          "les résultats d'examens complémentaires (écho, radio, ECG, EFR) en texte libre sur plusieurs lignes, les listes restant pour les signes fonctionnels et l'examen cardiovasculaire ;",
+          "plusieurs techniques possibles dans « Anesthésie prévue » (une AG avec une APD, par exemple), et l'ALR ajoutée ;",
+          "un bouton « Fin de consultation » qui imprime la feuille de consultation, le consentement et les consignes préopératoires avant que le patient quitte le bureau."
+        ] },
+        { "type": "paragraphe", "texte": "La veille de l'intervention, les secrétaires réimpriment seulement les feuilles d'anesthésie du lendemain pour le bloc. Un double de la feuille de consultation reste dans le dossier papier, en secours si les ordinateurs tombent en panne." },
+        { "type": "paragraphe", "texte": "En version 1, les listes (antécédents, anesthésies, prémédication…) sont fixées avec vous dans le code, pour aller vite. Ensuite, les administrateurs pourront les modifier eux-mêmes dans les réglages, sans compétence informatique, comme sur le logiciel que j'ai développé pour SOS MEDEVAC." },
+        { "type": "paragraphe", "texte": "Pour l'hébergement, nous partons sur un serveur principal en ligne, accessible depuis n'importe quel poste, et un petit serveur de secours dans chaque clinique, qui sauvegarde tout et prend le relais si internet coupe. Les fonctions d'intelligence artificielle prévues plus tard passeront par des services extérieurs : elles seront indisponibles pendant une coupure, le reste du logiciel non. Je compare en ce moment les hébergeurs, dont le nouveau datacenter de Tahiti repéré par Thomas." },
+        { "type": "paragraphe", "texte": "Chaque patient a un dossier unique. Chaque nouvelle consultation crée un nouveau dossier qui reprend les antécédents, les traitements et les allergies de la précédente, et les complète." },
+        { "type": "paragraphe", "texte": "Le logiciel aura trois rubriques pour son suivi : « Nouveautés » (les mises à jour au jour le jour), « Tickets » (un problème se signale en un clic, avec une capture de l'écran qui m'arrive directement) et « Documentation » (le guide complet). Un groupe WhatsApp réunira les anesthésistes, sans les secrétaires ni la facturation." },
+        { "type": "encadre", "titre": "Pièces attendues", "texte": "Une vidéo ou des captures d'une consultation complète dans FileMaker ; la liste des cases à garder dans les antécédents ; la liste des utilisateurs avec leur rôle et leur téléphone (section Équipe et accès) ; vos réponses à cette page." },
+        { "type": "encadre", "titre": "Envois prévus", "texte": "La maquette modifiée (déjà en ligne, voir Modifications) ; la feuille de route de la version 1 (plus bas sur cette page) ; l'étude des hébergeurs ; le premier devis, pour un début de facturation en décembre." }
+      ]
+    },
+    {
+      "id": "modifications",
+      "titre": "Modifications",
+      "intro": "Ces changements sont déjà dans la maquette V3 en ligne, sur la page d'accueil de l'espace. Pour chacun, dites-moi si je le garde ou ce que vous voulez à la place.",
+      "questions": [
+        {
+          "id": "v-colonnes",
+          "type": "validation",
+          "intitule": "Consultation en trois colonnes",
+          "aide": "Administratif à gauche, antécédents et examen au milieu, fin de consultation à droite. La colonne d'information a disparu ; ses éléments sont dans le bandeau patient et dans les onglets du haut.",
+          "image": "questions/consultation-3-colonnes-1366.png"
+        },
+        {
+          "id": "v-intubation",
+          "type": "validation",
+          "intitule": "Antécédent d'intubation difficile",
+          "aide": "Oui ou non, et un texte libre pour décrire ce qui s'est passé au bloc. L'information revient automatiquement à la consultation suivante, avec sa date."
+        },
+        {
+          "id": "v-alerte-ecran",
+          "type": "validation",
+          "intitule": "Encadré rouge à l'écran",
+          "aide": "Il s'affiche quand un antécédent d'intubation difficile est noté, quand les critères le prévoient (Mallampati IV, distance thyro-mentonnière de moins de 7 cm, comme dans FileMaker) ou quand une allergie est connue.",
+          "image": "questions/alerte-ecran.png"
+        },
+        {
+          "id": "v-etiquettes",
+          "type": "validation",
+          "intitule": "Antécédents en étiquettes",
+          "aide": "On tape une précision, Entrée l'ajoute comme étiquette, un clic sur la croix la retire. On peut en enchaîner plusieurs (par exemple « Cardiopathie ischémique stentée » puis « Antécédent de RA »).",
+          "image": "questions/antecedents-etiquettes.png"
+        },
+        {
+          "id": "v-examens",
+          "type": "validation",
+          "intitule": "Examens complémentaires en texte libre",
+          "aide": "Écho, radio, ECG, EFR : une zone de texte sur plusieurs lignes, imprimée avec ses retours à la ligne. Les listes restent pour les signes fonctionnels et l'examen cardiovasculaire.",
+          "image": "questions/examens-texte-libre.png"
+        },
+        {
+          "id": "v-anesthesie",
+          "type": "validation",
+          "intitule": "Plusieurs techniques d'anesthésie",
+          "aide": "On peut cocher plusieurs techniques à la fois, et ajouter une technique absente de la liste.",
+          "image": "questions/anesthesie-multiple.png"
+        },
+        {
+          "id": "v-fin",
+          "type": "validation",
+          "intitule": "Bouton « Fin de consultation »",
+          "aide": "Il remplace « Marquer prêt ». Il signale d'abord ce qui manque (poids, taille…), puis imprime d'un coup la feuille de consultation, le consentement et les consignes préopératoires."
+        },
+        {
+          "id": "v-lot",
+          "type": "validation",
+          "intitule": "Impression de la veille",
+          "aide": "L'écran « Demain » n'imprime plus que les feuilles de consultation des opérés du lendemain, pour le bloc.",
+          "image": "questions/lot-veille.png"
+        }
+      ]
+    },
+    {
+      "id": "choix-visuels",
+      "titre": "Choix visuels",
+      "intro": "Trois points où plusieurs présentations sont possibles. Cliquez sur une image pour l'agrandir.",
+      "questions": [
+        {
+          "id": "c-alerte-feuille",
+          "type": "variantes",
+          "intitule": "Encadré rouge imprimé",
+          "aide": "Exemple d'un patient avec une intubation difficile connue et une allergie.",
+          "options": [
+            { "id": "a", "libelle": "A · Dans la conclusion", "image": "questions/alerte-feuille-a.png", "legende": "Lu au moment où l'on relit la conclusion." },
+            { "id": "b", "libelle": "B · En tête de feuille", "image": "questions/alerte-feuille-b.png", "legende": "Sous l'identité du patient, visible dès qu'on prend la feuille." },
+            { "id": "c", "libelle": "C · Entre l'intervention et les constantes", "image": "questions/alerte-feuille-c.png", "legende": "À l'endroit évoqué par Thomas en réunion." }
+          ],
+          "aucune": true,
+          "commentaire": true
+        },
+        {
+          "id": "c-vertical",
+          "type": "variantes",
+          "intitule": "Écran vertical",
+          "aide": "Un écran 16/9 posé en hauteur, pour voir la feuille entière d'un coup d'œil.",
+          "options": [
+            { "id": "a", "libelle": "A · Une colonne", "image": "questions/vertical-a.png", "legende": "La consultation se lit de haut en bas, comme une feuille." },
+            { "id": "b", "libelle": "B · Deux colonnes", "image": "questions/vertical-b.png", "legende": "L'administratif en tête, puis l'examen à gauche et la fin de consultation à droite." }
+          ],
+          "aucune": true,
+          "commentaire": true
+        },
+        {
+          "id": "c-bouton-fin",
+          "type": "variantes",
+          "intitule": "Place du bouton de fin",
+          "options": [
+            { "id": "a", "libelle": "A · En bas de la colonne de droite", "image": "questions/fin-consultation-a.png", "legende": "Juste après la prémédication, là où se termine la saisie." },
+            { "id": "b", "libelle": "B · Dans une barre fixe en bas de l'écran", "image": "questions/fin-consultation-b.png", "legende": "Toujours visible, sans faire défiler." }
+          ],
+          "aucune": true,
+          "commentaire": true
+        },
+        {
+          "id": "c-ecrans",
+          "type": "texte-long",
+          "intitule": "Écrans actuels",
+          "aide": "Combien de postes de consultation par clinique, quelle taille d'écran, un seul écran par poste ? Seriez-vous prêts à tester un écran tourné à la verticale ou un deuxième écran ?"
+        }
+      ]
+    },
+    {
+      "id": "listes",
+      "titre": "Listes",
+      "intro": "Ces listes seront fixées dans la version 1. Vous pourrez les modifier vous-mêmes plus tard.",
+      "questions": [
+        {
+          "id": "l-cardio",
+          "type": "texte-long",
+          "intitule": "Antécédents cardiovasculaires",
+          "aide": "En réunion, Thomas a cité l'HTA, les troubles du rythme et la cardiopathie ischémique. Tout le reste passerait en étiquettes libres.",
+          "exemple": "HTA, trouble du rythme, cardiopathie ischémique"
+        },
+        {
+          "id": "l-autres-appareils",
+          "type": "texte-long",
+          "intitule": "Autres appareils",
+          "aide": "Thomas trouvait les listes respiratoire et neurologique bonnes. Pour les autres appareils (rénal, digestif, endocrinien, hématologique…), indiquez les cases à retirer ou à ajouter, appareil par appareil."
+        },
+        {
+          "id": "l-anesthesie",
+          "type": "choix-multiple",
+          "intitule": "Techniques d'anesthésie",
+          "aide": "Cochez celles à garder dans la liste « Anesthésie prévue ». Ajoutez celles qui manquent dans « Autre ».",
+          "options": [
+            { "id": "ag", "libelle": "AG" },
+            { "id": "ra", "libelle": "RA" },
+            { "id": "apd", "libelle": "APD" },
+            { "id": "amac", "libelle": "AMAC" },
+            { "id": "alr", "libelle": "ALR" }
+          ],
+          "autre": true
+        },
+        {
+          "id": "l-sigles",
+          "type": "texte-court",
+          "intitule": "Sigles à définir",
+          "aide": "RA et AMAC figurent dans les listes de FileMaker, PIA sur la feuille 74A. Je préfère avoir vos définitions plutôt que de les supposer."
+        },
+        {
+          "id": "l-premedication",
+          "type": "texte-long",
+          "intitule": "Liste de prémédication",
+          "aide": "Les produits et posologies que vous voulez pouvoir cocher."
+        },
+        {
+          "id": "l-reactions",
+          "type": "texte-long",
+          "intitule": "Réactions allergiques",
+          "aide": "Les réactions à proposer pour chaque allergie (urticaire, œdème de Quincke, choc anaphylactique…)."
+        },
+        {
+          "id": "l-medicaments",
+          "type": "texte-court",
+          "intitule": "Liste locale de médicaments",
+          "aide": "Existe-t-il une liste des médicaments disponibles en Polynésie (pharmacies, CPS) dont la saisie des traitements pourrait s'inspirer ?"
+        }
+      ]
+    },
+    {
+      "id": "equipe",
+      "titre": "Équipe et accès",
+      "questions": [
+        {
+          "id": "e-utilisateurs",
+          "type": "tableau-saisie",
+          "intitule": "Utilisateurs",
+          "aide": "Toutes les personnes qui utiliseront le logiciel : anesthésistes, IADE, secrétaires, facturation. Le téléphone me sert à les reconnaître sur WhatsApp. Les administrateurs pourront faire les réglages (Thomas et Nicolas, a priori).",
+          "colonnes": [
+            { "id": "nom", "libelle": "Nom et prénom", "type": "texte" },
+            { "id": "role", "libelle": "Rôle", "type": "choix", "options": ["Anesthésiste", "IADE", "Secrétaire", "Facturation", "Autre"] },
+            { "id": "clinique", "libelle": "Clinique", "type": "choix", "options": ["Cardella", "Mamao", "Les deux"] },
+            { "id": "admin", "libelle": "Administrateur", "type": "choix", "options": ["Oui", "Non"] },
+            { "id": "telephone", "libelle": "Téléphone", "type": "tel" }
+          ],
+          "lignesInitiales": 4
+        },
+        {
+          "id": "e-secretaires",
+          "type": "choix-unique",
+          "intitule": "Droits des secrétaires",
+          "aide": "En réunion, nous avons parlé d'un accès au dossier sans modification. Aujourd'hui, elles saisissent pourtant l'identité, l'intervention et les constantes avant la consultation.",
+          "options": [
+            { "id": "saisie-admin", "libelle": "Elles saisissent l'administratif et les constantes, sans toucher au contenu médical" },
+            { "id": "lecture", "libelle": "Lecture seule, sans aucune saisie" }
+          ],
+          "commentaire": true
+        },
+        {
+          "id": "e-secretaires-chir",
+          "type": "choix-unique",
+          "intitule": "Secrétaires des chirurgiens",
+          "aide": "Prendront-elles les rendez-vous de consultation directement dans le logiciel, avec un accès limité à l'agenda ?",
+          "options": [
+            { "id": "oui", "libelle": "Oui" },
+            { "id": "non", "libelle": "Non, les rendez-vous passent par vos secrétaires" },
+            { "id": "a-voir", "libelle": "À voir plus tard" }
+          ],
+          "commentaire": true
+        },
+        {
+          "id": "e-facturation",
+          "type": "texte-long",
+          "intitule": "Service de facturation",
+          "aide": "Qui, combien de personnes, et que doivent-ils voir exactement ? Je limiterai leur accès au strict nécessaire."
+        },
+        {
+          "id": "e-whatsapp",
+          "type": "choix-unique",
+          "intitule": "Groupe WhatsApp",
+          "options": [
+            { "id": "anesthesistes", "libelle": "Les anesthésistes seulement" },
+            { "id": "anesth-iade", "libelle": "Les anesthésistes et les IADE" },
+            { "id": "restreint", "libelle": "Nicolas, Thomas et moi seulement" }
+          ],
+          "commentaire": true
+        }
+      ]
+    },
+    {
+      "id": "impression",
+      "titre": "Impression",
+      "questions": [
+        {
+          "id": "i-documents",
+          "type": "choix-multiple",
+          "intitule": "Documents imprimés",
+          "options": [
+            { "id": "feuille", "libelle": "Feuille de consultation" },
+            { "id": "double", "libelle": "Double de la feuille de consultation, pour le dossier papier" },
+            { "id": "consentement", "libelle": "Consentement" },
+            { "id": "consignes", "libelle": "Consignes préopératoires pour les infirmières" },
+            { "id": "patient", "libelle": "Feuille remise au patient (traitements, jeûne, prémédication)" },
+            { "id": "courrier", "libelle": "Courrier" }
+          ],
+          "autre": true
+        },
+        {
+          "id": "i-confreres",
+          "type": "choix-unique",
+          "intitule": "Avis des confrères",
+          "options": [
+            { "id": "accord", "libelle": "D'accord" },
+            { "id": "remarques", "libelle": "D'accord, avec des remarques" },
+            { "id": "pas-encore", "libelle": "Pas encore demandé" }
+          ],
+          "commentaire": true
+        },
+        {
+          "id": "i-imprimantes",
+          "type": "texte-long",
+          "intitule": "Imprimantes et papier",
+          "aide": "Quelles imprimantes, et où ? FileMaker demande de charger un papier « FEUILLE D'ANESTHESIE » : est-ce un papier préimprimé ?"
+        },
+        {
+          "id": "i-heures",
+          "type": "choix-unique",
+          "intitule": "Heures de convocation et d'intervention",
+          "aide": "Elles ne sont plus sur l'écran du médecin. Qui les saisit ?",
+          "options": [
+            { "id": "secretariat-veille", "libelle": "Le secrétariat, la veille" },
+            { "id": "import", "libelle": "Un import du programme opératoire de la clinique" },
+            { "id": "autre", "libelle": "Autrement (précisez en commentaire)" }
+          ],
+          "commentaire": true
+        }
+      ]
+    },
+    {
+      "id": "historique",
+      "titre": "Historique FileMaker",
+      "intro": "Je peux reprendre les 194 570 fiches de Cardella décodées en octobre. Pour le reste, il me manque des fichiers.",
+      "questions": [
+        {
+          "id": "h-video",
+          "type": "texte-court",
+          "intitule": "Vidéo d'une consultation FileMaker",
+          "aide": "Le lien de la vidéo ou des captures (WeTransfer vers julianbonne@optimasantesolutions.com, ou WhatsApp). Elle m'aidera à retrouver la rapidité de FileMaker."
+        },
+        {
+          "id": "h-mamao",
+          "type": "texte-long",
+          "intitule": "Base de Mamao et NAS",
+          "aide": "Qui peut me les envoyer, comment, et à quelle date ? Pour le NAS, il s'agit des dossiers « anesthesie » et « anesthesie-1 »."
+        },
+        {
+          "id": "h-fichiers",
+          "type": "texte-long",
+          "intitule": "Autres fichiers FileMaker",
+          "aide": "La base reçue fait référence à 38 autres fichiers (programmes opératoires, activité, péridurales, archives, copies du serveur). Lesquels utilisez-vous encore, et faut-il les reprendre ?"
+        },
+        {
+          "id": "h-filemaker",
+          "type": "choix-unique",
+          "intitule": "Accès à FileMaker",
+          "aide": "Un poste a-t-il encore FileMaker Pro 5 ou 6, avec le mot de passe administrateur ? Il me permettrait de vérifier la reprise. Ne notez pas le mot de passe ici.",
+          "options": [
+            { "id": "oui", "libelle": "Oui" },
+            { "id": "non", "libelle": "Non" },
+            { "id": "ne-sais-pas", "libelle": "Je ne sais pas" }
+          ],
+          "commentaire": true
+        },
+        {
+          "id": "h-2003",
+          "type": "texte-court",
+          "intitule": "Fiches de 2003 à 2005",
+          "aide": "Elles sont presque absentes du fichier reçu. Existe-t-il une ancienne sauvegarde ?"
+        }
+      ]
+    },
+    {
+      "id": "hebergement",
+      "titre": "Hébergement et réseau",
+      "intro": "À ma connaissance, aucune certification d'hébergement de données de santé n'est exigée aujourd'hui en Polynésie. Preopia est quand même construit pour pouvoir y passer si la règle change.",
+      "questions": [
+        {
+          "id": "r-datacenter",
+          "type": "texte-court",
+          "intitule": "Nom du datacenter de Tahiti",
+          "aide": "Celui que Thomas a vu passer sur Facebook, s'il lui revient."
+        },
+        {
+          "id": "r-secours",
+          "type": "choix-unique",
+          "intitule": "Emplacement des serveurs de secours",
+          "aide": "Un petit boîtier par site (300 à 400 € pièce), sans écran ni clavier, branché au courant et au réseau par un câble. Je l'installe et je le maintiens à distance.",
+          "options": [
+            { "id": "cliniques", "libelle": "Un dans chaque clinique" },
+            { "id": "cabinet", "libelle": "Au cabinet ou chez un médecin" },
+            { "id": "a-voir", "libelle": "À discuter" }
+          ],
+          "commentaire": true
+        },
+        {
+          "id": "r-informaticien",
+          "type": "texte-court",
+          "intitule": "Contact informatique des cliniques",
+          "aide": "Qui peut brancher le boîtier sur le réseau, et lancer une semaine de mesure de la connexion ?"
+        },
+        {
+          "id": "r-connexion",
+          "type": "texte-long",
+          "intitule": "Connexion et électricité",
+          "aide": "Quelle connexion internet dans chaque clinique ? Des coupures fréquentes ? Des onduleurs ou un groupe électrogène sur les postes ?"
+        },
+        {
+          "id": "r-postes",
+          "type": "texte-court",
+          "intitule": "Postes et tablettes",
+          "aide": "Quels ordinateurs et quels navigateurs (Chrome, Edge…) ? Y a-t-il des tablettes, ou un poste au bloc ?"
+        }
+      ]
+    },
+    {
+      "id": "contenu-clinique",
+      "titre": "Contenu clinique",
+      "questions": [
+        {
+          "id": "m-referent",
+          "type": "texte-court",
+          "intitule": "Médecin référent",
+          "aide": "Qui valide les modèles de documents et les listes au fil du développement ?"
+        },
+        {
+          "id": "m-sintrom",
+          "type": "choix-unique",
+          "intitule": "Consigne SINTROM",
+          "aide": "Les modèles FileMaker indiquent « SINTROM 5 jours avant ». Les recommandations GIHP-SFAR de 2026 placent la dernière prise d'acénocoumarol à J-4 : faut-il modifier la consigne ?",
+          "options": [
+            { "id": "j4", "libelle": "Passer à J-4" },
+            { "id": "j5", "libelle": "Garder 5 jours" },
+            { "id": "autre", "libelle": "Autre (précisez)" }
+          ],
+          "commentaire": true
+        },
+        {
+          "id": "m-jeune-enfant",
+          "type": "texte-court",
+          "intitule": "Jeûne de l'enfant",
+          "aide": "La maquette affiche 6 h pour les solides et 2 h pour les liquides clairs, y compris chez l'enfant. Quels délais voulez-vous selon l'âge ?"
+        },
+        {
+          "id": "m-consentement",
+          "type": "texte-court",
+          "intitule": "Nouveau consentement",
+          "aide": "Thomas parlait en octobre de réécrire le consentement. Quand le texte sera-t-il prêt ?"
+        },
+        {
+          "id": "m-74a",
+          "type": "choix-unique",
+          "intitule": "Feuille per-opératoire 74A",
+          "aide": "Faut-il la saisie de la 74A dès la version 1, ou peut-elle rester sur papier au début ?",
+          "options": [
+            { "id": "v1", "libelle": "Dès la version 1" },
+            { "id": "papier", "libelle": "Papier au début" }
+          ],
+          "commentaire": true
+        }
+      ]
+    },
+    {
+      "id": "feuille-de-route",
+      "titre": "Feuille de route",
+      "intro": "Les durées sont des estimations, à confirmer dans le devis. La semaine 1 commence au démarrage du projet.",
+      "blocs": [
+        { "type": "tableau", "colonnes": ["Étape", "Contenu", "Durée estimée"], "lignes": [
+          ["0 · Socle", "Serveurs, sécurité, comptes et rôles, sauvegardes, serveurs de secours", "3 semaines"],
+          ["1 · Patients et agenda", "Recherche et création des patients, créneaux de consultation, liste du jour", "2 semaines"],
+          ["2 · Consultation et VPA", "Écran de consultation, données reprises, alertes, visite pré-anesthésique", "4 semaines"],
+          ["3 · Documents et impressions", "Feuille de consultation, consentement, consignes, feuille patient, impression de la veille", "3 semaines"],
+          ["En parallèle des étapes 1 à 3", "Reprise de l'historique FileMaker", "en parallèle"],
+          ["4 · Bloc et SSPI", "Feuille per-opératoire, entrée et sortie de SSPI", "2 semaines"],
+          ["5 · Activité et exports", "Statistiques d'activité, export complet de vos données", "2 semaines"],
+          ["Mise en service", "Recette avec vous, répétition de la reprise, pilote, bascule de l'équipe", "4 semaines"]
+        ] },
+        { "type": "paragraphe", "texte": "Soit environ 20 semaines. Si nous commençons début décembre, la version 1 serait en service vers la fin avril 2027 (estimation)." },
+        { "type": "paragraphe", "texte": "Un médecin peut commencer à consulter dans Preopia dès la fin de l'étape 3, vers la semaine 12, le bloc restant sur papier quelques semaines. Pendant tout le développement, je vous montre l'avancement en visio toutes les deux semaines, et vos remarques sont reprises à l'étape suivante." },
+        { "type": "paragraphe", "texte": "Ensuite viendront, dans l'ordre que vous choisirez : le questionnaire rempli par le patient avant la consultation, les recommandations sur les anticoagulants, l'import du programme opératoire, puis l'aide à la décision, la lecture des ordonnances et la dictée." }
+      ],
+      "questions": [
+        {
+          "id": "f-calendrier",
+          "type": "texte-court",
+          "intitule": "Contraintes de calendrier",
+          "aide": "Congés, période chargée, date à laquelle FileMaker doit être arrêté…"
+        },
+        {
+          "id": "f-pilote",
+          "type": "texte-court",
+          "intitule": "Médecin pilote",
+          "aide": "Qui consulte en premier dans Preopia ? Dès la fin de l'étape 3, ou seulement à la fin ?"
+        },
+        {
+          "id": "f-demo",
+          "type": "texte-court",
+          "intitule": "Créneau des démonstrations",
+          "aide": "Un jour fixe toutes les deux semaines, en début de matinée à Tahiti (fin d'après-midi à Paris).",
+          "exemple": "Le jeudi à 7 h"
+        },
+        {
+          "id": "f-priorites",
+          "type": "texte-court",
+          "intitule": "Ordre des évolutions",
+          "aide": "Ce que vous voulez en premier après la version 1."
+        }
+      ]
+    },
+    {
+      "id": "conditions",
+      "titre": "Conditions",
+      "blocs": [
+        { "type": "paragraphe", "texte": "Comme annoncé en réunion, je vous propose le même fonctionnement qu'avec SOS MEDEVAC : un forfait mensuel de 3 000 €, qui peut monter jusqu'à 3 500 € une fois les serveurs en service (je vous refacture leur coût)." },
+        { "type": "paragraphe", "texte": "Le forfait couvre le développement jusqu'à la version finale, puis la maintenance et les améliorations au fil de l'eau. Une fonction importante et nouvelle (par exemple une application qui écoute la consultation et remplit les champs) ferait l'objet d'un devis à part." },
+        { "type": "paragraphe", "texte": "Vos données vous appartiennent : vous pouvez les exporter en entier à tout moment. Le devis vous parvient dans les prochains jours, pour une facturation à partir de décembre." }
+      ],
+      "questions": [
+        {
+          "id": "k-avis",
+          "type": "choix-unique",
+          "intitule": "Avis de l'équipe sur le forfait",
+          "options": [
+            { "id": "accord", "libelle": "D'accord" },
+            { "id": "questions", "libelle": "D'accord sur le principe, avec des questions" },
+            { "id": "pas-encore", "libelle": "Pas encore discuté" }
+          ],
+          "commentaire": true
+        },
+        {
+          "id": "k-facturation",
+          "type": "texte-long",
+          "intitule": "Facturation",
+          "aide": "Au nom de qui établir le devis et les factures : un médecin, plusieurs associés, une société d'exercice ? La raison sociale, l'adresse et le nom du signataire.",
+          "exemple": "SELARL …, adresse, signataire : Dr …"
+        }
+      ]
+    },
+    {
+      "id": "remarques",
+      "titre": "Remarques",
+      "questions": [
+        {
+          "id": "z-remarques",
+          "type": "texte-long",
+          "intitule": "Autres remarques",
+          "aide": "Tout ce qui n'a pas trouvé sa place ailleurs, y compris les remarques de vos confrères."
+        }
+      ]
+    }
+  ]
+}
