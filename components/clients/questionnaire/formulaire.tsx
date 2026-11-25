@@ -199,7 +199,7 @@ export function FormulaireQuestionnaire({
     let image = 0;
     const calculer = () => {
       image = 0;
-      const seuil = window.innerHeight * 0.33;
+      const seuil = Math.max(200, window.innerHeight * 0.45);
       let courante = questionnaire.sections[0]?.id;
       for (const s of questionnaire.sections) {
         const el = document.getElementById(`s-${s.id}`);

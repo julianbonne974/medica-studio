@@ -470,9 +470,18 @@ export function ChampTableau({
     emettre(lignes.filter((_, j) => j !== i));
   };
   const ajouter = () => emettre([...lignes, {}]);
-  const n = question.colonnes.length;
   // Grille des colonnes sur grand écran ; sur téléphone, chaque ligne s'empile en carte.
-  const gabarit = { "--colonnes": `repeat(${n}, minmax(0, 1fr)) 2.75rem` } as React.CSSProperties;
+  // Largeur selon le type : le texte libre et le téléphone ont besoin de place, une liste courte moins.
+  const pistes = question.colonnes
+    .map((c) => {
+      if (c.type === "texte") return "minmax(7rem, 2fr)";
+      if (c.type === "tel") return "minmax(9rem, 1.5fr)";
+      // Liste : assez large pour son libellé le plus long (ou « Choisir… ») et la flèche.
+      const long = Math.max(8, ...(c.options ?? []).map((o) => o.length));
+      return `minmax(${(long * 0.5 + 2.75).toFixed(2)}rem, 1fr)`;
+    })
+    .join(" ");
+  const gabarit = { "--colonnes": `${pistes} 2.75rem` } as React.CSSProperties;
 
   return (
     <div>
